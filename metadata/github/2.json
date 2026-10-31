@@ -1,0 +1,20 @@
+{
+  "name": "ZIGZOO #2",
+  "description": "An experimental collection of original cartoon monster characters on BNB Smart Chain. Each character has up to 10 editions.",
+  "image": "https://zigzoo.xyz/images/zigzoo-51.webp",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Character",
+      "value": "Hot Air Balloon"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "3 of 10"
+    },
+    {
+      "trait_type": "Design",
+      "value": "51"
+    }
+  ]
+}
