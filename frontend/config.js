@@ -13,7 +13,7 @@
 window.ZIGZOO_CONFIG = {
   // Empty = contract not deployed yet. The frontend will show the status
   // "waiting for deployment" and disable the Mint button — not fake numbers.
-  CONTRACT_ADDRESS: "",
+  CONTRACT_ADDRESS: "0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C",
   CHAIN_ID: 56,
   CHAIN_NAME: "BNB Smart Chain",
   RPC_URL: "https://bsc-dataseed.binance.org/",
