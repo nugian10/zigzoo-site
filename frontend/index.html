@@ -15,6 +15,7 @@
 <body>
 <header>
   <div class="wrap nav">
+    <button class="burger" id="burgerBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sideMenu"><span></span><span></span><span></span></button>
     <a class="logo" href="#top" aria-label="ZIGZOO">ZIGZ<span class="eye-o sm" aria-hidden="true"></span><span class="eye-o sm" aria-hidden="true"></span></a>
     <nav class="navlinks" aria-label="Main navigation">
       <a href="#progress">01 / Progress</a><a href="#mint">02 / Mint</a><a href="#collection">03 / Gallery</a><a href="#about">04 / About</a><a href="#market">05 / Market</a><a href="#roadmap">06 / Roadmap</a><a href="#notes">07 / Notes</a>
@@ -22,6 +23,21 @@
     <button class="btn small" id="connectBtn" type="button">Connect Wallet</button>
   </div>
 </header>
+  <div class="menu-backdrop" id="menuBackdrop" hidden></div>
+  <aside class="side-menu" id="sideMenu" aria-label="Site menu" aria-hidden="true">
+    <div class="side-menu-head"><span style="font-weight:800;letter-spacing:.08em;text-transform:uppercase">Menu</span><button class="close-x" id="menuCloseBtn" type="button" aria-label="Close menu">&times;</button></div>
+    <nav>
+      <a href="#progress">01 / Progress</a>
+      <a href="#mint">02 / Mint</a>
+      <a href="#collection">03 / Gallery</a>
+      <a href="#about">04 / About</a>
+      <a href="#market">05 / Market</a>
+      <a href="#roadmap">06 / Roadmap</a>
+      <a href="#notes">07 / Notes</a>
+      <a href="https://x.com/zigzooNFT" target="_blank" rel="noopener">Official X</a>
+    </nav>
+  </aside>
+
 
 <main id="top">
   <!-- HERO -->
