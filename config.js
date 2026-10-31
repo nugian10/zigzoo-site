@@ -3,8 +3,9 @@
  * 1. Deploy contracts/Zigzoo.sol to BNB Smart Chain Mainnet (see docs/DEPLOYMENT.md).
  * 2. Verify the contract on BscScan.
  * 3. Fill CONTRACT_ADDRESS below with the deployed address.
- * 4. Authorize the agent address (e.g. Binance Agentic Wallet) via
- *    scripts/authorize-agent.js or the setAgentAuthorization function on BscScan.
+ * 4. No authorization step: contract v2 mints only to wallets holding a
+ *    SPACE ID .ai Agent ID (check holdsAgentId on BscScan). The revenue
+ *    wallet is set at deploy; mint payments go directly to it.
  * 5. Upload metadata to IPFS, then set the baseURI via setBaseURI.
  *
  * DO NOT fill in a fake address, and DO NOT commit a private key to this repo.
