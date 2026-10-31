@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZIGZOO — Agent Only Mint | BNB Smart Chain</title>
+<meta name="description" content="ZIGZOO: an experimental collection of 1,111 original cartoon monster characters on BNB Smart Chain. Agent-only mint, 0.0004 BNB per NFT.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js" defer></script>
+<script src="config.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="ZIGZOO">ZIGZ<span class="eye-o sm" aria-hidden="true"></span><span class="eye-o sm" aria-hidden="true"></span></a>
+    <nav class="navlinks" aria-label="Main navigation">
+      <a href="#progress">01 / Progress</a><a href="#mint">02 / Mint</a><a href="#collection">03 / Gallery</a><a href="#about">04 / About</a>
+    </nav>
+    <button class="btn small" id="connectBtn" type="button">Connect Wallet</button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><i></i> BNB Chain / Agent-Only Mint</span>
+        <h1 aria-label="ZIGZOO">ZIGZ<span class="eye-o" aria-hidden="true"></span><span class="eye-o" aria-hidden="true"></span></h1>
+        <p class="lead">An experimental collection of <strong>1,111 original cartoon monster characters</strong> on BNB Smart Chain. Each character has a different silhouette, anatomy, and personality, all from the same visual world.</p>
+        <p class="lead" style="font-size:16px"><strong>Only authorized agents can mint.</strong> Connecting a wallet alone is not proof of authorization — status is verified directly from the contract.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#mint">Go to Mint →</a>
+          <a class="btn ghost" href="#collection">View Gallery</a>
+        </div>
+      </div>
+      <div class="card-fan" aria-label="Three ZIGZOO monster previews">
+        <div class="fan-card"><img src="artwork/characters/zigzoo-01.webp" alt="ZIGZOO #1 — Spiral Horn Monster"><span>ZIGZOO #1 • Spiral Horn</span></div>
+        <div class="fan-card"><img src="artwork/characters/zigzoo-10.webp" alt="ZIGZOO #10 — Rocket Monster"><span>ZIGZOO #10 • Rocket</span></div>
+        <div class="fan-card"><img src="artwork/characters/zigzoo-12.webp" alt="ZIGZOO #12 — Vine Tangle Monster"><span>ZIGZOO #12 • Vine Tangle</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE — monster shape names, not a slogan -->
+  <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>BLOB • TALL • SQUARE • TRIANGLE • GHOST • DOME • WORM • CAT • <b>ZIGZOO</b> •&nbsp;</span><span>BLOB • TALL • SQUARE • TRIANGLE • GHOST • DOME • WORM • CAT • <b>ZIGZOO</b> •&nbsp;</span></div></div>
+
+  <!-- STATS STRIP -->
+  <div class="wrap stats-strip">
+    <div><span>Total Supply</span><b>1,111</b></div>
+    <div><span>Price / NFT</span><b>0.0004 BNB</b></div>
+    <div><span>Network</span><b>BNB Chain • 56</b></div>
+    <div><span>Mint System</span><b>Agent Only</b></div>
+  </div>
+
+  <!-- 01 / PROGRESS -->
+  <section id="progress">
+    <div class="wrap">
+      <div class="sec-label"><b>01</b> / Progress</div>
+      <div class="section-head">
+        <h2>Mint Progress</h2>
+        <p>The percentage and counts below are only read from the contract via <span class="mono">totalSupply()</span> once the contract is configured. Before that they show “—”, not simulated numbers.</p>
+      </div>
+      <div class="panel">
+        <div class="progress-pct"><span id="progressPct">—%</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="kv">
+          <div><b id="mintedVal">—</b><span>Already minted</span></div>
+          <div><b id="remainingVal">—</b><span>Still available / 1,111</span></div>
+        </div>
+        <div class="markers" id="markers">
+          <div data-mark="25">25%</div><div data-mark="50">50%</div><div data-mark="75">75%</div><div data-mark="100">100%</div>
+        </div>
+        <div id="progressStatus" class="status muted">Reading the chain… The contract is not configured yet, so progress cannot be shown.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 / MINT -->
+  <section id="mint">
+    <div class="wrap">
+      <div class="sec-label"><b>02</b> / Mint</div>
+      <div class="section-head">
+        <h2>Mint Through Your Agent</h2>
+        <p>Your agent. Your wallet. Your ZIGZOO. The price is always <strong>0.0004 BNB per NFT</strong>. No mint limit per wallet for authorized agents.</p>
+      </div>
+
+      <div class="panel">
+        <div class="sec-label" style="margin-bottom:14px"><b>Agent</b> / Check, Quantity &amp; Agent Command</div>
+        <p style="color:var(--muted)">There is no manual mint button on this site. Minting happens only through your authorized agent: check the wallet, set the quantity for the command, copy it, and let your agent confirm the transaction in its wallet.</p>
+        <div class="wallet-row" style="margin:10px 0">
+          <span class="pill" id="walletPill">Wallet not connected</span>
+          <button class="btn small ghost" id="switchBtn" type="button" style="display:none">Switch to BNB Chain</button>
+        </div>
+        <div id="walletStatus" class="status muted">Connect a compatible EIP-1193 wallet (e.g. Binance Agentic Wallet) to check the network and agent authorization.</div>
+        <div id="agentStatus" class="status muted">Agent status cannot be verified until the contract address is filled in.</div>
+        <div id="contractStatus" class="status muted">Checking contract configuration…</div>
+
+        <div class="sec-label" style="margin:20px 0 14px"><b>Quantity</b> / How many for the agent command?</div>
+        <div class="qty-boxes" id="qtyBoxes">
+          <button class="qty-box sel" type="button" data-qty="1">1</button>
+          <button class="qty-box" type="button" data-qty="2">2</button>
+          <button class="qty-box" type="button" data-qty="3">3</button>
+          <button class="qty-box" type="button" data-qty="5"><span class="best">Popular</span>5</button>
+          <button class="qty-box" type="button" data-qty="10">10</button>
+        </div>
+        <div class="qty-custom">
+          <input id="qtyInput" type="number" min="1" value="1" inputmode="numeric" aria-label="Custom quantity">
+          <span class="mono" style="color:var(--muted);font-size:12px">CUSTOM — NO LIMIT PER WALLET</span>
+        </div>
+        <div class="total"><span>Total in the command</span><span id="totalPrice">0.0004 BNB</span></div>
+        <p style="font-size:13px;color:var(--muted)">The total above excludes gas. Your agent confirms the final cost in the wallet before the transaction is sent. Overpayment is refunded automatically by the contract.</p>
+
+        <h3 style="font-size:16px;margin-top:20px">Mint with an AI Agent</h3>
+        <ol class="steps">
+          <li><b>01</b><span>Copy the command below.</span></li>
+          <li><b>02</b><span>Paste it to your agent.</span></li>
+          <li><b>03</b><span>Confirm the transaction in the agent's wallet.</span></li>
+        </ol>
+        <div class="prompt-box" id="agentPrompt">Mint ZIGZOO for me on BNB Smart Chain (Chain ID 56).
+Contract: [CONTRACT ADDRESS AFTER DEPLOYMENT]
+Quantity: 1 NFT, price 0.0004 BNB per NFT.
+IMPORTANT: continue only if this wallet is authorized as an agent in the contract (check isAuthorizedAgent). If it is not authorized, stop and report it — do not force a mint.</div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+          <button class="btn small" id="copyPromptBtn" type="button">Copy Command</button>
+          <a class="btn small ghost" href="agent-skill.md" target="_blank" rel="noopener">Agent Skill.md ↗</a>
+        </div>
+        <p style="font-size:12px;color:var(--muted)">This command helps an agent execute the mint. Authorization is still decided by the contract, not by this command — an unauthorized agent will be rejected by the contract.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 / GALLERY -->
+  <section id="collection">
+    <div class="wrap">
+      <div class="sec-label"><b>03</b> / Gallery</div>
+      <div class="section-head">
+        <h2>Collection Gallery</h2>
+        <p id="galleryNote">Showing real ZIGZOO characters from the character sheets. Click a card to see it larger.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+      <div class="center"><button class="btn ghost" id="loadMoreBtn" type="button">Load 12 more</button></div>
+      <p style="font-size:13px;color:var(--muted);text-align:center">The gallery's visual language follows the artwork reference: thick black silhouettes, large eyes, irregular shapes, yellow–red–green–turquoise accents, a warm cream background, and a distressed texture. All gallery characters are original ZIGZOO characters from the character sheets, not copies of the reference characters. The previous generative preview artwork has been removed.</p>
+    </div>
+  </section>
+
+  <!-- 04 / ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-label"><b>04</b> / About</div>
+      <div class="section-head">
+        <h2>What Is ZIGZOO?</h2>
+      </div>
+      <div class="about-grid">
+        <div class="panel">
+          <h3 style="font-size:20px">Experimental Collection</h3>
+          <p>ZIGZOO is a collection of weird, unique, playful, and original cartoon characters. Each monster has a different body shape, eyes, mouth, antennae, and pattern — but they all feel like they come from one world.</p>
+          <p>Its visual language is deliberately like a vintage cartoon print: rough ink, grain, and imperfect printing, on a warm cream background. Flat 2D, with no glossy 3D effects.</p>
+        </div>
+        <div class="panel">
+          <h3 style="font-size:20px">1,111 Characters</h3>
+          <p>Supply is hard-capped in the smart contract. There is no additional minting after 1,111 is reached, and no mint limit per wallet for authorized agents.</p>
+        </div>
+        <div class="panel">
+          <h3 style="font-size:20px">Agent Only</h3>
+          <p>Minting is designed for Binance Agentic Wallet and compatible agents already authorized on BNB Chain. This is not a conventional public mint.</p>
+        </div>
+      </div>
+      <ul class="trait-list" style="margin-top:16px">
+        <li><b>Silhouettes:</b> blob, tall, square, triangle, ghost, dome, worm, cat with ears, diamond, strange flower, and spiky star.</li>
+        <li><b>Eyes:</b> one large yellow/white eye, a vertical slit eye, or an unusual stalk-eye arrangement.</li>
+        <li><b>Details:</b> antennae, horns, spikes, tails, stripes, dots, and zigzag or checkered teeth mouths.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <h3 aria-label="ZIGZOO">ZIGZ<span class="eye-o sm" aria-hidden="true"></span><span class="eye-o sm" aria-hidden="true"></span></h3>
+      <p style="font-size:14px">An experimental NFT collection on BNB Smart Chain. Agent Only Mint.</p>
+      <p class="mono" style="font-size:13px;color:var(--muted)">Network: BNB Smart Chain Mainnet — Chain ID 56<br>Price: 0.0004 BNB / NFT • Supply: 1,111</p>
+    </div>
+    <div>
+      <h3 style="font-size:14px">Smart Contract</h3>
+      <p class="mono" id="contractFooter" style="font-size:13px;color:var(--muted)">Not deployed yet — the contract address will appear here after manual deployment and verification.</p>
+    </div>
+    <div>
+      <h3 style="font-size:14px">Official Social Media</h3>
+      <div class="socials" id="socials"><span class="pill">Official links will be announced</span></div>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">No fake social media accounts have been created for this project. Fill in official links in <span class="mono">frontend/config.js</span> once official accounts are available.</p>
+    </div>
+  </div>
+</footer>
+
+<dialog id="monsterModal">
+  <div class="modal">
+    <button class="close-x" id="closeModal" type="button" aria-label="Close">×</button>
+    <h3 id="modalTitle" style="font-size:22px;margin-bottom:14px">ZIGZOO #1</h3>
+    <div id="modalArt"></div>
+    <ul class="trait-list" id="modalTraits" style="margin-top:14px"></ul>
+    <p style="font-size:13px;font-weight:700;margin:16px 0 8px">Metadata preview (final structure in the metadata/ folder):</p>
+    <pre id="modalMeta"></pre>
+    <p id="modalNote" style="font-size:12px;color:var(--muted)"></p>
+  </div>
+</dialog>
+</body>
+</html>
