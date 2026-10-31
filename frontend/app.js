@@ -23,6 +23,7 @@
     'function authorizedAgents(address) view returns (bool)',
     'function isAuthorizedAgent(address) view returns (bool)',
     'function balanceOf(address) view returns (uint256)',
+    'function ownerOf(uint256) view returns (address)',
     'function mint(uint256 quantity) payable'
   ];
 
@@ -131,7 +132,19 @@
     { id: 97, name: 'Popcorn', file: 'artwork/characters/zigzoo-97.webp' },
     { id: 98, name: 'Soda Can', file: 'artwork/characters/zigzoo-98.webp' },
     { id: 99, name: 'Pizza Slice', file: 'artwork/characters/zigzoo-99.webp' },
-    { id: 100, name: 'Cookie', file: 'artwork/characters/zigzoo-100.webp' }
+    { id: 100, name: 'Cookie', file: 'artwork/characters/zigzoo-100.webp' },
+    { id: 101, name: 'Telescope', file: 'artwork/characters/zigzoo-101.webp' },
+    { id: 102, name: 'Snow Globe', file: 'artwork/characters/zigzoo-102.webp' },
+    { id: 103, name: 'Kite', file: 'artwork/characters/zigzoo-103.webp' },
+    { id: 104, name: 'Crown', file: 'artwork/characters/zigzoo-104.webp' },
+    { id: 105, name: 'Yo-Yo', file: 'artwork/characters/zigzoo-105.webp' },
+    { id: 106, name: 'Treasure Chest', file: 'artwork/characters/zigzoo-106.webp' },
+    { id: 107, name: 'Cauldron', file: 'artwork/characters/zigzoo-107.webp' },
+    { id: 108, name: 'Phoenix', file: 'artwork/characters/zigzoo-108.webp' },
+    { id: 109, name: 'Magic Wand', file: 'artwork/characters/zigzoo-109.webp' },
+    { id: 110, name: 'Dragon', file: 'artwork/characters/zigzoo-110.webp' },
+    { id: 111, name: 'Unicorn', file: 'artwork/characters/zigzoo-111.webp' },
+    { id: 112, name: 'Crystal Ball', file: 'artwork/characters/zigzoo-112.webp' }
   ];function realChar(id) { return REAL_CHARACTERS[id - 1] || null; }
 
   function fmt(n) { return Number(n).toLocaleString('en-US'); }
@@ -194,7 +207,7 @@
       var max = await c.MAX_SUPPLY();
       state.minted = Number(minted); state.remaining = Number(max) - state.minted;
       setStatus($('contractStatus'), 'ok', 'Kontrak aktif di BNB Smart Chain. Alamat: <a class="mono" target="_blank" rel="noopener" href="' + CFG.EXPLORER_ADDRESS + CFG.CONTRACT_ADDRESS + '">' + CFG.CONTRACT_ADDRESS + '</a>');
-      renderMintNumbers();
+      renderMintNumbers(); renderMarket();
       if (state.account) await checkAuthorization();
     } catch (e) {
       console.error(e);
@@ -303,8 +316,8 @@
       })(id);
     }
     state.shown = count;
-    $('loadMoreBtn').style.display = count >= REAL_CHARACTERS.length ? 'none' : '';
-    $('galleryNote').textContent = 'Showing ' + count + ' real ZIGZOO characters from the character sheets. The collection grows toward 1,111 in the same style.';
+    $('loadMoreBtn').style.display = count >= 20 ? 'none' : '';
+    $('galleryNote').textContent = 'Showing ' + count + ' featured ZIGZOO characters. The full collection has 112 designs, each with up to 10 editions, for a total supply of 1,111 — available through mint.';
   }
 
   function renderFooter() {
@@ -317,14 +330,59 @@
     $('socials').innerHTML = links.length ? links.join(' ') : '<span class="pill">Official links will be announced</span>';
   }
 
+
+  function renderMarket() {
+    if ($('marketMinted')) $('marketMinted').textContent = state.minted === null ? '—' : fmt(state.minted);
+    if ($('marketOwners')) $('marketOwners').textContent = '—';
+    var wrap = $('marketBscScanWrap');
+    if (wrap) {
+      if (CFG.CONTRACT_ADDRESS) {
+        wrap.innerHTML = '<a class="btn ghost" target="_blank" rel="noopener" href="' + CFG.EXPLORER_ADDRESS + CFG.CONTRACT_ADDRESS + '">Contract on BscScan</a>';
+      } else {
+        wrap.innerHTML = '<span class="pill">Contract on BscScan — not deployed yet</span>';
+      }
+    }
+  }
+
+  async function marketSearch(e) {
+    if (e) e.preventDefault();
+    var out = $('marketSearchResult'); if (!out) return;
+    var q = ($('marketSearchInput').value || '').trim();
+    if (!q) { out.textContent = 'Enter a token number (for example 42) or a wallet address starting with 0x.'; return; }
+    if (!CFG.CONTRACT_ADDRESS) { out.textContent = 'Market search will be available after deployment. Minted tokens and owners are read on-chain, so no results are shown yet.'; return; }
+    if (!window.ethers) { out.textContent = 'The ethers library failed to load. Check your connection and try again.'; return; }
+    try {
+      var provider = state.provider || new window.ethers.JsonRpcProvider(CFG.RPC_URL);
+      var c = state.contract || new window.ethers.Contract(CFG.CONTRACT_ADDRESS, ABI, provider);
+      if (/^0x[0-9a-fA-F]{40}$/.test(q)) {
+        var bal = await c.balanceOf(q);
+        out.textContent = 'Wallet ' + q + ' owns ' + Number(bal) + ' ZIGZOO.';
+      } else if (/^\d+$/.test(q)) {
+        var id = Number(q);
+        var minted = await c.totalSupply();
+        if (id < 1 || id > Number(minted)) { out.textContent = 'Token #' + id + ' has not been minted yet.'; return; }
+        var owner = await c.ownerOf(id);
+        out.textContent = 'Token #' + id + ' — Owner: ' + owner;
+      } else {
+        out.textContent = 'Enter a token number (for example 42) or a wallet address starting with 0x.';
+      }
+    } catch (err) {
+      console.error(err);
+      out.textContent = 'Could not read that from the chain yet. Check the number or address and try again.';
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderFooter();
+    renderMarket();
+    document.querySelectorAll('.acc-btn').forEach(function (b) { b.addEventListener('click', function () { var item = b.closest('.acc-item'); var open = item.classList.toggle('open'); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }); });
+    if ($('marketSearchForm')) $('marketSearchForm').addEventListener('submit', marketSearch);
     renderGallery(12);
     renderMintNumbers();
     readOnChain();
     $('connectBtn').addEventListener('click', connect);
     $('switchBtn').addEventListener('click', switchChain);
-    $('loadMoreBtn').addEventListener('click', function () { renderGallery(Math.min(REAL_CHARACTERS.length, state.shown + 12)); });
+    $('loadMoreBtn').addEventListener('click', function () { renderGallery(Math.min(20, state.shown + 12)); });
     $('closeModal').addEventListener('click', function () { $('monsterModal').close(); });
     document.querySelectorAll('.qty-box').forEach(function (b) {
       b.addEventListener('click', function () { state.qty = Number(b.getAttribute('data-qty')); renderMintNumbers(); });
