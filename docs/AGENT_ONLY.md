@@ -8,19 +8,22 @@ bukan klaim dari frontend.
 
 ## Komponen
 
-1. **Registry di kontrak (`authorizedAgents`)**
-   - `mapping(address => bool) public authorizedAgents`
-   - Hanya owner yang bisa mengubah lewat `setAgentAuthorization` /
-     `setAgentAuthorizations`.
-   - Setiap perubahan memancarkan `AgentAuthorizationUpdated`.
+1. **Cek SPACE ID di kontrak (v2, menggantikan otorisasi owner)**
+   - `holdsAgentId(address)` — true kalau wallet memegang minimal 1
+     SPACE ID .ai Agent ID NFT di registry yang dikonfigurasi
+     (default registry publik SPACE ID di BSC).
+   - TIDAK ADA lagi `authorizedAgents`, `setAgentAuthorization`, atau
+     saklar untuk mematikan cek ini. Owner hanya bisa mengganti alamat
+     registry (`setAgentIdRegistry`) kalau SPACE ID bermigrasi, dan
+     mengubah revenue wallet (`setRevenueWallet`) / baseURI.
 
 2. **Pemeriksaan di `mint()`**
-   - Baris pertama yang relevan: `if (!authorizedAgents[msg.sender]) revert NotAuthorizedAgent(msg.sender);`
+   - Baris pertama yang relevan: `if (!holdsAgentId(msg.sender)) revert NoAgentId(msg.sender);`
    - Tidak ada jalur lain untuk mint. Tidak ada fungsi mint publik,
      tidak ada allowlist off-chain yang bisa dipalsukan di frontend.
 
 3. **Pemeriksaan di frontend (`frontend/app.js`)**
-   - Setelah connect, frontend memanggil `isAuthorizedAgent(alamat)` di chain.
+   - Setelah connect, frontend memanggil `holdsAgentId(alamat)` di chain.
    - Bila `false`, tombol Mint dinonaktifkan dan pesan penolakan ditampilkan.
    - Bila kontrak belum dikonfigurasi, frontend menampilkan status
      "menunggu deployment" — bukan status verified palsu.
@@ -29,30 +32,31 @@ bukan klaim dari frontend.
 
 Binance Agentic Wallet dan wallet EIP-1193 lain terhubung lewat provider
 yang sama (`window.ethereum`). Dari sisi kontrak, yang diverifikasi adalah
-**alamat agent yang sudah diotorisasi owner**, bukan label wallet.
+**kepemilikan SPACE ID .ai Agent ID**, bukan label wallet dan bukan
+otorisasi owner.
 
 Artinya alur yang benar adalah:
 
-1. Agent memberikan alamat wallet-nya kepada pemilik proyek lewat kanal resmi.
-2. Pemilik memverifikasi identitas/afiliasi agent di luar chain.
-3. Pemilik mengotorisasi alamat itu on-chain (lihat `scripts/authorize-agent.js`).
-4. Baru setelah itu frontend + kontrak mengizinkan mint.
+1. Wallet agent memegang minimal 1 SPACE ID .ai Agent ID NFT.
+2. Kontrak memeriksa kepemilikan itu on-chain di setiap `mint()`
+   (lihat `scripts/check-agent-id.js`).
+3. Baru setelah itu frontend + kontrak mengizinkan mint.
 
 Klaim "wallet ini adalah Agentic Wallet, jadi otomatis terverifikasi"
-**tidak** dipakai di proyek ini, karena alamat saja tidak membuktikan
-otorisasi.
+**tidak** dipakai di proyek ini, karena label saja tidak membuktikan
+kepemilikan SPACE ID.
 
 ## Serangan yang ditangani
 
 | Serangan / kesalahan | Penanganan |
 |---|---|
-| Wallet biasa memanggil `mint` langsung ke kontrak | Revert `NotAuthorizedAgent` |
+| Wallet tanpa SPACE ID memanggil `mint` langsung ke kontrak | Revert `NoAgentId` |
 | Frontend dimodifikasi untuk mengaktifkan tombol | Kontrak tetap menolak; frontend bukan otoritas |
 | Pembayaran kurang | Revert `InsufficientPayment` |
 | Mint melebihi 1.111 | Revert `MaxSupplyExceeded` |
 | Kelebihan bayar "nyangkut" | Refund otomatis dalam `mint()` |
 | Reentrancy saat refund/withdraw | `ReentrancyGuard` + checks-effects-interactions |
-| Owner lama / agent dicabut | `setAgentAuthorization(..., false)` langsung efektif |
+| Registry SPACE ID berubah | Owner mengganti `agentIdRegistry` lewat `setAgentIdRegistry` |
 
 ## Batasan yang jujur
 

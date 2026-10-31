@@ -6,8 +6,10 @@
  * 2. NO fake counters. Minted/remaining numbers are only read from
  *    the contract via totalSupply(). If the contract is not set, show "—".
  * 3. NO "Binance Agentic Wallet" detection from the address alone.
- *    Authorization = the authorizedAgents mapping in the contract (see Zigzoo.sol).
- *    An ordinary wallet that is not authorized is rejected clearly.
+ *    Authorization = the SPACE ID check in the contract (see Zigzoo.sol).
+ *    A wallet can mint only if it holds a SPACE ID .ai Agent ID
+ *    (holdsAgentId). An ordinary wallet without one is rejected clearly.
+ *    There is no owner authorization list in contract v2.
  * 4. A transaction is only shown as successful after its receipt is confirmed
  *    on-chain (tx.wait()), with its hash + BscScan link.
  */
@@ -20,8 +22,10 @@
     'function totalSupply() view returns (uint256)',
     'function MAX_SUPPLY() view returns (uint256)',
     'function MINT_PRICE() view returns (uint256)',
-    'function authorizedAgents(address) view returns (bool)',
-    'function isAuthorizedAgent(address) view returns (bool)',
+    'function holdsAgentId(address) view returns (bool)',
+    'function hasAgentId(address) view returns (bool)',
+    'function revenueWallet() view returns (address)',
+    'function agentIdRegistry() view returns (address)',
     'function balanceOf(address) view returns (uint256)',
     'function ownerOf(uint256) view returns (address)',
     'function mint(uint256 quantity) payable'
@@ -184,11 +188,11 @@
     el.textContent = 'Mint ZIGZOO for me on BNB Smart Chain (Chain ID 56).\n' +
       'Contract: ' + addr + '\n' +
       'Quantity: ' + state.qty + ' NFT, price ' + CFG.MINT_PRICE_BNB + ' BNB per NFT.\n' +
-      'IMPORTANT: continue only if this wallet is authorized as an agent in the contract (check isAuthorizedAgent). If it is not authorized, stop and report it — do not force a mint.';
+      'IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check holdsAgentId). If it does not hold one, stop and report it — do not force a mint.';
   }
 
   function refreshMintButton() {
-    // Manual mint was removed: minting happens only through an authorized agent.
+    // Manual mint was removed: minting happens only through a wallet holding a SPACE ID Agent ID.
     // This function is kept so other code can call it safely; it does nothing now.
     return;
   }
@@ -220,19 +224,17 @@
     if (!CFG.CONTRACT_ADDRESS || !state.account || !state.contract) return;
     state.authorized = null; refreshMintButton();
     try {
-      var ok = false;
-      try { ok = await state.contract.isAuthorizedAgent(state.account); }
-      catch (e) { ok = await state.contract.authorizedAgents(state.account); }
+      var ok = await state.contract.holdsAgentId(state.account);
       state.authorized = !!ok;
       if (ok) {
-        setStatus($('agentStatus'), 'ok', '<b>Agent verified.</b> Wallet <span class="mono">' + shortAddr(state.account) + '</span> is registered as an authorized agent in the contract. You can mint.');
+        setStatus($('agentStatus'), 'ok', '<b>Agent verified.</b> Wallet <span class="mono">' + shortAddr(state.account) + '</span> holds a SPACE ID .ai Agent ID, so the contract allows it to mint. Mint payments go directly to the revenue wallet.');
       } else {
-        setStatus($('agentStatus'), 'err', '<b>This wallet is not authorized as an agent.</b> Connecting a wallet alone is NOT proof of authorization. The project owner must authorize this address via <span class="mono">setAgentAuthorization</span> in the contract before minting can happen. Public minting is not available on ZIGZOO.');
+        setStatus($('agentStatus'), 'err', '<b>This wallet does not hold a SPACE ID .ai Agent ID.</b> Connecting a wallet alone is NOT proof of authorization. In contract v2 there is no owner authorization step — the contract itself requires a SPACE ID Agent ID (check holdsAgentId). Public minting is not available on ZIGZOO.');
       }
     } catch (e) {
       console.error(e);
       state.authorized = false;
-      setStatus($('agentStatus'), 'err', 'Failed to check agent authorization in the contract. Minting is disabled until verification succeeds.');
+      setStatus($('agentStatus'), 'err', 'Failed to check the SPACE ID Agent ID in the contract. Minting is disabled until verification succeeds.');
     }
     refreshMintButton();
   }

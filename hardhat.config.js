@@ -17,7 +17,16 @@ module.exports = {
     bsc: {
       url: process.env.BSC_RPC_URL || "https://bsc-dataseed.binance.org/",
       accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
-      chainId: 56
+      chainId: 56,
+      // Target deploy di bawah Rp 3.000 (dipilih Bryan 2026-11-01):
+      // gasPrice 0.05 gwei = 50.000.000 wei. Dengan gas deploy ~1.727.052,
+      // biaya ≈ 0,000086 BNB ≈ Rp 1.100 (kurs BNB ~Rp 12.808.548 saat diukur).
+      // Kalau transaksi terlalu lama pending, owner boleh menaikkan gasPrice
+      // manual — tapi biayanya akan naik di atas target, dan wallet akan
+      // menampilkan total pastinya sebelum Approve. JANGAN ubah ini jadi
+      // gasPrice default wallet (biasanya 3 gwei ≈ Rp 66.000) kalau targetnya
+      // tetap di bawah Rp 3.000.
+      gasPrice: 50000000
     }
   },
   etherscan: {
