@@ -28,7 +28,7 @@ contract Zigzoo is ERC721, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
     uint256 public constant MAX_SUPPLY = 1111;
-    uint256 public constant MINT_PRICE = 0.0004 ether;
+    uint256 public constant MINT_PRICE = 0.0005 ether;
 
     uint256 private _nextTokenId = 1;
     uint256 private _totalMinted;

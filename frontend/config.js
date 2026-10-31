@@ -18,10 +18,10 @@ window.ZIGZOO_CONFIG = {
   RPC_URL: "https://bsc-dataseed.binance.org/",
   EXPLORER_TX: "https://bscscan.com/tx/",
   EXPLORER_ADDRESS: "https://bscscan.com/address/",
-  MINT_PRICE_BNB: "0.0004",
+  MINT_PRICE_BNB: "0.0005",
   MAX_SUPPLY: 1111,
   // Official links: fill ONLY with official accounts once announced.
   // Leave the string empty if there is none yet — the footer will show
   // "Official links will be announced" instead of a fake link.
-  SOCIALS: { x: "", discord: "", telegram: "", website: "" }
+  SOCIALS: { x: "https://x.com/zigzooNFT", discord: "", telegram: "", website: "" }
 };

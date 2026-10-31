@@ -85,7 +85,7 @@ Untuk mencabut: tambahkan `REVOKE=1` pada perintah di atas.
 
 ## 9. Checklist sebelum pengumuman
 
-- [ ] Kontrak terverifikasi di BscScan, MAX_SUPPLY = 1111, MINT_PRICE = 0.0004 BNB
+- [ ] Kontrak terverifikasi di BscScan, MAX_SUPPLY = 1111, MINT_PRICE = 0.0005 BNB
 - [ ] `totalSupply()` awal = 0 (tidak ada pre-mint tersembunyi)
 - [ ] Agent resmi sudah diotorisasi; wallet biasa ditolak saat uji mint
 - [ ] Frontend menampilkan alamat kontrak asli, bukan placeholder

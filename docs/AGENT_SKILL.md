@@ -9,7 +9,7 @@ wallet is authorized just because it is called an Agentic Wallet.
 - Name: ZIGZOO
 - Blockchain: BNB Smart Chain Mainnet, Chain ID 56
 - Total supply: 1,111 NFTs
-- Mint price: 0.0004 BNB per NFT
+- Mint price: 0.0005 BNB per NFT
 - System: AGENT ONLY MINT (not a public mint)
 - Contract: fill in the deployed contract address here after manual
   deployment and verification. Before that address exists, DO NOT claim
@@ -21,7 +21,7 @@ wallet is authorized just because it is called an Agentic Wallet.
 1. Make sure the active network is BNB Smart Chain (Chain ID 56).
    If it is not, ask the user to switch networks first.
 2. Read the contract: `totalSupply()`, `MAX_SUPPLY()`, `MINT_PRICE()`.
-   Calculate total = quantity × 0.0004 BNB. Reject if the quantity
+   Calculate total = quantity × 0.0005 BNB. Reject if the quantity
    exceeds the remaining supply.
 3. Verify authorization: call `isAuthorizedAgent(wallet_address)`.
    - If `false`: STOP. Report that the wallet is not authorized
