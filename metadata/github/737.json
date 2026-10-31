@@ -1,0 +1,20 @@
+{
+  "name": "ZIGZOO #737",
+  "description": "An experimental collection of original cartoon monster characters on BNB Smart Chain. Each character has up to 10 editions.",
+  "image": "https://zigzoo.xyz/images/zigzoo-50.webp",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Character",
+      "value": "Submarine"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "8 of 10"
+    },
+    {
+      "trait_type": "Design",
+      "value": "50"
+    }
+  ]
+}
