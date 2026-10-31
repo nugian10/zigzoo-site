@@ -1,0 +1,403 @@
+/* ZIGZOO frontend — Web3 logic (ethers v6 via CDN).
+ * Security principles enforced here:
+ * 1. NO simulated mint. The Mint button is only active when the contract
+ *    is configured, the wallet is connected on Chain ID 56, and the contract
+ *    says the wallet is authorized as an agent.
+ * 2. NO fake counters. Minted/remaining numbers are only read from
+ *    the contract via totalSupply(). If the contract is not set, show "—".
+ * 3. NO "Binance Agentic Wallet" detection from the address alone.
+ *    Authorization = the authorizedAgents mapping in the contract (see Zigzoo.sol).
+ *    An ordinary wallet that is not authorized is rejected clearly.
+ * 4. A transaction is only shown as successful after its receipt is confirmed
+ *    on-chain (tx.wait()), with its hash + BscScan link.
+ */
+(function () {
+  'use strict';
+  var CFG = window.ZIGZOO_CONFIG;
+  var $ = function (id) { return document.getElementById(id); };
+
+  var ABI = [
+    'function totalSupply() view returns (uint256)',
+    'function MAX_SUPPLY() view returns (uint256)',
+    'function MINT_PRICE() view returns (uint256)',
+    'function authorizedAgents(address) view returns (bool)',
+    'function isAuthorizedAgent(address) view returns (bool)',
+    'function balanceOf(address) view returns (uint256)',
+    'function mint(uint256 quantity) payable'
+  ];
+
+  var state = { provider: null, signer: null, account: null, chainOk: false, authorized: null, contract: null, minted: null, remaining: null, qty: 1, shown: 0 };
+
+  // Real characters from the ZIGZOO character sheets (cropped tiles).
+  // Tokens 1-100 use these images on the site. The generative preview system was removed.
+  var REAL_CHARACTERS = [
+    { id: 1, name: 'Spiral Horn' },
+    { id: 2, name: 'Jar' },
+    { id: 3, name: 'Crystal Coffin' },
+    { id: 4, name: 'Berry Cloud' },
+    { id: 5, name: 'Spring Robot' },
+    { id: 6, name: 'Ink Drop' },
+    { id: 7, name: 'Puzzle' },
+    { id: 8, name: 'Padlock' },
+    { id: 9, name: 'Acorn' },
+    { id: 10, name: 'Rocket' },
+    { id: 11, name: 'Compass Star' },
+    { id: 12, name: 'Vine Tangle' },
+    { id: 13, name: 'Lighthouse' },
+    { id: 14, name: 'Teapot' },
+    { id: 15, name: 'Umbrella' },
+    { id: 16, name: 'Clock' },
+    { id: 17, name: 'Cactus' },
+    { id: 18, name: 'Open Book' },
+    { id: 19, name: 'Balloon' },
+    { id: 20, name: 'Guitar' },
+    { id: 21, name: 'Camera' },
+    { id: 22, name: 'Anchor' },
+    { id: 23, name: 'Pineapple' },
+    { id: 24, name: 'Snowman' },
+    { id: 25, name: 'Rotary Telephone' },
+    { id: 26, name: 'Lamp' },
+    { id: 27, name: 'Dice' },
+    { id: 28, name: 'Magnet' },
+    { id: 29, name: 'Battery' },
+    { id: 30, name: 'Feather' },
+    { id: 31, name: 'Seashell' },
+    { id: 32, name: 'Mushroom' },
+    { id: 33, name: 'Carrot' },
+    { id: 34, name: 'Donut' },
+    { id: 35, name: 'Pretzel' },
+    { id: 36, name: 'Chess Pawn' },
+    { id: 37, name: 'Tire Wheel' },
+    { id: 38, name: 'Mailbox' },
+    { id: 39, name: 'Pencil' },
+    { id: 40, name: 'Scissors' },
+    { id: 41, name: 'Traffic Cone' },
+    { id: 42, name: 'Ice Cream Cone' },
+    { id: 43, name: 'Watermelon Slice' },
+    { id: 44, name: 'Butterfly' },
+    { id: 45, name: 'Crescent Moon' },
+    { id: 46, name: 'Rain Cloud' },
+    { id: 47, name: 'Volcano' },
+    { id: 48, name: 'Castle Tower' },
+    { id: 49, name: 'Train Locomotive' },
+    { id: 50, name: 'Submarine' },
+    { id: 51, name: 'Hot Air Balloon' },
+    { id: 52, name: 'Tent' },
+    { id: 53, name: 'Igloo' },
+    { id: 54, name: 'Windmill' },
+    { id: 55, name: 'Ferris Wheel' },
+    { id: 56, name: 'Drum' },
+    { id: 57, name: 'Trumpet' },
+    { id: 58, name: 'Violin' },
+    { id: 59, name: 'Typewriter' },
+    { id: 60, name: 'Satellite' },
+    { id: 61, name: 'Penguin' },
+    { id: 62, name: 'Fox' },
+    { id: 63, name: 'Owl' },
+    { id: 64, name: 'Frog' },
+    { id: 65, name: 'Bee' },
+    { id: 66, name: 'Ladybug' },
+    { id: 67, name: 'Crab' },
+    { id: 68, name: 'Octopus' },
+    { id: 69, name: 'Turtle' },
+    { id: 70, name: 'Shark' },
+    { id: 71, name: 'Elephant' },
+    { id: 72, name: 'Lion' },
+    { id: 73, name: 'Astronaut' },
+    { id: 74, name: 'Pirate' },
+    { id: 75, name: 'Wizard' },
+    { id: 76, name: 'Chef' },
+    { id: 77, name: 'Firefighter' },
+    { id: 78, name: 'Doctor' },
+    { id: 79, name: 'Farmer' },
+    { id: 80, name: 'Sailor' },
+    { id: 81, name: 'Superhero' },
+    { id: 82, name: 'Ninja' },
+    { id: 83, name: 'Knight' },
+    { id: 84, name: 'Clown' },
+    { id: 85, name: 'Cottage House' },
+    { id: 86, name: 'Water Tower' },
+    { id: 87, name: 'Mountain' },
+    { id: 88, name: 'Beach Ball' },
+    { id: 89, name: 'Surfboard' },
+    { id: 90, name: 'Skateboard' },
+    { id: 91, name: 'Bicycle' },
+    { id: 92, name: 'Car' },
+    { id: 93, name: 'Airplane' },
+    { id: 94, name: 'Boat' },
+    { id: 95, name: 'Hot Dog' },
+    { id: 96, name: 'Cupcake' },
+    { id: 97, name: 'Popcorn' },
+    { id: 98, name: 'Soda Can' },
+    { id: 99, name: 'Pizza Slice' },
+    { id: 100, name: 'Cookie' }
+  ];var CHUNK_DATA = {};var LOADED_CHUNKS = {};function realChar(id) { return REAL_CHARACTERS[id - 1] || null; }
+
+  function fmt(n) { return Number(n).toLocaleString('en-US'); }
+  function shortAddr(a) { return a ? a.slice(0, 6) + '…' + a.slice(-4) : '—'; }
+  function setStatus(el, kind, html) { el.className = 'status ' + kind; el.innerHTML = html; }
+
+  function renderMintNumbers() {
+    $('mintedVal').textContent = state.minted === null ? '—' : fmt(state.minted);
+    $('remainingVal').textContent = state.remaining === null ? '—' : fmt(state.remaining);
+    $('totalPrice').textContent = (state.qty * parseFloat(CFG.MINT_PRICE_BNB)).toFixed(4) + ' BNB';
+    if ($('qtyInput')) $('qtyInput').value = state.qty;
+    var boxes = document.querySelectorAll('.qty-box');
+    boxes.forEach(function (b) { b.classList.toggle('sel', Number(b.getAttribute('data-qty')) === state.qty); });
+    // Progress (Subsonic-style panel) — hanya dari chain, tidak pernah ditebak.
+    if ($('progressPct')) {
+      if (state.minted === null) {
+        $('progressPct').textContent = '—%';
+        $('progressFill').style.width = '0%';
+        document.querySelectorAll('#markers div').forEach(function (m) { m.classList.remove('hit'); });
+        setStatus($('progressStatus'), 'muted', 'Reading the chain… The contract is not configured yet, so progress cannot be shown.');
+      } else {
+        var pct = (state.minted / CFG.MAX_SUPPLY) * 100;
+        $('progressPct').textContent = pct.toFixed(1) + '%';
+        $('progressFill').style.width = pct + '%';
+        document.querySelectorAll('#markers div').forEach(function (m) { m.classList.toggle('hit', pct >= Number(m.getAttribute('data-mark'))); });
+        setStatus($('progressStatus'), 'ok', fmt(state.minted) + ' / ' + fmt(CFG.MAX_SUPPLY) + ' minted. Remaining: ' + fmt(state.remaining) + '.');
+      }
+    }
+    updateAgentPrompt();
+    refreshMintButton();
+  }
+
+  function updateAgentPrompt() {
+    var el = $('agentPrompt');
+    if (!el) return;
+    var addr = CFG.CONTRACT_ADDRESS || '[ALAMAT KONTRAK SETELAH DEPLOYMENT]';
+    el.textContent = 'Mint ZIGZOO for me on BNB Smart Chain (Chain ID 56).\n' +
+      'Contract: ' + addr + '\n' +
+      'Quantity: ' + state.qty + ' NFT, price ' + CFG.MINT_PRICE_BNB + ' BNB per NFT.\n' +
+      'IMPORTANT: continue only if this wallet is authorized as an agent in the contract (check isAuthorizedAgent). If it is not authorized, stop and report it — do not force a mint.';
+  }
+
+  function refreshMintButton() {
+    // Manual mint was removed: minting happens only through an authorized agent.
+    // This function is kept so other code can call it safely; it does nothing now.
+    return;
+  }
+
+  async function readOnChain() {
+    if (!CFG.CONTRACT_ADDRESS) {
+      setStatus($('contractStatus'), 'warn', '<b>Contract not configured yet.</b> This project is deliberately NOT deployed automatically and uses no BNB. After manual deployment, fill in <span class="mono">CONTRACT_ADDRESS</span> di <span class="mono">frontend/config.js</span>, and the numbers on this page will then be read directly from the blockchain.');
+      setStatus($('agentStatus'), 'muted', 'Agent status cannot be verified until the contract address is filled in.');
+      state.minted = null; state.remaining = null; renderMintNumbers(); return;
+    }
+    try {
+      var provider = state.provider || new window.ethers.JsonRpcProvider(CFG.RPC_URL);
+      var c = new window.ethers.Contract(CFG.CONTRACT_ADDRESS, ABI, provider);
+      state.contract = c;
+      var minted = await c.totalSupply();
+      var max = await c.MAX_SUPPLY();
+      state.minted = Number(minted); state.remaining = Number(max) - state.minted;
+      setStatus($('contractStatus'), 'ok', 'Kontrak aktif di BNB Smart Chain. Alamat: <a class="mono" target="_blank" rel="noopener" href="' + CFG.EXPLORER_ADDRESS + CFG.CONTRACT_ADDRESS + '">' + CFG.CONTRACT_ADDRESS + '</a>');
+      renderMintNumbers();
+      if (state.account) await checkAuthorization();
+    } catch (e) {
+      console.error(e);
+      setStatus($('contractStatus'), 'err', 'Tidak bisa membaca kontrak dari chain. Periksa alamat kontrak dan koneksi RPC. Detail: ' + (e && e.message ? e.message.slice(0, 220) : 'unknown'));
+      state.minted = null; state.remaining = null; renderMintNumbers();
+    }
+  }
+
+  async function checkAuthorization() {
+    if (!CFG.CONTRACT_ADDRESS || !state.account || !state.contract) return;
+    state.authorized = null; refreshMintButton();
+    try {
+      var ok = false;
+      try { ok = await state.contract.isAuthorizedAgent(state.account); }
+      catch (e) { ok = await state.contract.authorizedAgents(state.account); }
+      state.authorized = !!ok;
+      if (ok) {
+        setStatus($('agentStatus'), 'ok', '<b>Agent verified.</b> Wallet <span class="mono">' + shortAddr(state.account) + '</span> is registered as an authorized agent in the contract. You can mint.');
+      } else {
+        setStatus($('agentStatus'), 'err', '<b>This wallet is not authorized as an agent.</b> Connecting a wallet alone is NOT proof of authorization. The project owner must authorize this address via <span class="mono">setAgentAuthorization</span> in the contract before minting can happen. Public minting is not available on ZIGZOO.');
+      }
+    } catch (e) {
+      console.error(e);
+      state.authorized = false;
+      setStatus($('agentStatus'), 'err', 'Failed to check agent authorization in the contract. Minting is disabled until verification succeeds.');
+    }
+    refreshMintButton();
+  }
+
+  async function connect() {
+    var el = $('walletStatus');
+    try {
+      if (!window.ethereum) {
+        setStatus(el, 'warn', 'No EIP-1193 wallet found in this browser. Open this page from Binance Agentic Wallet / a compatible BNB Chain wallet, or install a wallet that supports BNB Smart Chain, then try again.');
+        return;
+      }
+      if (!window.ethers) { setStatus(el, 'err', 'The ethers library failed to load from the CDN. Check your internet connection, then reload the page.'); return; }
+      state.provider = new window.ethers.BrowserProvider(window.ethereum);
+      var accounts = await state.provider.send('eth_requestAccounts', []);
+      state.signer = await state.provider.getSigner();
+      state.account = accounts[0];
+      var net = await state.provider.getNetwork();
+      state.chainOk = Number(net.chainId) === CFG.CHAIN_ID;
+      $('connectBtn').textContent = 'Connected: ' + shortAddr(state.account);
+      $('walletPill').textContent = shortAddr(state.account);
+      if (!state.chainOk) {
+        setStatus(el, 'warn', 'Wallet connected, but the current network is not BNB Smart Chain (Chain ID 56). Click “Switch to BNB Chain” to switch networks.');
+        $('switchBtn').style.display = 'inline-flex';
+      } else {
+        setStatus(el, 'ok', 'Wallet connected on BNB Smart Chain (56). Address: <span class="mono">' + state.account + '</span>');
+        $('switchBtn').style.display = 'none';
+      }
+      await readOnChain();
+    } catch (e) {
+      console.error(e);
+      var msg = (e && e.code === 4001) ? 'Connection rejected in the wallet.' : 'Failed to connect wallet: ' + (e && e.message ? e.message.slice(0, 220) : 'unknown');
+      setStatus(el, 'err', msg);
+    }
+    refreshMintButton();
+  }
+
+  async function switchChain() {
+    try {
+      await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x38' }] });
+      await connect();
+    } catch (e) {
+      if (e && e.code === 4902) {
+        try {
+          await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x38', chainName: 'BNB Smart Chain', nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 }, rpcUrls: [CFG.RPC_URL], blockExplorerUrls: ['https://bscscan.com'] }] });
+          await connect();
+        } catch (e2) { setStatus($('walletStatus'), 'err', 'Failed to add the BNB Smart Chain network: ' + (e2.message || '').slice(0, 200)); }
+      } else if (e && e.code === 4001) {
+        setStatus($('walletStatus'), 'warn', 'Network switch rejected in the wallet.');
+      } else {
+        setStatus($('walletStatus'), 'err', 'Failed to switch networks: ' + (e.message || '').slice(0, 200));
+      }
+    }
+  }
+
+  // ---- Gallery ----
+  function chunkFor(id) { return Math.ceil(id / 12); }
+  function loadChunk(k) {
+    if (LOADED_CHUNKS[k]) return Promise.resolve();
+    if (window.ZIGZOO_GALLERY && window.ZIGZOO_GALLERY[k]) { CHUNK_DATA[k] = window.ZIGZOO_GALLERY[k]; LOADED_CHUNKS[k] = true; return Promise.resolve(); }
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = 'gallery/gallery-chunk-' + k + '.js';
+      s.onload = function () { CHUNK_DATA[k] = window.ZIGZOO_GALLERY[k] || {}; LOADED_CHUNKS[k] = true; resolve(); };
+      s.onerror = function () { reject(new Error('Failed to load gallery chunk ' + k)); };
+      document.head.appendChild(s);
+    });
+  }
+  function charImage(id) {
+    var k = chunkFor(id);
+    return (CHUNK_DATA[k] && CHUNK_DATA[k][String(id)]) || null;
+  }
+  function openModal(id) {
+    var real = realChar(id);
+    if (!real) return;
+    var img = charImage(id);
+    if (!img) {
+      loadChunk(chunkFor(id)).then(function () { openModal(id); }).catch(function () {
+        $('modalTitle').textContent = 'ZIGZOO #' + id;
+        $('modalArt').innerHTML = '<p style="color:var(--muted)">Image failed to load. Please check your connection and try again.</p>';
+        $('modalTraits').innerHTML = '';
+        $('modalMeta').textContent = '';
+        $('monsterModal').showModal();
+      });
+      return;
+    }
+    $('modalArt').innerHTML = '<img src="' + img + '" alt="ZIGZOO #' + id + ' — ' + real.name + ' Monster">';
+    $('modalTitle').textContent = 'ZIGZOO #' + id;
+    $('modalTraits').innerHTML = '<li><b>Character:</b> ' + real.name + ' Monster</li><li><b>Source:</b> ZIGZOO character sheet</li><li><b>Style:</b> Retro vintage cartoon, black silhouette, distressed print, warm cream background</li>';
+    $('modalMeta').textContent = JSON.stringify({ name: 'ZIGZOO #' + id, description: 'An experimental collection of original cartoon monster characters on BNB Smart Chain.', image: 'gallery-chunk-' + chunkFor(id) + ' (token ' + id + ')', attributes: [{ trait_type: 'Character', value: real.name }] }, null, 2);
+    $('modalNote').textContent = 'This is a real character from the ZIGZOO character sheet. Final token metadata and IPFS CID are filled in after artwork production and metadata upload are complete.';
+    $('monsterModal').showModal();
+  }
+
+  function renderGallery(count) {
+    var grid = $('gallery');
+    for (var id = state.shown + 1; id <= count; id++) {
+      (function (tokenId) {
+        var btn = document.createElement('button');
+        btn.className = 'gcard c' + (tokenId % 4); btn.type = 'button'; btn.setAttribute('aria-label', 'View ZIGZOO #' + tokenId);
+        btn.setAttribute('data-token', tokenId);
+        var rc = realChar(tokenId);
+        if (!rc) return;
+        btn.innerHTML = '<div class="gph">Loading ZIGZOO #' + tokenId + '…</div>' + '<span class="gmeta"><b>ZIGZOO #' + tokenId + '</b><span>' + rc.name + '</span></span>';
+        btn.addEventListener('click', function () { openModal(tokenId); });
+        grid.appendChild(btn);
+      })(id);
+    }
+    state.shown = count;
+    $('loadMoreBtn').style.display = count >= REAL_CHARACTERS.length ? 'none' : '';
+    $('galleryNote').textContent = 'Showing ' + count + ' real ZIGZOO characters from the character sheets. The collection grows toward 1,111 in the same style.';
+  }
+  function fillGalleryImages(fromId, toId) {
+    for (var id = fromId; id <= toId; id++) {
+      (function (tokenId) {
+        var img = charImage(tokenId);
+        if (!img) return;
+        var btn = document.querySelector('[data-token="' + tokenId + '"]');
+        if (!btn) return;
+        var ph = btn.querySelector('.gph');
+        if (!ph) return;
+        var rc = realChar(tokenId);
+        var el = document.createElement('img');
+        el.src = img; el.alt = 'ZIGZOO #' + tokenId + ' — ' + rc.name + ' Monster'; el.loading = 'lazy';
+        ph.replaceWith(el);
+      })(id);
+    }
+  }
+  function loadAndShow(fromId, toId) {
+    var chunks = [];
+    for (var id = fromId; id <= toId; id++) { var k = chunkFor(id); if (chunks.indexOf(k) === -1) chunks.push(k); }
+    var done = 0;
+    $('galleryNote').textContent = 'Loading gallery images…';
+    chunks.forEach(function (k) {
+      loadChunk(k).then(function () {
+        done++;
+        if (done === chunks.length) { fillGalleryImages(fromId, toId); $('galleryNote').textContent = 'Showing ' + toId + ' real ZIGZOO characters from the character sheets. The collection grows toward 1,111 in the same style.'; }
+      }).catch(function () { $('galleryNote').textContent = 'Gallery images failed to load. Check your connection and click Load more to retry.'; });
+    });
+  }
+
+  function renderFooter() {
+    $('contractFooter').textContent = CFG.CONTRACT_ADDRESS || 'Not deployed yet — the contract address will appear here after manual deployment and verification.';
+    var s = CFG.SOCIALS || {};
+    var links = [];
+    if (s.x) links.push('<a class="btn small ghost" target="_blank" rel="noopener" href="' + s.x + '">X</a>');
+    if (s.discord) links.push('<a class="btn small ghost" target="_blank" rel="noopener" href="' + s.discord + '">Discord</a>');
+    if (s.telegram) links.push('<a class="btn small ghost" target="_blank" rel="noopener" href="' + s.telegram + '">Telegram</a>');
+    $('socials').innerHTML = links.length ? links.join(' ') : '<span class="pill">Official links will be announced</span>';
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    renderFooter();
+    renderGallery(12);
+    if ('IntersectionObserver' in window) {
+      var go = new IntersectionObserver(function (entries) { if (entries[0].isIntersecting) { go.disconnect(); loadAndShow(1, 12); } }, { rootMargin: '200px' });
+      go.observe($('collection'));
+    } else { loadAndShow(1, 12); }
+    renderMintNumbers();
+    readOnChain();
+    $('connectBtn').addEventListener('click', connect);
+    $('switchBtn').addEventListener('click', switchChain);
+    $('loadMoreBtn').addEventListener('click', function () { var from = state.shown + 1; var to = Math.min(REAL_CHARACTERS.length, state.shown + 12); renderGallery(to); loadAndShow(from, to); });
+    $('closeModal').addEventListener('click', function () { $('monsterModal').close(); });
+    document.querySelectorAll('.qty-box').forEach(function (b) {
+      b.addEventListener('click', function () { state.qty = Number(b.getAttribute('data-qty')); renderMintNumbers(); });
+    });
+    $('qtyInput').addEventListener('change', function () { var v = parseInt($('qtyInput').value, 10); if (!isFinite(v) || v < 1) v = 1; var cap = state.remaining !== null ? state.remaining : 1111; state.qty = Math.min(cap, v); renderMintNumbers(); });
+    var copyBtn = $('copyPromptBtn');
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      var text = $('agentPrompt').textContent;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { copyBtn.textContent = 'Copied ✓'; setTimeout(function () { copyBtn.textContent = 'Copy Command'; }, 2000); });
+      } else {
+        var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); copyBtn.textContent = 'Copied ✓';
+      }
+    });
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', function () { state.account = null; state.authorized = null; connect(); });
+      window.ethereum.on('chainChanged', function () { connect(); });
+    }
+  });
+})();

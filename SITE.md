@@ -2,23 +2,40 @@
 
 This repository stores the ZIGZOO website on GitHub only, as requested.
 
-- `index.html` is the complete, self-contained website: hero, Mint Through
-  Your Agent section, and a gallery of 100 real ZIGZOO characters. All CSS,
-  JavaScript, and all 100 character images are embedded in this one file,
-  so it can be served as a static site with no build step.
-- `frontend/` holds the same website as separate source files
-  (index.html, style.css, app.js, config.js, agent-skill.md). The character
-  image tiles themselves are embedded in the root `index.html`; the
-  individual webp tiles are not stored in this repository because the
-  GitHub snapshot upload used here only accepts UTF-8 text files.
-- `contracts/`, `scripts/`, `test/`, and `docs/` hold the ERC-721 smart
-  contract, Hardhat scripts and tests, and deployment documentation.
+## Deployed site (repository root)
 
-Key facts (unchanged from the project):
+The site Vercel serves from this repository root is the optimized version:
+
+- `index.html` — page structure, with only the 3 hero character images embedded
+  (tokens #1, #10, #12). Initial load is about 166 KB of local files
+  (index + style.css + app.js + config.js), excluding external fonts and
+  the ethers CDN script.
+- `style.css`, `app.js`, `config.js`, `agent-skill.md`, `vercel.json` — site
+  code and configuration. There is no manual Mint button; minting is
+  agent-only, via the command copied from the site.
+- `gallery/gallery-chunk-1.js` … `gallery-chunk-9.js` — the 100 character
+  images, in base64, split into 9 chunks of 12 (last chunk 4). A chunk is
+  only downloaded when its gallery section scrolls into view or when the
+  user clicks "Load more". Nothing in the gallery is downloaded on the
+  first page load.
+- The previous single-file version (all 100 images embedded in one
+  4.3 MB HTML file) is superseded by this optimized version.
+
+## Other folders
+
+- `frontend/` — earlier source version of the site (separate files
+  referencing `artwork/characters/*.webp` tiles). Kept for reference; the
+  deployed site is the optimized root version above.
+- `contracts/`, `scripts/`, `test/`, `docs/` — the ERC-721 smart contract,
+  Hardhat scripts and tests, and deployment documentation.
+
+Key facts (unchanged):
 - Supply: 1,111 NFTs, price: 0.0004 BNB per NFT
 - Blockchain: BNB Smart Chain Mainnet, Chain ID 56
-- Minting: agent-only. There is no manual Mint button on the site;
-  minting happens only through an authorized agent, via the agent command
-  copied from the site. The contract is NOT deployed yet, so
-  `CONTRACT_ADDRESS` in `frontend/config.js` is intentionally empty.
+- Minting: agent-only. The contract is NOT deployed yet, so
+  `CONTRACT_ADDRESS` in `config.js` is intentionally empty.
 - No private keys or credentials are stored in this repository.
+- Individual webp tiles are not stored as separate files in this
+  repository because the GitHub snapshot upload used here only accepts
+  UTF-8 text files; the images are stored as base64 in the gallery
+  chunks above.
