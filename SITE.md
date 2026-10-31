@@ -13,11 +13,15 @@ The site Vercel serves from this repository root is the optimized version:
 - `style.css`, `app.js`, `config.js`, `agent-skill.md`, `vercel.json` — site
   code and configuration. There is no manual Mint button; minting is
   agent-only, via the command copied from the site.
-- `gallery/gallery-chunk-1.js` … `gallery-chunk-9.js` — the 100 character
-  images, in base64, split into 9 chunks of 12 (last chunk 4). A chunk is
-  only downloaded when its gallery section scrolls into view or when the
-  user clicks "Load more". Nothing in the gallery is downloaded on the
-  first page load.
+- `gallery/gallery-chunk-1.js` … `gallery-chunk-9.js` — character
+  images, in base64, split into chunks of 12. Only chunks 1–2 are used
+  by the live gallery, which shows 20 featured characters only
+  (#1–#20). A chunk is only downloaded when its gallery section
+  scrolls into view or when the user clicks "Load more". Nothing in
+  the gallery is downloaded on the first page load. The remaining
+  designs (up to 112 total, each with up to 10 editions, 1,111 tokens
+  in total) are in the mint pool via metadata/IPFS, not in the
+  live gallery.
 - The previous single-file version (all 100 images embedded in one
   4.3 MB HTML file) is superseded by this optimized version.
 

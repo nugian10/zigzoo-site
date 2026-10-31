@@ -50,87 +50,7 @@
     { id: 17, name: 'Cactus' },
     { id: 18, name: 'Open Book' },
     { id: 19, name: 'Balloon' },
-    { id: 20, name: 'Guitar' },
-    { id: 21, name: 'Camera' },
-    { id: 22, name: 'Anchor' },
-    { id: 23, name: 'Pineapple' },
-    { id: 24, name: 'Snowman' },
-    { id: 25, name: 'Rotary Telephone' },
-    { id: 26, name: 'Lamp' },
-    { id: 27, name: 'Dice' },
-    { id: 28, name: 'Magnet' },
-    { id: 29, name: 'Battery' },
-    { id: 30, name: 'Feather' },
-    { id: 31, name: 'Seashell' },
-    { id: 32, name: 'Mushroom' },
-    { id: 33, name: 'Carrot' },
-    { id: 34, name: 'Donut' },
-    { id: 35, name: 'Pretzel' },
-    { id: 36, name: 'Chess Pawn' },
-    { id: 37, name: 'Tire Wheel' },
-    { id: 38, name: 'Mailbox' },
-    { id: 39, name: 'Pencil' },
-    { id: 40, name: 'Scissors' },
-    { id: 41, name: 'Traffic Cone' },
-    { id: 42, name: 'Ice Cream Cone' },
-    { id: 43, name: 'Watermelon Slice' },
-    { id: 44, name: 'Butterfly' },
-    { id: 45, name: 'Crescent Moon' },
-    { id: 46, name: 'Rain Cloud' },
-    { id: 47, name: 'Volcano' },
-    { id: 48, name: 'Castle Tower' },
-    { id: 49, name: 'Train Locomotive' },
-    { id: 50, name: 'Submarine' },
-    { id: 51, name: 'Hot Air Balloon' },
-    { id: 52, name: 'Tent' },
-    { id: 53, name: 'Igloo' },
-    { id: 54, name: 'Windmill' },
-    { id: 55, name: 'Ferris Wheel' },
-    { id: 56, name: 'Drum' },
-    { id: 57, name: 'Trumpet' },
-    { id: 58, name: 'Violin' },
-    { id: 59, name: 'Typewriter' },
-    { id: 60, name: 'Satellite' },
-    { id: 61, name: 'Penguin' },
-    { id: 62, name: 'Fox' },
-    { id: 63, name: 'Owl' },
-    { id: 64, name: 'Frog' },
-    { id: 65, name: 'Bee' },
-    { id: 66, name: 'Ladybug' },
-    { id: 67, name: 'Crab' },
-    { id: 68, name: 'Octopus' },
-    { id: 69, name: 'Turtle' },
-    { id: 70, name: 'Shark' },
-    { id: 71, name: 'Elephant' },
-    { id: 72, name: 'Lion' },
-    { id: 73, name: 'Astronaut' },
-    { id: 74, name: 'Pirate' },
-    { id: 75, name: 'Wizard' },
-    { id: 76, name: 'Chef' },
-    { id: 77, name: 'Firefighter' },
-    { id: 78, name: 'Doctor' },
-    { id: 79, name: 'Farmer' },
-    { id: 80, name: 'Sailor' },
-    { id: 81, name: 'Superhero' },
-    { id: 82, name: 'Ninja' },
-    { id: 83, name: 'Knight' },
-    { id: 84, name: 'Clown' },
-    { id: 85, name: 'Cottage House' },
-    { id: 86, name: 'Water Tower' },
-    { id: 87, name: 'Mountain' },
-    { id: 88, name: 'Beach Ball' },
-    { id: 89, name: 'Surfboard' },
-    { id: 90, name: 'Skateboard' },
-    { id: 91, name: 'Bicycle' },
-    { id: 92, name: 'Car' },
-    { id: 93, name: 'Airplane' },
-    { id: 94, name: 'Boat' },
-    { id: 95, name: 'Hot Dog' },
-    { id: 96, name: 'Cupcake' },
-    { id: 97, name: 'Popcorn' },
-    { id: 98, name: 'Soda Can' },
-    { id: 99, name: 'Pizza Slice' },
-    { id: 100, name: 'Cookie' }
+    { id: 20, name: 'Guitar' }
   ];var CHUNK_DATA = {};var LOADED_CHUNKS = {};function realChar(id) { return REAL_CHARACTERS[id - 1] || null; }
 
   function fmt(n) { return Number(n).toLocaleString('en-US'); }
@@ -328,7 +248,7 @@
     }
     state.shown = count;
     $('loadMoreBtn').style.display = count >= REAL_CHARACTERS.length ? 'none' : '';
-    $('galleryNote').textContent = 'Showing ' + count + ' real ZIGZOO characters from the character sheets. The collection grows toward 1,111 in the same style.';
+    $('galleryNote').textContent = 'Showing ' + count + ' featured ZIGZOO characters. The full collection has 112 designs, each with up to 10 editions, for a total supply of 1,111 — available through mint.';
   }
   function fillGalleryImages(fromId, toId) {
     for (var id = fromId; id <= toId; id++) {
@@ -354,7 +274,7 @@
     chunks.forEach(function (k) {
       loadChunk(k).then(function () {
         done++;
-        if (done === chunks.length) { fillGalleryImages(fromId, toId); $('galleryNote').textContent = 'Showing ' + toId + ' real ZIGZOO characters from the character sheets. The collection grows toward 1,111 in the same style.'; }
+        if (done === chunks.length) { fillGalleryImages(fromId, toId); $('galleryNote').textContent = 'Showing ' + toId + ' featured ZIGZOO characters. The full collection has 112 designs, each with up to 10 editions, for a total supply of 1,111 — available through mint.'; }
       }).catch(function () { $('galleryNote').textContent = 'Gallery images failed to load. Check your connection and click Load more to retry.'; });
     });
   }
