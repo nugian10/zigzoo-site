@@ -62,3 +62,14 @@ Key facts (unchanged):
   own words (agent-only registry, shuffled metadata with up to 10
   editions per design and no reveal system, BNB Smart Chain + IPFS,
   and the NFT itself only — no other benefit is promised).
+
+## Hamburger menu (2026-11-01)
+
+- A three-line button at the top-left of the header, before the logo,
+  visible on mobile and desktop. The previous horizontal nav links
+  were hidden on mobile, so this is now the main way to reach sections
+  on a phone.
+- Tapping it opens a slide-in menu from the left with Progress, Mint,
+  Gallery, About, Market, Roadmap, Notes, and the official X link.
+  Tapping a link, the close button, the dark backdrop, or pressing
+  Escape closes the menu.

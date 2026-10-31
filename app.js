@@ -291,6 +291,10 @@
   }
 
 
+
+  function openMenu() { $('sideMenu').classList.add('open'); $('sideMenu').setAttribute('aria-hidden', 'false'); $('menuBackdrop').hidden = false; $('burgerBtn').setAttribute('aria-expanded', 'true'); }
+  function closeMenu() { $('sideMenu').classList.remove('open'); $('sideMenu').setAttribute('aria-hidden', 'true'); $('menuBackdrop').hidden = true; $('burgerBtn').setAttribute('aria-expanded', 'false'); }
+
   function renderMarket() {
     if ($('marketMinted')) $('marketMinted').textContent = state.minted === null ? '—' : fmt(state.minted);
     if ($('marketOwners')) $('marketOwners').textContent = '—';
@@ -337,6 +341,11 @@
     renderMarket();
     document.querySelectorAll('.acc-btn').forEach(function (b) { b.addEventListener('click', function () { var item = b.closest('.acc-item'); var open = item.classList.toggle('open'); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }); });
     if ($('marketSearchForm')) $('marketSearchForm').addEventListener('submit', marketSearch);
+    if ($('burgerBtn')) $('burgerBtn').addEventListener('click', function () { if ($('sideMenu').classList.contains('open')) { closeMenu(); } else { openMenu(); } });
+    if ($('menuCloseBtn')) $('menuCloseBtn').addEventListener('click', closeMenu);
+    if ($('menuBackdrop')) $('menuBackdrop').addEventListener('click', closeMenu);
+    document.querySelectorAll('#sideMenu nav a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
     renderGallery(12);
     if ('IntersectionObserver' in window) {
       var go = new IntersectionObserver(function (entries) { if (entries[0].isIntersecting) { go.disconnect(); loadAndShow(1, 12); } }, { rootMargin: '200px' });
