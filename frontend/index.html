@@ -78,7 +78,7 @@
       <div class="sec-label"><b>01</b> / Progress</div>
       <div class="section-head">
         <h2>Mint Progress</h2>
-        <p>The percentage and counts below are only read from the contract via <span class="mono">totalSupply()</span> once the contract is configured. Before that they show “—”, not simulated numbers.</p>
+        <p>The percentage and counts below are read live from the contract via <span class="mono">totalSupply()</span>. They are never simulated numbers.</p>
       </div>
       <div class="panel">
         <div class="progress-pct"><span id="progressPct">—%</span></div>
@@ -90,7 +90,7 @@
         <div class="markers" id="markers">
           <div data-mark="25">25%</div><div data-mark="50">50%</div><div data-mark="75">75%</div><div data-mark="100">100%</div>
         </div>
-        <div id="progressStatus" class="status muted">Reading the chain… The contract is not configured yet, so progress cannot be shown.</div>
+        <div id="progressStatus" class="status muted">Reading the chain… Minted and remaining counts are read live from the contract.</div>
       </div>
     </div>
   </section>
@@ -182,7 +182,7 @@ IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check hol
         </div>
         <div class="panel">
           <h3 style="font-size:20px">Agent Only</h3>
-          <p>Minting is designed for Binance Agentic Wallet and compatible agents already authorized on BNB Chain. This is not a conventional public mint.</p>
+          <p>Minting is designed for Binance Agentic Wallet and compatible agents holding a SPACE ID .ai Agent ID. This is not a conventional public mint.</p>
         </div>
       </div>
       <ul class="trait-list" style="margin-top:16px">
@@ -198,17 +198,17 @@ IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check hol
       <div class="sec-label"><b>05</b> / Market <span class="pill" style="margin-left:8px">Coming soon</span></div>
       <div class="section-head">
         <h2>The Market</h2>
-        <p>A preview of what is coming: every ZIGZOO minted so far, with its owner. Trading opens soon. Once minting is live, minted tokens can be traded on BNB Chain NFT marketplaces such as Element.</p>
+        <p>Minting is live. Every ZIGZOO minted so far can be looked up below by token number or wallet. Trading opens soon on BNB Chain NFT marketplaces such as Element.</p>
       </div>
       <div class="market-stats">
         <div class="market-stat"><span>Minted</span><b id="marketMinted">—</b></div>
         <div class="market-stat"><span>Owners</span><b id="marketOwners">—</b></div>
         <div class="market-stat"><span>Max Supply</span><b>1,111</b></div>
       </div>
-      <p style="font-size:13px;color:var(--muted)">Owners will be counted from on-chain holders once minting is live. No minted count or owner is shown until the contract is deployed and the numbers are read from the chain.</p>
+      <p style="font-size:13px;color:var(--muted)">Minted counts are read live from the contract. Owners can be looked up per wallet via the search below.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin:16px 0">
         <button class="btn" type="button" disabled>Trading opens soon</button>
-        <span id="marketBscScanWrap"><span class="pill">Contract on BscScan — not deployed yet</span></span>
+        <span id="marketBscScanWrap"><span class="pill">Contract on BscScan — live</span></span>
       </div>
       <form id="marketSearchForm" class="market-search">
         <input id="marketSearchInput" type="text" placeholder="Search # or paste a wallet address" aria-label="Search a token number or wallet address">
@@ -228,12 +228,12 @@ IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check hol
       <div class="roadmap">
         <div class="roadmap-item"><div><b>Website live</b><p style="margin:4px 0 0">ZIGZOO site live, gallery limited to 20 featured characters, agent-only mint panel, and the official X link in the footer.</p></div><span class="pill ok">Done</span></div>
         <div class="roadmap-item"><div><b>112 designs and 1,111 metadata files</b><p style="margin:4px 0 0">Each design appears in at most 10 editions, with the edition labelled in the metadata. Artwork assignment is random via shuffled metadata, with no reveal system.</p></div><span class="pill ok">Done</span></div>
-        <div class="roadmap-item"><div><b>Agent-only contract tested</b><p style="margin:4px 0 0">ERC-721 contract with an on-chain authorized-agent registry, 0.0005 BNB per NFT, and 8 passing Hardhat tests.</p></div><span class="pill ok">Done</span></div>
-        <div class="roadmap-item"><div><b>Deploy the contract to BNB Smart Chain Mainnet</b><p style="margin:4px 0 0">Manual deployment by the owner only. This site never deploys a contract or spends BNB on its own.</p></div><span class="pill warn">Pending</span></div>
-        <div class="roadmap-item"><div><b>BscScan verification, contract address, and agent authorization</b><p style="margin:4px 0 0">Verify the contract on BscScan, fill the deployed address into the site, and authorize agent wallets on-chain.</p></div><span class="pill warn">Pending</span></div>
-        <div class="roadmap-item"><div><b>Upload artwork and metadata to IPFS, then set the base URI</b><p style="margin:4px 0 0">After the final shuffle seed is confirmed, upload the images and metadata and point the contract at them.</p></div><span class="pill warn">Pending</span></div>
-        <div class="roadmap-item"><div><b>Test mint through an authorized agent</b><p style="margin:4px 0 0">A small test mint, verified on-chain, before mint opens more widely.</p></div><span class="pill warn">Pending</span></div>
-        <div class="roadmap-item"><div><b>Mint opens through agents, then the market opens</b><p style="margin:4px 0 0">Minting stays agent-only. After mint, the market preview above becomes live and trading opens on BNB Chain NFT marketplaces.</p></div><span class="pill">Coming soon</span></div>
+        <div class="roadmap-item"><div><b>Agent-only contract tested</b><p style="margin:4px 0 0">ERC-721 contract with an on-chain SPACE ID Agent ID check, 0.0005 BNB per NFT, and 8 passing Hardhat tests.</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>Deploy the contract to BNB Smart Chain Mainnet</b><p style="margin:4px 0 0">Deployed to BNB Smart Chain Mainnet by the owner. Contract: 0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C. This site never deploys a contract or spends BNB on its own.</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>BscScan verification, contract address, and agent authorization</b><p style="margin:4px 0 0">Source verified on BscScan. The contract address is filled into the site, and minting is gated on-chain by the SPACE ID registry, not by an owner list.</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>Artwork and metadata hosted, base URI set</b><p style="margin:4px 0 0">Artwork and metadata are hosted on GitHub Pages, and the contract baseURI points to https://zigzoo.xyz/metadata/github/ (set via setBaseURI).</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>Mint live through agents</b><p style="margin:4px 0 0">Minting is live and verified on-chain — tokens are already being minted through agents holding a SPACE ID Agent ID.</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>Mint open through agents, then the market opens</b><p style="margin:4px 0 0">Minting is open and stays agent-only. Trading on BNB Chain NFT marketplaces opens next.</p></div><span class="pill">Coming soon</span></div>
       </div>
     </div>
   </section>
@@ -247,15 +247,15 @@ IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check hol
       <div class="accordion">
         <div class="acc-item">
           <button class="acc-btn" type="button" aria-expanded="false">Why only agents? <span class="acc-plus">+</span></button>
-          <div class="acc-panel"><p>ZIGZOO minting is agent-only by design. Only wallet addresses authorized on-chain by the contract owner can call mint, through Binance Agentic Wallet or a compatible authorized agent. Connecting a wallet alone does not authorize it, and there is no conventional public mint.</p></div>
+          <div class="acc-panel"><p>ZIGZOO minting is agent-only by design. Only wallets holding a SPACE ID .ai Agent ID can call mint, through Binance Agentic Wallet or a compatible agent. The contract checks this on-chain; there is no owner authorization list. Connecting a wallet alone does not authorize it, and there is no conventional public mint.</p></div>
         </div>
         <div class="acc-item">
           <button class="acc-btn" type="button" aria-expanded="false">What decides my piece? <span class="acc-plus">+</span></button>
-          <div class="acc-panel"><p>Artwork is assigned randomly from shuffled metadata prepared before the IPFS upload. Token IDs are sequential, but the artwork is not. There is no reveal system, no hidden placeholder metadata, and no delayed reveal phase. Each of the 112 designs appears in at most 10 editions, and the edition is labelled in the metadata, for example Edition 2 of 10.</p></div>
+          <div class="acc-panel"><p>Artwork is assigned randomly from shuffled metadata (seed 20261031). Token IDs are sequential, but the artwork is not. There is no reveal system, no hidden placeholder metadata, and no delayed reveal phase. Each of the 112 designs appears in at most 10 editions, and the edition is labelled in the metadata, for example Edition 2 of 10.</p></div>
         </div>
         <div class="acc-item">
           <button class="acc-btn" type="button" aria-expanded="false">Where does it live? <span class="acc-plus">+</span></button>
-          <div class="acc-panel"><p>Each token will live on BNB Smart Chain Mainnet (Chain ID 56) as an ERC-721 token, with its artwork and metadata on IPFS once the base URI is set after deployment. The contract is not deployed yet, so the on-chain numbers on this page still show — until the deployed address is filled in.</p></div>
+          <div class="acc-panel"><p>Each token lives on BNB Smart Chain Mainnet (Chain ID 56) as an ERC-721 token, with its artwork and metadata hosted at https://zigzoo.xyz/metadata/github/ and https://zigzoo.xyz/images/. The contract is deployed and verified, and its baseURI is already set — the on-chain numbers on this page are read live from the contract.</p></div>
         </div>
         <div class="acc-item">
           <button class="acc-btn" type="button" aria-expanded="false">What comes with it? <span class="acc-plus">+</span></button>
