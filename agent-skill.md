@@ -15,7 +15,7 @@ v2, the only on-chain gate is holding a SPACE ID .ai Agent ID.
 - Contract: fill in the deployed contract address here after manual
   deployment and verification. Before that address exists, DO NOT claim
   a mint succeeded and DO NOT send any transaction.
-  Contract address: [CONTRACT ADDRESS AFTER DEPLOYMENT]
+  Contract address: 0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C
 
 ## Agent steps (in order)
 
