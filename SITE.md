@@ -34,7 +34,7 @@ The site Vercel serves from this repository root is the optimized version:
   Hardhat scripts and tests, and deployment documentation.
 
 Key facts (unchanged):
-- Supply: 1,111 NFTs, price: 0.0004 BNB per NFT
+- Supply: 1,111 NFTs, price: 0.0005 BNB per NFT
 - Blockchain: BNB Smart Chain Mainnet, Chain ID 56
 - Minting: agent-only. The contract is NOT deployed yet, so
   `CONTRACT_ADDRESS` in `config.js` is intentionally empty.
