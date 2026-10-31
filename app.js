@@ -23,6 +23,7 @@
     'function authorizedAgents(address) view returns (bool)',
     'function isAuthorizedAgent(address) view returns (bool)',
     'function balanceOf(address) view returns (uint256)',
+    'function ownerOf(uint256) view returns (address)',
     'function mint(uint256 quantity) payable'
   ];
 
@@ -113,7 +114,7 @@
       var max = await c.MAX_SUPPLY();
       state.minted = Number(minted); state.remaining = Number(max) - state.minted;
       setStatus($('contractStatus'), 'ok', 'Kontrak aktif di BNB Smart Chain. Alamat: <a class="mono" target="_blank" rel="noopener" href="' + CFG.EXPLORER_ADDRESS + CFG.CONTRACT_ADDRESS + '">' + CFG.CONTRACT_ADDRESS + '</a>');
-      renderMintNumbers();
+      renderMintNumbers(); renderMarket();
       if (state.account) await checkAuthorization();
     } catch (e) {
       console.error(e);
@@ -289,8 +290,53 @@
     $('socials').innerHTML = links.length ? links.join(' ') : '<span class="pill">Official links will be announced</span>';
   }
 
+
+  function renderMarket() {
+    if ($('marketMinted')) $('marketMinted').textContent = state.minted === null ? '—' : fmt(state.minted);
+    if ($('marketOwners')) $('marketOwners').textContent = '—';
+    var wrap = $('marketBscScanWrap');
+    if (wrap) {
+      if (CFG.CONTRACT_ADDRESS) {
+        wrap.innerHTML = '<a class="btn ghost" target="_blank" rel="noopener" href="' + CFG.EXPLORER_ADDRESS + CFG.CONTRACT_ADDRESS + '">Contract on BscScan</a>';
+      } else {
+        wrap.innerHTML = '<span class="pill">Contract on BscScan — not deployed yet</span>';
+      }
+    }
+  }
+
+  async function marketSearch(e) {
+    if (e) e.preventDefault();
+    var out = $('marketSearchResult'); if (!out) return;
+    var q = ($('marketSearchInput').value || '').trim();
+    if (!q) { out.textContent = 'Enter a token number (for example 42) or a wallet address starting with 0x.'; return; }
+    if (!CFG.CONTRACT_ADDRESS) { out.textContent = 'Market search will be available after deployment. Minted tokens and owners are read on-chain, so no results are shown yet.'; return; }
+    if (!window.ethers) { out.textContent = 'The ethers library failed to load. Check your connection and try again.'; return; }
+    try {
+      var provider = state.provider || new window.ethers.JsonRpcProvider(CFG.RPC_URL);
+      var c = state.contract || new window.ethers.Contract(CFG.CONTRACT_ADDRESS, ABI, provider);
+      if (/^0x[0-9a-fA-F]{40}$/.test(q)) {
+        var bal = await c.balanceOf(q);
+        out.textContent = 'Wallet ' + q + ' owns ' + Number(bal) + ' ZIGZOO.';
+      } else if (/^\d+$/.test(q)) {
+        var id = Number(q);
+        var minted = await c.totalSupply();
+        if (id < 1 || id > Number(minted)) { out.textContent = 'Token #' + id + ' has not been minted yet.'; return; }
+        var owner = await c.ownerOf(id);
+        out.textContent = 'Token #' + id + ' — Owner: ' + owner;
+      } else {
+        out.textContent = 'Enter a token number (for example 42) or a wallet address starting with 0x.';
+      }
+    } catch (err) {
+      console.error(err);
+      out.textContent = 'Could not read that from the chain yet. Check the number or address and try again.';
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderFooter();
+    renderMarket();
+    document.querySelectorAll('.acc-btn').forEach(function (b) { b.addEventListener('click', function () { var item = b.closest('.acc-item'); var open = item.classList.toggle('open'); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }); });
+    if ($('marketSearchForm')) $('marketSearchForm').addEventListener('submit', marketSearch);
     renderGallery(12);
     if ('IntersectionObserver' in window) {
       var go = new IntersectionObserver(function (entries) { if (entries[0].isIntersecting) { go.disconnect(); loadAndShow(1, 12); } }, { rootMargin: '200px' });

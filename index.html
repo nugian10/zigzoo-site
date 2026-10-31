@@ -17,7 +17,7 @@
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="ZIGZOO">ZIGZ<span class="eye-o sm" aria-hidden="true"></span><span class="eye-o sm" aria-hidden="true"></span></a>
     <nav class="navlinks" aria-label="Main navigation">
-      <a href="#progress">01 / Progress</a><a href="#mint">02 / Mint</a><a href="#collection">03 / Gallery</a><a href="#about">04 / About</a>
+      <a href="#progress">01 / Progress</a><a href="#mint">02 / Mint</a><a href="#collection">03 / Gallery</a><a href="#about">04 / About</a><a href="#market">05 / Market</a><a href="#roadmap">06 / Roadmap</a><a href="#notes">07 / Notes</a>
     </nav>
     <button class="btn small" id="connectBtn" type="button">Connect Wallet</button>
   </div>
@@ -176,6 +176,78 @@ IMPORTANT: continue only if this wallet is authorized as an agent in the contrac
       </ul>
     </div>
   </section>
+
+  <section id="market">
+    <div class="wrap">
+      <div class="sec-label"><b>05</b> / Market <span class="pill" style="margin-left:8px">Coming soon</span></div>
+      <div class="section-head">
+        <h2>The Market</h2>
+        <p>A preview of what is coming: every ZIGZOO minted so far, with its owner. Trading opens soon. Once minting is live, minted tokens can be traded on BNB Chain NFT marketplaces such as Element.</p>
+      </div>
+      <div class="market-stats">
+        <div class="market-stat"><span>Minted</span><b id="marketMinted">—</b></div>
+        <div class="market-stat"><span>Owners</span><b id="marketOwners">—</b></div>
+        <div class="market-stat"><span>Max Supply</span><b>1,111</b></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted)">Owners will be counted from on-chain holders once minting is live. No minted count or owner is shown until the contract is deployed and the numbers are read from the chain.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin:16px 0">
+        <button class="btn" type="button" disabled>Trading opens soon</button>
+        <span id="marketBscScanWrap"><span class="pill">Contract on BscScan — not deployed yet</span></span>
+      </div>
+      <form id="marketSearchForm" class="market-search">
+        <input id="marketSearchInput" type="text" placeholder="Search # or paste a wallet address" aria-label="Search a token number or wallet address">
+        <button class="btn ghost" type="submit">Search</button>
+      </form>
+      <p class="mono" id="marketSearchResult" style="font-size:13px;color:var(--muted)"></p>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="sec-label"><b>06</b> / Roadmap</div>
+      <div class="section-head">
+        <h2>Roadmap</h2>
+        <p>What is done, what is next, and what comes after mint. No dates are promised here — each step is marked by its real status.</p>
+      </div>
+      <div class="roadmap">
+        <div class="roadmap-item"><div><b>Website live</b><p style="margin:4px 0 0">ZIGZOO site live, gallery limited to 20 featured characters, agent-only mint panel, and the official X link in the footer.</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>112 designs and 1,111 metadata files</b><p style="margin:4px 0 0">Each design appears in at most 10 editions, with the edition labelled in the metadata. Artwork assignment is random via shuffled metadata, with no reveal system.</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>Agent-only contract tested</b><p style="margin:4px 0 0">ERC-721 contract with an on-chain authorized-agent registry, 0.0005 BNB per NFT, and 8 passing Hardhat tests.</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>Deploy the contract to BNB Smart Chain Mainnet</b><p style="margin:4px 0 0">Manual deployment by the owner only. This site never deploys a contract or spends BNB on its own.</p></div><span class="pill warn">Pending</span></div>
+        <div class="roadmap-item"><div><b>BscScan verification, contract address, and agent authorization</b><p style="margin:4px 0 0">Verify the contract on BscScan, fill the deployed address into the site, and authorize agent wallets on-chain.</p></div><span class="pill warn">Pending</span></div>
+        <div class="roadmap-item"><div><b>Upload artwork and metadata to IPFS, then set the base URI</b><p style="margin:4px 0 0">After the final shuffle seed is confirmed, upload the images and metadata and point the contract at them.</p></div><span class="pill warn">Pending</span></div>
+        <div class="roadmap-item"><div><b>Test mint through an authorized agent</b><p style="margin:4px 0 0">A small test mint, verified on-chain, before mint opens more widely.</p></div><span class="pill warn">Pending</span></div>
+        <div class="roadmap-item"><div><b>Mint opens through agents, then the market opens</b><p style="margin:4px 0 0">Minting stays agent-only. After mint, the market preview above becomes live and trading opens on BNB Chain NFT marketplaces.</p></div><span class="pill">Coming soon</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="notes">
+    <div class="wrap">
+      <div class="sec-label"><b>07</b> / Notes</div>
+      <div class="section-head">
+        <h2>Notes</h2>
+      </div>
+      <div class="accordion">
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">Why only agents? <span class="acc-plus">+</span></button>
+          <div class="acc-panel"><p>ZIGZOO minting is agent-only by design. Only wallet addresses authorized on-chain by the contract owner can call mint, through Binance Agentic Wallet or a compatible authorized agent. Connecting a wallet alone does not authorize it, and there is no conventional public mint.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">What decides my piece? <span class="acc-plus">+</span></button>
+          <div class="acc-panel"><p>Artwork is assigned randomly from shuffled metadata prepared before the IPFS upload. Token IDs are sequential, but the artwork is not. There is no reveal system, no hidden placeholder metadata, and no delayed reveal phase. Each of the 112 designs appears in at most 10 editions, and the edition is labelled in the metadata, for example Edition 2 of 10.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">Where does it live? <span class="acc-plus">+</span></button>
+          <div class="acc-panel"><p>Each token will live on BNB Smart Chain Mainnet (Chain ID 56) as an ERC-721 token, with its artwork and metadata on IPFS once the base URI is set after deployment. The contract is not deployed yet, so the on-chain numbers on this page still show — until the deployed address is filled in.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">What comes with it? <span class="acc-plus">+</span></button>
+          <div class="acc-panel"><p>The NFT itself: a unique token, one of 112 original ZIGZOO designs, with its edition label and artwork. Nothing else is promised on this page.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -192,7 +264,7 @@ IMPORTANT: continue only if this wallet is authorized as an agent in the contrac
     <div>
       <h3 style="font-size:14px">Official Social Media</h3>
       <div class="socials" id="socials"><span class="pill">Official links will be announced</span></div>
-      <p style="font-size:12px;color:var(--muted);margin-top:12px">No fake social media accounts have been created for this project. Fill in official links in <span class="mono">frontend/config.js</span> once official accounts are available.</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">The official X link is live. Other links will be added only once official accounts are available, and no fake social media accounts have been created for this project.</p>
     </div>
   </div>
 </footer>

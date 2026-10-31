@@ -43,3 +43,22 @@ Key facts (unchanged):
   repository because the GitHub snapshot upload used here only accepts
   UTF-8 text files; the images are stored as base64 in the gallery
   chunks above.
+
+## Market, Roadmap, Notes (2026-11-01)
+
+- `05 / Market` — coming-soon market preview: minted/owners/max-supply
+  stats (minted and owners show — until the contract is deployed and the
+  numbers are read on-chain), a disabled "Trading opens soon" button, a
+  BscScan button that only links once a contract address is configured,
+  and a search box for a token number or wallet address that reads
+  on-chain only after deployment and never shows fake results.
+- `06 / Roadmap` — honest status list: website live, 112 designs and
+  1,111 metadata files, and the tested agent-only contract are Done;
+  manual deployment, BscScan verification, agent authorization, IPFS
+  upload, and test mint are Pending; mint through agents, then the
+  market opening, are Coming soon. No dates are promised.
+- `07 / Notes` — accordion answering Why only agents?, What decides my
+  piece?, Where does it live?, and What comes with it?, in ZIGZOO's
+  own words (agent-only registry, shuffled metadata with up to 10
+  editions per design and no reveal system, BNB Smart Chain + IPFS,
+  and the NFT itself only — no other benefit is promised).
