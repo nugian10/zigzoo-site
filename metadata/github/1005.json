@@ -1,0 +1,20 @@
+{
+  "name": "ZIGZOO #1005",
+  "description": "An experimental collection of original cartoon monster characters on BNB Smart Chain. Each character has up to 10 editions.",
+  "image": "https://zigzoo.xyz/images/zigzoo-60.webp",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Character",
+      "value": "Satellite"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "10 of 10"
+    },
+    {
+      "trait_type": "Design",
+      "value": "60"
+    }
+  ]
+}
