@@ -31,7 +31,7 @@
     'function mint(uint256 quantity) payable'
   ];
 
-  var state = { provider: null, signer: null, account: null, chainOk: false, authorized: null, contract: null, minted: null, remaining: null, qty: 1, shown: 0 };
+  var state = { provider: null, signer: null, account: null, chainOk: false, authorized: null, contract: null, minted: null, remaining: null, owners: null, countingOwners: false, qty: 1, shown: 0 };
 
   // Real characters from the ZIGZOO character sheets (cropped tiles).
   // Tokens 1-100 use these images on the site. The generative preview system was removed.
@@ -168,7 +168,7 @@
         $('progressPct').textContent = '—%';
         $('progressFill').style.width = '0%';
         document.querySelectorAll('#markers div').forEach(function (m) { m.classList.remove('hit'); });
-        setStatus($('progressStatus'), 'muted', 'Reading the chain… The contract is not configured yet, so progress cannot be shown.');
+        setStatus($('progressStatus'), 'muted', 'Reading the chain… Minted counts could not be loaded yet.');
       } else {
         var pct = (state.minted / CFG.MAX_SUPPLY) * 100;
         $('progressPct').textContent = pct.toFixed(1) + '%';
@@ -199,24 +199,36 @@
 
   async function readOnChain() {
     if (!CFG.CONTRACT_ADDRESS) {
-      setStatus($('contractStatus'), 'warn', '<b>Contract not configured yet.</b> This project is deliberately NOT deployed automatically and uses no BNB. After manual deployment, fill in <span class="mono">CONTRACT_ADDRESS</span> di <span class="mono">frontend/config.js</span>, and the numbers on this page will then be read directly from the blockchain.');
+      setStatus($('contractStatus'), 'warn', '<b>Contract not configured yet.</b> This project is deliberately NOT deployed automatically and uses no BNB. After manual deployment, fill in <span class="mono">CONTRACT_ADDRESS</span> in <span class="mono">frontend/config.js</span>, and the numbers on this page will then be read directly from the blockchain.');
       setStatus($('agentStatus'), 'muted', 'Agent status cannot be verified until the contract address is filled in.');
-      state.minted = null; state.remaining = null; renderMintNumbers(); return;
+      state.minted = null; state.remaining = null; state.owners = null; renderMintNumbers(); return;
     }
     try {
-      var provider = state.provider || new window.ethers.JsonRpcProvider(CFG.RPC_URL);
-      var c = new window.ethers.Contract(CFG.CONTRACT_ADDRESS, ABI, provider);
-      state.contract = c;
-      var minted = await c.totalSupply();
-      var max = await c.MAX_SUPPLY();
-      state.minted = Number(minted); state.remaining = Number(max) - state.minted;
-      setStatus($('contractStatus'), 'ok', 'Kontrak aktif di BNB Smart Chain. Alamat: <a class="mono" target="_blank" rel="noopener" href="' + CFG.EXPLORER_ADDRESS + CFG.CONTRACT_ADDRESS + '">' + CFG.CONTRACT_ADDRESS + '</a>');
+      var minted = null; var max = null; var lastErr = null;
+      if (state.provider) {
+        try {
+          var cw = new window.ethers.Contract(CFG.CONTRACT_ADDRESS, ABI, state.provider);
+          minted = await cw.totalSupply(); max = await cw.MAX_SUPPLY(); state.contract = cw;
+        } catch (e) { lastErr = e; }
+      } else {
+        var rpcList = [CFG.RPC_URL, 'https://bsc-dataseed1.binance.org/', 'https://bsc-dataseed2.binance.org/', 'https://bsc-dataseed3.binance.org/'];
+        for (var i = 0; i < rpcList.length && minted === null; i++) {
+          try {
+            var provider = new window.ethers.JsonRpcProvider(rpcList[i]);
+            var c = new window.ethers.Contract(CFG.CONTRACT_ADDRESS, ABI, provider);
+            minted = await c.totalSupply(); max = await c.MAX_SUPPLY(); state.contract = c; state.provider = provider;
+          } catch (e) { lastErr = e; }
+        }
+      }
+      if (minted === null) throw lastErr || new Error('RPC unavailable');
+      state.minted = Number(minted); state.remaining = Number(max) - state.minted; state.owners = null;
+      setStatus($('contractStatus'), 'ok', 'Contract active on BNB Smart Chain. Address: <a class="mono" target="_blank" rel="noopener" href="' + CFG.EXPLORER_ADDRESS + CFG.CONTRACT_ADDRESS + '">' + CFG.CONTRACT_ADDRESS + '</a>');
       renderMintNumbers(); renderMarket();
       if (state.account) await checkAuthorization();
     } catch (e) {
       console.error(e);
-      setStatus($('contractStatus'), 'err', 'Tidak bisa membaca kontrak dari chain. Periksa alamat kontrak dan koneksi RPC. Detail: ' + (e && e.message ? e.message.slice(0, 220) : 'unknown'));
-      state.minted = null; state.remaining = null; renderMintNumbers();
+      setStatus($('contractStatus'), 'err', 'Could not read the contract from the chain. Check the contract address and RPC connection. Detail: ' + (e && e.message ? e.message.slice(0, 220) : 'unknown'));
+      state.minted = null; state.remaining = null; state.owners = null; renderMintNumbers();
     }
   }
 
@@ -339,7 +351,11 @@
 
   function renderMarket() {
     if ($('marketMinted')) $('marketMinted').textContent = state.minted === null ? '—' : fmt(state.minted);
-    if ($('marketOwners')) $('marketOwners').textContent = '—';
+    if ($('marketOwners')) {
+      if (state.minted === null) { $('marketOwners').textContent = '—'; }
+      else if (state.owners !== null && state.owners !== undefined) { $('marketOwners').textContent = fmt(state.owners); }
+      else { $('marketOwners').textContent = '…'; countOwners(); }
+    }
     var wrap = $('marketBscScanWrap');
     if (wrap) {
       if (CFG.CONTRACT_ADDRESS) {
@@ -348,6 +364,28 @@
         wrap.innerHTML = '<span class="pill">Contract on BscScan — not deployed yet</span>';
       }
     }
+  }
+
+  async function countOwners() {
+    if (state.countingOwners || !state.contract || state.minted === null) return;
+    if (state.minted === 0) { state.owners = 0; if ($('marketOwners')) $('marketOwners').textContent = '0'; return; }
+    state.countingOwners = true;
+    try {
+      var owners = {};
+      var batch = 20;
+      for (var start = 1; start <= state.minted; start += batch) {
+        var ids = [];
+        for (var id = start; id < Math.min(start + batch, state.minted + 1); id++) ids.push(id);
+        var results = await Promise.all(ids.map(function (tid) { return state.contract.ownerOf(tid); }));
+        results.forEach(function (o) { owners[o.toLowerCase()] = true; });
+      }
+      state.owners = Object.keys(owners).length;
+      if ($('marketOwners')) $('marketOwners').textContent = fmt(state.owners);
+    } catch (e) {
+      console.error(e);
+      if ($('marketOwners')) $('marketOwners').textContent = '—';
+    }
+    state.countingOwners = false;
   }
 
   async function marketSearch(e) {
