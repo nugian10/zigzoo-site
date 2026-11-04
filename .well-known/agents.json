@@ -31,5 +31,19 @@
         }
       ]
     }
-  }
+  },
+  "endpoints": [
+    {
+      "name": "llms.txt",
+      "url": "https://zigzoo.xyz/llms.txt"
+    },
+    {
+      "name": "sitemap.xml",
+      "url": "https://zigzoo.xyz/sitemap.xml"
+    },
+    {
+      "name": "mint",
+      "url": "https://zigzoo.xyz/"
+    }
+  ]
 }
