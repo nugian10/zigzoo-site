@@ -11,7 +11,7 @@
   --grad:linear-gradient(90deg,var(--yellow),var(--red),var(--turq));
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--text);
   font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -53,7 +53,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(14,13,11,.92);backdrop-f
 /* hero */
 .hero{padding:44px 0 28px}
 .hero-grid{display:grid;gap:36px;align-items:center}
-.hero h1{font-size:clamp(64px,15vw,128px);letter-spacing:-.04em;margin:20px 0 16px}
+.hero h1{font-size:clamp(52px,15vw,128px);letter-spacing:-.04em;margin:20px 0 16px}
 .hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero h1 .eye-o{border-color:#000;box-shadow:0 0 0 2px rgba(255,255,255,.08)}
 .hero p.lead{font-size:clamp(17px,4vw,21px);color:var(--muted);max-width:560px}
@@ -112,7 +112,8 @@ section{padding:56px 0}
 .qty-custom{display:flex;gap:10px;align-items:center}
 .qty-custom input{flex:1;background:var(--panel2);border:1px solid var(--line2);border-radius:8px;color:var(--text);
   font-family:"JetBrains Mono",monospace;font-size:16px;padding:12px;min-width:0}
-.total{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line2);padding-top:14px;font-weight:800;margin-top:16px}
+.total{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px 12px;border-top:1px dashed var(--line2);padding-top:14px;font-weight:800;margin-top:16px}
+.total span{min-width:0;overflow-wrap:break-word}
 .status{border-radius:10px;padding:13px 15px;font-size:14px;line-height:1.5;margin:14px 0;font-weight:600;border:1px solid var(--line2)}
 .status.ok{background:rgba(122,182,72,.12);border-color:#4E7A2A;color:#D6EFC0}
 .status.warn{background:rgba(255,196,0,.1);border-color:#8A6400;color:#FFE9A8}
@@ -134,7 +135,8 @@ section{padding:56px 0}
 .gcard.c3{border-color:var(--green)}
 .gcard svg{display:block}
 .gcard img{width:100%;display:block;aspect-ratio:464/411;object-fit:cover}
-.gmeta{padding:11px 12px;background:var(--panel);border-top:2px solid var(--line2);display:flex;justify-content:space-between;gap:8px;align-items:center}
+.gmeta{padding:11px 12px;background:var(--panel);border-top:2px solid var(--line2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.gmeta b,.gmeta span{min-width:0;overflow-wrap:break-word}
 .gmeta b{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--text)}
 .gmeta span{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
 .center{text-align:center;margin-top:22px}
@@ -183,7 +185,8 @@ dialog::backdrop{background:rgba(0,0,0,.7)}
 .market-search input{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--line2);border-radius:8px;color:var(--text);padding:14px 16px;font-size:14px}
 .roadmap{display:grid;gap:12px}
 .roadmap-item{border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--panel);display:flex;gap:12px;justify-content:space-between;align-items:flex-start}
-.roadmap-item p{font-size:14px}
+.roadmap-item>div{min-width:0}
+.roadmap-item p{font-size:14px;overflow-wrap:break-word}
 .accordion{border-top:1px solid var(--line)}
 .acc-item{border-bottom:1px solid var(--line)}
 .acc-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:18px 0;font-family:"Archivo Black",Arial,sans-serif;font-size:20px;text-transform:uppercase;text-align:left;cursor:pointer;color:var(--text)}
@@ -208,3 +211,19 @@ dialog::backdrop{background:rgba(0,0,0,.7)}
 .side-menu nav a:hover{background:var(--panel2)}
 .menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99;border:0;padding:0}
 .menu-backdrop[hidden]{display:none}
+
+/* Mobile-first fixes (2026-11-04): tap targets >=44px, hero CTAs full-width,
+   market search stays on one row, header stays on one line at 360px */
+@media(max-width:719px){
+  .btn.small{min-height:44px;padding-top:12px;padding-bottom:12px}
+  .close-x{width:44px;height:44px}
+}
+@media(max-width:640px){
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn{width:100%}
+  .market-search input{min-width:0;flex:1 1 160px}
+}
+@media(max-width:480px){
+  .logo{font-size:20px}
+  .btn.small{padding-left:12px;padding-right:12px;font-size:11px}
+}
