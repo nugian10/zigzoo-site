@@ -222,7 +222,7 @@ IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check hol
         <span id="marketBscScanWrap"><span class="pill">Contract on BscScan — live</span></span>
       </div>
       <form id="marketSearchForm" class="market-search">
-        <input id="marketSearchInput" type="text" placeholder="Search # or paste a wallet address" aria-label="Search a token number or wallet address">
+        <input id="marketSearchInput" type="text" placeholder="Search # or wallet" aria-label="Search a token number or wallet address">
         <button class="btn ghost" type="submit">Search</button>
       </form>
       <p class="mono" id="marketSearchResult" style="font-size:13px;color:var(--muted)"></p>
@@ -298,8 +298,10 @@ IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check hol
 
 <dialog id="monsterModal">
   <div class="modal">
-    <button class="close-x" id="closeModal" type="button" aria-label="Close">×</button>
-    <h3 id="modalTitle" style="font-size:22px;margin-bottom:14px">ZIGZOO #1</h3>
+    <div class="modal-head">
+      <button class="close-x" id="closeModal" type="button" aria-label="Close">×</button>
+      <h3 id="modalTitle" style="font-size:22px;margin-bottom:0">ZIGZOO #1</h3>
+    </div>
     <div id="modalArt"></div>
     <ul class="trait-list" id="modalTraits" style="margin-top:14px"></ul>
     <p id="modalStory" class="modal-story"></p>

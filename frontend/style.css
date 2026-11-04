@@ -53,7 +53,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(14,13,11,.92);backdrop-f
 /* hero */
 .hero{padding:44px 0 28px}
 .hero-grid{display:grid;gap:36px;align-items:center}
-.hero h1{font-size:clamp(52px,15vw,128px);letter-spacing:-.04em;margin:20px 0 16px}
+.hero h1{font-size:clamp(52px,15vw,128px);letter-spacing:-.04em;margin:20px 0 16px;white-space:nowrap}
 .hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero h1 .eye-o{border-color:#000;box-shadow:0 0 0 2px rgba(255,255,255,.08)}
 .hero p.lead{font-size:clamp(17px,4vw,21px);color:var(--muted);max-width:560px}
@@ -156,7 +156,7 @@ dialog::backdrop{background:rgba(0,0,0,.7)}
 .modal{padding:20px}
 .modal svg{border:2px solid var(--line2);border-radius:12px;overflow:hidden}
 .modal img{width:100%;display:block;border:2px solid var(--line2);border-radius:12px}
-.modal pre{white-space:pre-wrap;word-break:break-all;background:#000;border:1px solid var(--line2);border-radius:10px;padding:12px;font-size:12px;max-height:220px;overflow:auto;color:#E8E0CC}
+.modal pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#000;border:1px solid var(--line2);border-radius:10px;padding:12px;font-size:12px;color:#E8E0CC}
 .close-x{float:right;border:1px solid var(--line2);background:var(--red);color:#fff;width:38px;height:38px;border-radius:50%;font-weight:900;cursor:pointer}
 @media(min-width:720px){
   .navlinks{display:flex}
@@ -212,7 +212,7 @@ dialog::backdrop{background:rgba(0,0,0,.7)}
 
 /* Mobile-first fixes (2026-11-04): tap targets >=44px, hero CTAs full-width,
    market search stays on one row, header stays on one line at 360px */
-@media(max-width:719px){
+@media(max-width:900px){
   .btn.small{min-height:44px;padding-top:12px;padding-bottom:12px}
   .close-x{width:44px;height:44px}
 }
@@ -224,4 +224,39 @@ dialog::backdrop{background:rgba(0,0,0,.7)}
 @media(max-width:480px){
   .logo{font-size:20px}
   .btn.small{padding-left:12px;padding-right:12px;font-size:11px}
+}
+
+/* Mobile-first fixes (2026-11-05, from real phone audit at 360px/390px/768px):
+   roadmap cards fit at 360px, sticky modal header, JSON preview flows with the
+   modal (no nested scroll, no mid-word breaks), footer words stay whole,
+   hero fan cards un-fan into a readable 3-up grid on phones, hero title
+   never splits mid-word. Desktop >=720px layout unchanged. */
+/* 1. Roadmap: grid item may shrink below its min-content (the 42-char contract
+   address in the text set a ~380px min-content width); `anywhere` lets that
+   long string break only when the line actually runs out, and the pill never
+   gets squished. */
+.roadmap-item{min-width:0}
+.roadmap-item p{overflow-wrap:anywhere}
+.roadmap-item .pill{flex-shrink:0;white-space:nowrap}
+/* 2. Sticky modal header: title + close stay pinned at the top of the modal
+   while the story/metadata scroll beneath them. */
+.modal-head{position:sticky;top:0;z-index:5;background:var(--panel);margin:-20px -20px 0;padding:16px 20px 12px;border-bottom:1px solid var(--line);border-radius:15px 15px 0 0}
+/* 3. Footer: keep words whole — no mid-word breaks in "Chain" etc. The
+   contract address still breaks, but only at the line edge via `anywhere`. */
+footer .mono{word-break:normal;overflow-wrap:anywhere}
+/* 6. Hero fan cards on phones: drop the overlapping fan, show all three cards
+   side by side with fully readable labels. */
+@media(max-width:640px){
+  .card-fan{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;height:auto;max-width:none}
+  .fan-card{position:static;width:100%;transform:none}
+  .fan-card:nth-child(2){top:0}
+  .fan-card span{font-size:10px;padding:7px 8px;overflow-wrap:break-word}
+}
+/* 7. Hero title at tablet widths: shrink so the whole "ZIGZOO" (ZIGZ + two eye
+   O's) fits the text column instead of splitting mid-word. */
+@media(min-width:720px) and (max-width:1000px){
+  .hero h1{font-size:clamp(52px,10vw,88px)}
+}
+@media(max-width:480px){
+  .roadmap-item{padding:14px}
 }
