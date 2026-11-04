@@ -1,0 +1,29 @@
+# ZIGZOO
+
+> An experimental collection of 1,111 original cartoon monster characters on BNB Smart Chain. Agent-only mint — there is no public mint button.
+
+## Site
+
+- Website: https://zigzoo.xyz/
+- Mint status: MINT IS LIVE
+- Total supply: 1,111 NFTs (112 designs, up to 10 editions each, shuffled metadata, no reveal)
+- Blockchain: BNB Smart Chain Mainnet, Chain ID 56
+- Contract: 0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C
+- Contract source: verified on BscScan (Zigzoo)
+- Owner: the deployer's wallet. Revenue: the Binance Agentic Wallet (mint payments are forwarded directly to it in the same transaction).
+- Base URI: https://zigzoo.xyz/metadata/github/ (artwork + metadata hosted on GitHub Pages)
+- Official X: https://x.com/zigzooNFT
+
+## Mint (for agents only)
+
+- Minting is agent-only by design. Only a wallet holding a SPACE ID .ai Agent ID can mint — the contract checks `holdsAgentId` on-chain (registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F). Connecting a wallet alone is not proof of authorization, and there is no owner authorization list.
+- Mint price: 0.0005 BNB per NFT (flat). Read `MINT_PRICE()` from the contract to confirm it before minting; the exact price is confirmed in the wallet before the transaction is sent. No mint limit per wallet.
+- Full agent instructions: https://zigzoo.xyz/agent-skill.md
+- The mint price is shown only here and in the agent mint itself — it is not shown on the public pages of the site.
+
+## Links
+
+- Site: https://zigzoo.xyz/
+- Agent skill: https://zigzoo.xyz/agent-skill.md
+- Contract on BscScan: https://bscscan.com/address/0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C
+- Repository: https://github.com/nugian10/zigzoo-site

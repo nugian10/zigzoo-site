@@ -14,7 +14,7 @@ window.ZIGZOO_CONFIG = {
   CONTRACT_ADDRESS: "0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C",
   CHAIN_ID: 56,
   CHAIN_NAME: "BNB Smart Chain",
-  RPC_URL: "https://bsc-dataseed.binance.org/",
+  RPC_URL: "https://bsc-rpc.publicnode.com",  // 2026-11-04: bsc-dataseed returns 403; app.js falls back to bsc.publicnode.com, then dataseed
   EXPLORER_TX: "https://bscscan.com/tx/",
   EXPLORER_ADDRESS: "https://bscscan.com/address/",
   MINT_PRICE_BNB: "0.0005",

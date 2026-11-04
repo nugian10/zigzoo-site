@@ -14,10 +14,11 @@ BNB Smart Chain. **Agent Only Mint** — bukan mint publik.
   disalin) yang diterjemahkan ke palet dan monster ZIGZOO sendiri.
   Supply, harga, nama, dan artwork Subsonic tidak disalin.
 
-> Proyek ini **belum di-deploy**. Tidak ada transaksi blockchain yang
-> dijalankan dan tidak ada BNB yang dikeluarkan saat proyek ini dibuat.
-> Alamat kontrak dan akun media sosial sengaja dibiarkan kosong sampai
-> deployment manual dan pengumuman resmi — tidak ada alamat atau akun palsu.
+> Proyek ini **SUDAH di-deploy dan MINT LIVE sejak 1 Nov 2026**.
+> Kontrak: `0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C` (BNB Smart Chain,
+> source-verified di BscScan). Situs live di https://zigzoo.xyz.
+> Ter-mint 19 dari 1.111 per cek 4 Nov 2026 — cek jumlah terbaru langsung
+> di chain (`totalSupply()`), bukan dari angka di file ini.
 
 ## Isi proyek
 
@@ -26,7 +27,7 @@ zigzoo/
 ├── frontend/
 │   ├── index.html      # Website minting (mobile-first, section 01–04)
 │   ├── style.css       # Desain gelap editorial + aksen kuning / merah / hijau / turquoise
-│   ├── config.js       # ← ISI CONTRACT_ADDRESS SETELAH DEPLOYMENT
+│   ├── config.js       # CONTRACT_ADDRESS sudah terisi (kontrak deploy 1 Nov 2026)
 │   ├── agent-skill.md  # Instruksi mint untuk AI agent (ditautkan dari website)
 │   ├── artwork/characters/ # 60 tile karakter asli (zigzoo-01..60)
 │   └── app.js          # Web3: validasi chain 56, cek agent, mint, baca counter dari chain
@@ -59,9 +60,9 @@ python3 -m http.server 8000
 # buka http://localhost:8000
 ```
 
-Website akan menampilkan status "kontrak belum dikonfigurasi" dan
-menonaktifkan Mint sampai `config.js` diisi alamat kontrak terverifikasi.
-Ini disengaja: tidak ada counter palsu dan tidak ada simulasi sukses.
+Kontrak sudah terkonfigurasi di `config.js`, jadi angka mint di website
+dibaca langsung dari chain (`totalSupply()`). Tidak ada counter palsu
+dan tidak ada simulasi sukses.
 
 ## Jalankan test kontrak
 
@@ -73,6 +74,8 @@ npx hardhat test
 
 ## Deployment
 
+Deployment SUDAH selesai 1 Nov 2026 (kontrak di atas, terverifikasi di
+BscScan, baseURI sudah di-set). Untuk referensi, prosedur awalnya:
 Ikuti `docs/DEPLOYMENT.md` secara berurutan: testnet dulu, verifikasi
 BscScan, isi `CONTRACT_ADDRESS`, cek SPACE ID, upload metadata,
 lalu `setBaseURI`. Jangan lewati verifikasi sebelum mengumumkan alamat.

@@ -65,7 +65,7 @@
   function renderMintNumbers() {
     $('mintedVal').textContent = state.minted === null ? '—' : fmt(state.minted);
     $('remainingVal').textContent = state.remaining === null ? '—' : fmt(state.remaining);
-    $('totalPrice').textContent = (state.qty * parseFloat(CFG.MINT_PRICE_BNB)).toFixed(4) + ' BNB';
+    $('totalPrice').textContent = 'Shown by your agent before confirming'; // price is shown only inside the agent mint, never on the page
     if ($('qtyInput')) $('qtyInput').value = state.qty;
     var boxes = document.querySelectorAll('.qty-box');
     boxes.forEach(function (b) { b.classList.toggle('sel', Number(b.getAttribute('data-qty')) === state.qty); });
@@ -118,7 +118,7 @@
           minted = await cw.totalSupply(); max = await cw.MAX_SUPPLY(); state.contract = cw;
         } catch (e) { lastErr = e; }
       } else {
-        var rpcList = [CFG.RPC_URL, 'https://bsc-dataseed1.binance.org/', 'https://bsc-dataseed2.binance.org/', 'https://bsc-dataseed3.binance.org/'];
+        var rpcList = [CFG.RPC_URL, 'https://bsc.publicnode.com', 'https://bsc-dataseed.binance.org/', 'https://bsc-dataseed1.binance.org/', 'https://bsc-dataseed2.binance.org/'];
         for (var i = 0; i < rpcList.length && minted === null; i++) {
           try {
             var provider = new window.ethers.JsonRpcProvider(rpcList[i]);

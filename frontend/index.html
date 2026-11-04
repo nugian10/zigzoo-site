@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZIGZOO — Agent Only Mint | BNB Smart Chain</title>
-<meta name="description" content="ZIGZOO: an experimental collection of 1,111 original cartoon monster characters on BNB Smart Chain. Agent-only mint, 0.0005 BNB per NFT.">
+<meta name="description" content="ZIGZOO: an experimental collection of 1,111 original cartoon monster characters on BNB Smart Chain. Agent-only mint.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:title" content="ZIGZOO — Agent Only Mint | BNB Smart Chain">
 <meta property="og:description" content="An experimental collection of 1,111 original cartoon monster characters on BNB Smart Chain. Agent-only mint.">
@@ -15,6 +15,7 @@
 <meta name="twitter:title" content="ZIGZOO — Agent Only Mint | BNB Smart Chain">
 <meta name="twitter:description" content="An experimental collection of 1,111 original cartoon monster characters on BNB Smart Chain. Agent-only mint.">
 <meta name="twitter:image" content="https://zigzoo.xyz/images/zigzoo-01.webp">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ZIGZOO","url":"https://zigzoo.xyz/","description":"An experimental collection of 1,111 original cartoon monster characters on BNB Smart Chain. Agent-only mint."}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -77,7 +78,7 @@
   <!-- STATS STRIP -->
   <div class="wrap stats-strip">
     <div><span>Total Supply</span><b>1,111</b></div>
-    <div><span>Price / NFT</span><b>0.0005 BNB</b></div>
+    <div><span>Designs</span><b>112</b></div>
     <div><span>Network</span><b>BNB Chain • 56</b></div>
     <div><span>Mint System</span><b>Agent Only</b></div>
   </div>
@@ -111,7 +112,7 @@
       <div class="sec-label"><b>02</b> / Mint <span class="pill" style="margin-left:8px;background:#111;color:#FFD400;border-color:#111">● MINT IS LIVE</span></div>
       <div class="section-head">
         <h2>Mint Through Your Agent</h2>
-        <p><strong>Minting is live now on BNB Smart Chain.</strong> Your agent. Your wallet. Your ZIGZOO. The price is always <strong>0.0005 BNB per NFT</strong>. No mint limit per wallet for authorized agents. Minted and remaining counts on this page are read live from the contract.</p>
+        <p><strong>Minting is live now on BNB Smart Chain.</strong> Your agent. Your wallet. Your ZIGZOO. Your agent reads the exact price from the contract before confirming it in the wallet. No mint limit per wallet for authorized agents. Minted and remaining counts on this page are read live from the contract.</p>
       </div>
 
       <div class="panel">
@@ -137,8 +138,8 @@
           <input id="qtyInput" type="number" min="1" value="1" inputmode="numeric" aria-label="Custom quantity">
           <span class="mono" style="color:var(--muted);font-size:12px">CUSTOM — NO LIMIT PER WALLET</span>
         </div>
-        <div class="total"><span>Total in the command</span><span id="totalPrice">0.0005 BNB</span></div>
-        <p style="font-size:13px;color:var(--muted)">The total above excludes gas. Your agent confirms the final cost in the wallet before the transaction is sent. Overpayment is refunded automatically by the contract.</p>
+        <div class="total"><span>Total in the command</span><span id="totalPrice">Shown by your agent</span></div>
+        <p style="font-size:13px;color:var(--muted)">The exact price is read from the contract by your agent, who confirms the final cost in the wallet before the transaction is sent. Overpayment is refunded automatically by the contract.</p>
 
         <h3 style="font-size:16px;margin-top:20px">Mint with an AI Agent</h3>
         <ol class="steps">
@@ -238,7 +239,7 @@ IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check hol
       <div class="roadmap">
         <div class="roadmap-item"><div><b>Website live</b><p style="margin:4px 0 0">ZIGZOO site live, gallery limited to 20 featured characters, agent-only mint panel, and the official X link in the footer.</p></div><span class="pill ok">Done</span></div>
         <div class="roadmap-item"><div><b>112 designs and 1,111 metadata files</b><p style="margin:4px 0 0">Each design appears in at most 10 editions, with the edition labelled in the metadata. Artwork assignment is random via shuffled metadata, with no reveal system.</p></div><span class="pill ok">Done</span></div>
-        <div class="roadmap-item"><div><b>Agent-only contract tested</b><p style="margin:4px 0 0">ERC-721 contract with an on-chain SPACE ID Agent ID check, 0.0005 BNB per NFT, and 8 passing Hardhat tests.</p></div><span class="pill ok">Done</span></div>
+        <div class="roadmap-item"><div><b>Agent-only contract tested</b><p style="margin:4px 0 0">ERC-721 contract with an on-chain SPACE ID Agent ID check and 8 passing Hardhat tests.</p></div><span class="pill ok">Done</span></div>
         <div class="roadmap-item"><div><b>Deploy the contract to BNB Smart Chain Mainnet</b><p style="margin:4px 0 0">Deployed to BNB Smart Chain Mainnet by the owner. Contract: 0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C. This site never deploys a contract or spends BNB on its own.</p></div><span class="pill ok">Done</span></div>
         <div class="roadmap-item"><div><b>BscScan verification, contract address, and agent authorization</b><p style="margin:4px 0 0">Source verified on BscScan. The contract address is filled into the site, and minting is gated on-chain by the SPACE ID registry, not by an owner list.</p></div><span class="pill ok">Done</span></div>
         <div class="roadmap-item"><div><b>Artwork and metadata hosted, base URI set</b><p style="margin:4px 0 0">Artwork and metadata are hosted on GitHub Pages, and the contract baseURI points to https://zigzoo.xyz/metadata/github/ (set via setBaseURI).</p></div><span class="pill ok">Done</span></div>
@@ -281,7 +282,7 @@ IMPORTANT: continue only if this wallet holds a SPACE ID .ai Agent ID (check hol
     <div>
       <h3 aria-label="ZIGZOO">ZIGZ<span class="eye-o sm" aria-hidden="true"></span><span class="eye-o sm" aria-hidden="true"></span></h3>
       <p style="font-size:14px">An experimental NFT collection on BNB Smart Chain. Agent Only Mint.</p>
-      <p class="mono" style="font-size:13px;color:var(--muted)">Network: BNB Smart Chain Mainnet — Chain ID 56<br>Price: 0.0005 BNB / NFT • Supply: 1,111</p>
+      <p class="mono" style="font-size:13px;color:var(--muted)">Network: BNB Smart Chain Mainnet — Chain ID 56<br>Supply: 1,111</p>
     </div>
     <div>
       <h3 style="font-size:14px">Smart Contract</h3>
