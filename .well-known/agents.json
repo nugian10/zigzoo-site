@@ -1,0 +1,35 @@
+{
+  "$schema": "https://dnacore.ai/.well-known/agents.schema.json",
+  "name": "Zigzoo",
+  "description": "1,111 original cartoon monster character NFTs (ERC-721) on BNB Smart Chain. Agent-only minting through a Binance Agentic Wallet agent.",
+  "version": "0.1",
+  "homepage": "https://zigzoo.xyz",
+  "llms_txt": "https://zigzoo.xyz/llms.txt",
+  "auth": {
+    "account_required": false,
+    "type": "open"
+  },
+  "flows": {
+    "mint": {
+      "description": "How an AI agent mints a Zigzoo NFT for a Binance Agentic Wallet user.",
+      "steps": [
+        {
+          "description": "Read https://zigzoo.xyz/llms.txt and the agent prompt on https://zigzoo.xyz/",
+          "id": "read_llms"
+        },
+        {
+          "description": "Confirm the user's wallet holds a SPACE ID Agent ID (registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F)",
+          "id": "check_agent_id"
+        },
+        {
+          "description": "Read MINT_PRICE() on the live contract 0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C — never hardcode a price",
+          "id": "read_price"
+        },
+        {
+          "description": "Call mint(quantity) with value = MINT_PRICE() x quantity, show the exact amount in the wallet confirmation before signing, then confirm on-chain",
+          "id": "mint"
+        }
+      ]
+    }
+  }
+}
