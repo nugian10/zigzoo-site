@@ -32,3 +32,5 @@ For Binance Agentic Wallet agents. Mint ZIGZOO cartoon monsters (ZIGZOO) on BNB 
 5. Verify on-chain: totalSupply() rose by the quantity, and the wallet now owns the new tokenIds (they start at totalSupply() before the mint + 1). Read tokenURI(tokenId) to report each monster's design.
 
 Repeat as needed. There is no per-wallet limit and no pause.
+
+<!-- redeploy trigger 2026-11-05: previous Pages deploy failed, retriggering build -->
