@@ -146,6 +146,7 @@ section{padding:56px 0}
 .trait-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
 .trait-list li{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:12px;font-size:14px;color:var(--muted)}
 .trait-list li b{color:var(--yellow)}
+.modal-story{font-size:14px;line-height:1.6;color:var(--muted);margin:14px 0 0}
 footer{border-top:1px solid var(--line);padding:36px 0 46px;margin-top:10px}
 .foot-grid{display:grid;gap:22px}
 .foot-grid h3{font-size:22px}

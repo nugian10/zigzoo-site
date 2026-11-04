@@ -36,26 +36,26 @@
   // Real characters from the ZIGZOO character sheets (cropped tiles).
   // Tokens 1-100 use these images on the site. The generative preview system was removed.
   var REAL_CHARACTERS = [
-    { id: 1, name: 'Spiral Horn', file: 'artwork/characters/zigzoo-01.webp' },
-    { id: 2, name: 'Jar', file: 'artwork/characters/zigzoo-02.webp' },
-    { id: 3, name: 'Crystal Coffin', file: 'artwork/characters/zigzoo-03.webp' },
-    { id: 4, name: 'Berry Cloud', file: 'artwork/characters/zigzoo-04.webp' },
-    { id: 5, name: 'Spring Robot', file: 'artwork/characters/zigzoo-05.webp' },
-    { id: 6, name: 'Ink Drop', file: 'artwork/characters/zigzoo-06.webp' },
-    { id: 7, name: 'Puzzle', file: 'artwork/characters/zigzoo-07.webp' },
-    { id: 8, name: 'Padlock', file: 'artwork/characters/zigzoo-08.webp' },
-    { id: 9, name: 'Acorn', file: 'artwork/characters/zigzoo-09.webp' },
-    { id: 10, name: 'Rocket', file: 'artwork/characters/zigzoo-10.webp' },
-    { id: 11, name: 'Compass Star', file: 'artwork/characters/zigzoo-11.webp' },
-    { id: 12, name: 'Vine Tangle', file: 'artwork/characters/zigzoo-12.webp' },
-    { id: 13, name: 'Lighthouse', file: 'artwork/characters/zigzoo-13.webp' },
-    { id: 14, name: 'Teapot', file: 'artwork/characters/zigzoo-14.webp' },
-    { id: 15, name: 'Umbrella', file: 'artwork/characters/zigzoo-15.webp' },
-    { id: 16, name: 'Clock', file: 'artwork/characters/zigzoo-16.webp' },
-    { id: 17, name: 'Cactus', file: 'artwork/characters/zigzoo-17.webp' },
-    { id: 18, name: 'Open Book', file: 'artwork/characters/zigzoo-18.webp' },
-    { id: 19, name: 'Balloon', file: 'artwork/characters/zigzoo-19.webp' },
-    { id: 20, name: 'Guitar', file: 'artwork/characters/zigzoo-20.webp' },
+    { id: 1, name: 'Spiral Horn', story: "Spiral Horn never walks in a straight line — he spirals everywhere, even to the fridge. His horn plays a tiny trumpet sound every time he sneezes, which is often, because he is allergic to his own glitter.", file: 'artwork/characters/zigzoo-01.webp' },
+    { id: 2, name: 'Jar', story: "Jar keeps all his feelings neatly labeled on tiny shelves inside himself. His favorite is the jar marked \"Tuesday Excitement,\" which he opens every single day, just in case.", file: 'artwork/characters/zigzoo-02.webp' },
+    { id: 3, name: 'Crystal Coffin', story: "Crystal Coffin is not spooky at all — he is the friendliest ghost-host in Zigzoo, and he throws the best nap parties. Everyone who sleeps over wakes up sparkling.", file: 'artwork/characters/zigzoo-03.webp' },
+    { id: 4, name: 'Berry Cloud', story: "Berry Cloud rains blueberries when she is happy, which is almost always. The other monsters follow her around with bowls, just in case it starts to drizzle.", file: 'artwork/characters/zigzoo-04.webp' },
+    { id: 5, name: 'Spring Robot', story: "Spring Robot bounces instead of walking and squeaks \"boing!\" with every step. He once bounced clean over the Zigzoo fence and landed in a picnic, where he stayed for dessert.", file: 'artwork/characters/zigzoo-05.webp' },
+    { id: 6, name: 'Ink Drop', story: "Ink Drop is a tiny poet who writes poems on everything, including himself. His masterpiece is a haiku about a puddle, which he reads aloud every time it rains.", file: 'artwork/characters/zigzoo-06.webp' },
+    { id: 7, name: 'Puzzle', story: "Puzzle is missing one piece of himself and has turned looking for it into a lifelong hobby. He has found 47 other pieces instead, and he keeps them all in a box labeled \"Almost Me.\"", file: 'artwork/characters/zigzoo-07.webp' },
+    { id: 8, name: 'Padlock', story: "Padlock guards the world's most important secret: the recipe for the perfect sandwich. He has never told anyone, mostly because he forgot where he put the key.", file: 'artwork/characters/zigzoo-08.webp' },
+    { id: 9, name: 'Acorn', story: "Acorn dreams of becoming the tallest oak in Zigzoo, but he is afraid of heights. So he practices being tall by standing on books and announcing, \"Behold, a tree!\"", file: 'artwork/characters/zigzoo-09.webp' },
+    { id: 10, name: 'Rocket', story: "Rocket counts down from ten before doing anything, even brushing his teeth. He once launched himself to the moon for a sandwich and came back with moon crumbs in his pockets.", file: 'artwork/characters/zigzoo-10.webp' },
+    { id: 11, name: 'Compass Star', story: "Compass Star always knows which way is north, but she has a terrible sense of timing and arrives everywhere exactly one snack late. She navigates by following the smell of fresh cookies.", file: 'artwork/characters/zigzoo-11.webp' },
+    { id: 12, name: 'Vine Tangle', story: "Vine Tangle is a walking knot who gets tangled in his own vines every morning. He calls it \"morning yoga\" and insists it is the reason he is so flexible.", file: 'artwork/characters/zigzoo-12.webp' },
+    { id: 13, name: 'Lighthouse', story: "Lighthouse shines his light to guide lost ships home, but he is afraid of the dark himself. So he keeps a tiny nightlight on at all times, just in case the dark sneaks up on him.", file: 'artwork/characters/zigzoo-13.webp' },
+    { id: 14, name: 'Teapot', story: "Teapot whistles a happy tune whenever he is excited, which is every time someone says \"tea.\" He dreams of pouring tea for the whole world, one tiny cup at a time.", file: 'artwork/characters/zigzoo-14.webp' },
+    { id: 15, name: 'Umbrella', story: "Umbrella opens up whenever she senses even one drop of rain, even if it is just someone sneezing nearby. She has never once gotten wet, and she is very proud of that fact.", file: 'artwork/characters/zigzoo-15.webp' },
+    { id: 16, name: 'Clock', story: "Clock is always on time, to the second, and he reminds everyone of it constantly. His greatest fear is daylight saving time, which he calls \"the great confusion.\"", file: 'artwork/characters/zigzoo-16.webp' },
+    { id: 17, name: 'Cactus', story: "Cactus gives the best hugs in Zigzoo, despite the spikes — everyone just hugs him very, very carefully. He waters himself with lemonade and insists it makes him sweeter.", file: 'artwork/characters/zigzoo-17.webp' },
+    { id: 18, name: 'Open Book', story: "Open Book knows a thousand stories and tells them all at once if you let him. His favorite story is about a book who wanted to be read, which he tells to every new friend he meets.", file: 'artwork/characters/zigzoo-18.webp' },
+    { id: 19, name: 'Balloon', story: "Balloon floats a little higher every time someone compliments him. He once floated all the way to the clouds and had to be talked down with a promise of cake.", file: 'artwork/characters/zigzoo-19.webp' },
+    { id: 20, name: 'Guitar', story: "Guitar strums himself when he is nervous, which is always right before a performance. His dream is to play one perfect note that makes the whole of Zigzoo dance.", file: 'artwork/characters/zigzoo-20.webp' },
     { id: 21, name: 'Camera', file: 'artwork/characters/zigzoo-21.webp' },
     { id: 22, name: 'Anchor', file: 'artwork/characters/zigzoo-22.webp' },
     { id: 23, name: 'Pineapple', file: 'artwork/characters/zigzoo-23.webp' },
@@ -308,6 +308,7 @@
       $('modalArt').innerHTML = '<img src="' + real.file + '" alt="ZIGZOO #' + id + ' — ' + real.name + ' Monster">';
       $('modalTitle').textContent = 'ZIGZOO #' + id;
       $('modalTraits').innerHTML = '<li><b>Character:</b> ' + real.name + ' Monster</li><li><b>Source:</b> ZIGZOO character sheet</li><li><b>Style:</b> Retro vintage cartoon, black silhouette, distressed print, warm cream background</li>';
+      if ($('modalStory')) $('modalStory').textContent = real.story || '';
       $('modalMeta').textContent = JSON.stringify({ name: 'ZIGZOO #' + id, description: 'An experimental collection of original cartoon monster characters on BNB Smart Chain.', image: real.file, attributes: [{ trait_type: 'Character', value: real.name }] }, null, 2);
       $('modalNote').textContent = 'This is a real character from the ZIGZOO character sheet. Final token metadata and IPFS CID are filled in after artwork production and metadata upload are complete.';
       $('monsterModal').showModal();

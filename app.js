@@ -36,26 +36,26 @@
   // Real characters from the ZIGZOO character sheets (cropped tiles).
   // Tokens 1-100 use these images on the site. The generative preview system was removed.
   var REAL_CHARACTERS = [
-    { id: 1, name: 'Spiral Horn' },
-    { id: 2, name: 'Jar' },
-    { id: 3, name: 'Crystal Coffin' },
-    { id: 4, name: 'Berry Cloud' },
-    { id: 5, name: 'Spring Robot' },
-    { id: 6, name: 'Ink Drop' },
-    { id: 7, name: 'Puzzle' },
-    { id: 8, name: 'Padlock' },
-    { id: 9, name: 'Acorn' },
-    { id: 10, name: 'Rocket' },
-    { id: 11, name: 'Compass Star' },
-    { id: 12, name: 'Vine Tangle' },
-    { id: 13, name: 'Lighthouse' },
-    { id: 14, name: 'Teapot' },
-    { id: 15, name: 'Umbrella' },
-    { id: 16, name: 'Clock' },
-    { id: 17, name: 'Cactus' },
-    { id: 18, name: 'Open Book' },
-    { id: 19, name: 'Balloon' },
-    { id: 20, name: 'Guitar' }
+    { id: 1, name: 'Spiral Horn', story: "Spiral Horn never walks in a straight line — he spirals everywhere, even to the fridge. His horn plays a tiny trumpet sound every time he sneezes, which is often, because he is allergic to his own glitter." },
+    { id: 2, name: 'Jar', story: "Jar keeps all his feelings neatly labeled on tiny shelves inside himself. His favorite is the jar marked \"Tuesday Excitement,\" which he opens every single day, just in case." },
+    { id: 3, name: 'Crystal Coffin', story: "Crystal Coffin is not spooky at all — he is the friendliest ghost-host in Zigzoo, and he throws the best nap parties. Everyone who sleeps over wakes up sparkling." },
+    { id: 4, name: 'Berry Cloud', story: "Berry Cloud rains blueberries when she is happy, which is almost always. The other monsters follow her around with bowls, just in case it starts to drizzle." },
+    { id: 5, name: 'Spring Robot', story: "Spring Robot bounces instead of walking and squeaks \"boing!\" with every step. He once bounced clean over the Zigzoo fence and landed in a picnic, where he stayed for dessert." },
+    { id: 6, name: 'Ink Drop', story: "Ink Drop is a tiny poet who writes poems on everything, including himself. His masterpiece is a haiku about a puddle, which he reads aloud every time it rains." },
+    { id: 7, name: 'Puzzle', story: "Puzzle is missing one piece of himself and has turned looking for it into a lifelong hobby. He has found 47 other pieces instead, and he keeps them all in a box labeled \"Almost Me.\"" },
+    { id: 8, name: 'Padlock', story: "Padlock guards the world's most important secret: the recipe for the perfect sandwich. He has never told anyone, mostly because he forgot where he put the key." },
+    { id: 9, name: 'Acorn', story: "Acorn dreams of becoming the tallest oak in Zigzoo, but he is afraid of heights. So he practices being tall by standing on books and announcing, \"Behold, a tree!\"" },
+    { id: 10, name: 'Rocket', story: "Rocket counts down from ten before doing anything, even brushing his teeth. He once launched himself to the moon for a sandwich and came back with moon crumbs in his pockets." },
+    { id: 11, name: 'Compass Star', story: "Compass Star always knows which way is north, but she has a terrible sense of timing and arrives everywhere exactly one snack late. She navigates by following the smell of fresh cookies." },
+    { id: 12, name: 'Vine Tangle', story: "Vine Tangle is a walking knot who gets tangled in his own vines every morning. He calls it \"morning yoga\" and insists it is the reason he is so flexible." },
+    { id: 13, name: 'Lighthouse', story: "Lighthouse shines his light to guide lost ships home, but he is afraid of the dark himself. So he keeps a tiny nightlight on at all times, just in case the dark sneaks up on him." },
+    { id: 14, name: 'Teapot', story: "Teapot whistles a happy tune whenever he is excited, which is every time someone says \"tea.\" He dreams of pouring tea for the whole world, one tiny cup at a time." },
+    { id: 15, name: 'Umbrella', story: "Umbrella opens up whenever she senses even one drop of rain, even if it is just someone sneezing nearby. She has never once gotten wet, and she is very proud of that fact." },
+    { id: 16, name: 'Clock', story: "Clock is always on time, to the second, and he reminds everyone of it constantly. His greatest fear is daylight saving time, which he calls \"the great confusion.\"" },
+    { id: 17, name: 'Cactus', story: "Cactus gives the best hugs in Zigzoo, despite the spikes — everyone just hugs him very, very carefully. He waters himself with lemonade and insists it makes him sweeter." },
+    { id: 18, name: 'Open Book', story: "Open Book knows a thousand stories and tells them all at once if you let him. His favorite story is about a book who wanted to be read, which he tells to every new friend he meets." },
+    { id: 19, name: 'Balloon', story: "Balloon floats a little higher every time someone compliments him. He once floated all the way to the clouds and had to be talked down with a promise of cake." },
+    { id: 20, name: 'Guitar', story: "Guitar strums himself when he is nervous, which is always right before a performance. His dream is to play one perfect note that makes the whole of Zigzoo dance." }
   ];var CHUNK_DATA = {};var LOADED_CHUNKS = {};function realChar(id) { return REAL_CHARACTERS[id - 1] || null; }
 
   function fmt(n) { return Number(n).toLocaleString('en-US'); }
@@ -234,6 +234,7 @@
         $('modalTitle').textContent = 'ZIGZOO #' + id;
         $('modalArt').innerHTML = '<p style="color:var(--muted)">Image failed to load. Please check your connection and try again.</p>';
         $('modalTraits').innerHTML = '';
+        if ($('modalStory')) $('modalStory').textContent = '';
         $('modalMeta').textContent = '';
         $('monsterModal').showModal();
       });
@@ -242,6 +243,7 @@
     $('modalArt').innerHTML = '<img src="' + img + '" alt="ZIGZOO #' + id + ' — ' + real.name + ' Monster">';
     $('modalTitle').textContent = 'ZIGZOO #' + id;
     $('modalTraits').innerHTML = '<li><b>Character:</b> ' + real.name + ' Monster</li><li><b>Source:</b> ZIGZOO character sheet</li><li><b>Style:</b> Retro vintage cartoon, black silhouette, distressed print, warm cream background</li>';
+    if ($('modalStory')) $('modalStory').textContent = real.story || '';
     $('modalMeta').textContent = JSON.stringify({ name: 'ZIGZOO #' + id, description: 'An experimental collection of original cartoon monster characters on BNB Smart Chain.', image: 'gallery-chunk-' + chunkFor(id) + ' (token ' + id + ')', attributes: [{ trait_type: 'Character', value: real.name }] }, null, 2);
     $('modalNote').textContent = 'This is a real character from the ZIGZOO character sheet. Final token metadata and IPFS CID are filled in after artwork production and metadata upload are complete.';
     $('monsterModal').showModal();
