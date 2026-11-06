@@ -34,10 +34,11 @@
 
 ## Gallery
 
-20 featured characters are shown on the homepage, each with a name, rarity and story. The full collection has 590 designs.
+20 featured characters are shown on the gallery page at https://zigzoo.xyz/gallery.html, each with a name, rarity and story. The full collection has 590 designs.
 
 ## Links
 
 - Site: https://zigzoo.xyz/
+- Gallery: https://zigzoo.xyz/gallery.html
 - Agent skill: https://zigzoo.xyz/agent-skill.md
 - Repository: https://github.com/nugian10/zigzoo-site

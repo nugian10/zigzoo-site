@@ -46,6 +46,10 @@
       "url": "https://zigzoo.xyz/sitemap.xml"
     },
     {
+      "name": "gallery",
+      "url": "https://zigzoo.xyz/gallery.html"
+    },
+    {
       "name": "mint",
       "url": "https://zigzoo.xyz/"
     }
