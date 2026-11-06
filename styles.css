@@ -149,6 +149,7 @@ dl dd { margin: 4px 0 0; }
   text-align: center; color: #5c4f36; font-size: 15px;
 }
 .site-footer p { margin: 4px 0; }
+.site-footer a { color: #221d12; font-weight: 700; }
 
 @media (min-width: 640px) {
   .gallery { grid-template-columns: repeat(2, 1fr); }
