@@ -105,6 +105,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 16px 48px; }
 }
 .stats strong { display: block; font-size: 22px; }
 .stats span { font-size: 13px; color: #6b5d43; }
+.stats div.wide { grid-column: 1 / -1; }
 
 .ladder { width: 100%; max-width: 520px; border-collapse: collapse; margin: 16px 0; background: #fff; }
 .ladder th, .ladder td {

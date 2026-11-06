@@ -60,6 +60,7 @@
       <div><strong>590</strong><span>designs</span></div>
       <div><strong>100</strong><span>one-of-one Legendary</span></div>
       <div><strong>FREE</strong><span>first mint</span></div>
+      <div class="wide"><strong id="minted-count">&hellip;</strong><span>minted so far</span></div>
     </div>
   </section>
 
@@ -326,6 +327,28 @@ Never mint without an Agent ID; never send more than priceFor().</pre>
       done(fallbackCopy(text));
     }
   });
+})();
+</script>
+<script>
+(function () {
+  var el = document.getElementById('minted-count');
+  if (!el) return;
+  var rpcs = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
+  var done = false;
+  function tryRpc(i) {
+    if (done || i >= rpcs.length) { if (!done) el.textContent = '\u2014'; return; }
+    fetch(rpcs[i], { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_call',
+        params: [{ to: '0x09ADA5A12293C30D75b97c56E34967E8a4326a3C', data: '0x18160ddd' }, 'latest'] }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j.result) throw new Error('no result');
+        el.textContent = parseInt(j.result, 16).toLocaleString('en-US');
+        done = true;
+      })
+      .catch(function () { tryRpc(i + 1); });
+  }
+  tryRpc(0);
 })();
 </script>
 </body>
