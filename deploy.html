@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deploy Zigzoo Contract — Owner Tool</title>
+<meta name="description" content="Owner-only page to deploy the Zigzoo NFT contract from a browser wallet. Not a public page.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hidden { display: none !important; }
+  .owner-pill { background: #b3541e; color: #F6EFDC; }
+  .back-link { display: inline-block; margin: 16px 0 0; font-weight: 700; }
+  .deploy-intro { max-width: 640px; margin: 0 auto; }
+  .step {
+    background: #fff; border: 3px solid #221d12; border-radius: 18px;
+    padding: 18px; margin-top: 18px; max-width: 640px; margin-left: auto; margin-right: auto;
+  }
+  .step h2 { font-size: 22px; margin: 0 0 6px; }
+  .step.todo { opacity: 0.55; }
+  .step.active { border-color: #f5b301; box-shadow: 0 0 0 3px #f5b30133; }
+  .step.blocked { border-color: #b91c1c; }
+  .step.done { border-color: #3f6212; }
+  .step.done h2::after { content: " ✓"; color: #3f6212; }
+  .btn {
+    display: block; width: 100%; min-height: 52px; margin: 12px 0 0;
+    padding: 14px 18px; font-size: 18px; font-weight: 800; font-family: inherit;
+    color: #F6EFDC; background: #221d12; border: 3px solid #221d12; border-radius: 14px;
+    cursor: pointer; text-align: center;
+  }
+  .btn:hover:not(:disabled) { background: #3a3120; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn.primary { background: #b3541e; border-color: #b3541e; }
+  .btn.primary:hover:not(:disabled) { background: #96431a; }
+  .btn.ghost { background: #fff; color: #221d12; }
+  .btn.small { width: auto; display: inline-block; min-height: 44px; font-size: 15px; padding: 10px 16px; margin-top: 8px; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; overflow-wrap: anywhere; word-break: break-word; }
+  .kv { width: 100%; border-collapse: collapse; margin: 10px 0; background: #fff; }
+  .kv th, .kv td { border: 2px solid #221d12; padding: 10px 12px; text-align: left; font-size: 15px; vertical-align: top; }
+  .kv th { background: #221d12; color: #F6EFDC; width: 34%; }
+  .badge { display: inline-block; font-weight: 800; font-size: 14px; padding: 6px 12px; border-radius: 999px; margin: 6px 0; }
+  .badge.ok { background: #e8f5d8; color: #3f6212; }
+  .badge.bad { background: #fee2e2; color: #b91c1c; }
+  .note-box { max-width: 640px; margin: 16px auto 0; padding: 14px 16px; border-radius: 14px; border: 3px solid #221d12; font-size: 15px; }
+  .note-box.info { background: #fff8e1; border-color: #f5b301; }
+  .note-box.warn { background: #fff7ed; border-color: #b3541e; }
+  .note-box.error { background: #fee2e2; border-color: #b91c1c; }
+  .note-box.ok { background: #e8f5d8; border-color: #3f6212; }
+  .warn-box { background: #fee2e2; border: 3px solid #b91c1c; border-radius: 14px; padding: 14px 16px; margin-top: 12px; }
+  .status-line { margin: 8px 0; }
+  .status-line strong { display: block; font-size: 15px; }
+  .cost { font-size: 26px; font-weight: 900; margin: 4px 0; }
+  input.addr {
+    width: 100%; min-height: 52px; padding: 12px 14px; font-size: 15px; font-family: inherit;
+    border: 3px solid #221d12; border-radius: 12px; background: #fff; color: #221d12;
+  }
+  .done-box { background: #e8f5d8; border: 3px solid #3f6212; border-radius: 16px; padding: 18px; margin-top: 18px; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .done-box h2 { margin-top: 0; }
+  .done-box ol { padding-left: 22px; }
+  .done-box li { margin: 8px 0; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="index.html">ZIGZOO</a>
+  <span class="status-pill owner-pill">OWNER TOOL</span>
+</header>
+
+<main>
+  <a class="back-link" href="index.html">&larr; Back to site</a>
+
+  <section class="section hero" style="margin-top:24px">
+    <p class="eyebrow">OWNER ONLY &mdash; NOT A PUBLIC PAGE</p>
+    <h1 style="font-size:44px">Deploy the Contract</h1>
+    <p class="tagline">Deploy the Zigzoo NFT contract to BNB Smart Chain from your own browser wallet. No private key, no seed phrase &mdash; ever. Your wallet signs each transaction after you click.</p>
+  </section>
+
+  <div class="note-box warn" style="margin-top:24px">
+    <strong>Safety first.</strong> This page will <strong>never</strong> ask for your seed phrase or private key.
+    Only connect your browser wallet (MetaMask). If any page or person asks for your seed phrase, it is a scam &mdash; stop immediately.
+    Deployment costs real BNB (see the estimate in step 3 before you sign anything).
+  </div>
+
+  <div id="note" class="note-box info hidden" role="status"></div>
+
+  <!-- Step 1 -->
+  <section class="step todo" id="step-1">
+    <h2>Step 1 &mdash; Connect your wallet</h2>
+    <p>Connect the browser wallet on <strong>BNB Smart Chain (chain 56)</strong>. If you are on another network, the page will offer to switch.</p>
+    <p class="status-line"><strong>Wallet:</strong> <span id="wallet-status">Not connected.</span></p>
+    <p class="status-line hidden" id="wallet-address-row"><strong>Address:</strong> <code class="mono" id="wallet-address"></code></p>
+    <p class="status-line"><strong>Network:</strong> <span id="chain-status">—</span></p>
+    <p class="status-line"><strong>Contract files:</strong> <span id="artifact-status">Loading…</span></p>
+    <button class="btn" id="connect-btn" type="button">Connect Wallet</button>
+    <div id="switch-row" class="hidden">
+      <button class="btn ghost" id="switch-btn" type="button">Switch to BNB Smart Chain</button>
+    </div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="step todo" id="step-2">
+    <h2>Step 2 &mdash; Owner check</h2>
+    <p>The contract owner <strong>must</strong> be My Wallet. Deploy stays disabled until that wallet is connected.</p>
+    <p class="status-line"><strong>Owner must be:</strong> <code class="mono" id="owner-expected">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code></p>
+    <p class="status-line"><strong>Connected wallet:</strong> <code class="mono" id="owner-connected">—</code></p>
+    <p><span class="badge" id="owner-badge">Not checked yet</span></p>
+    <div id="owner-warning" class="warn-box hidden">
+      <strong>Wrong wallet.</strong> The connected wallet is not My Wallet. Switch accounts in your wallet app, then reconnect here. Do not deploy from any other wallet &mdash; the owner address is locked in the contract at deploy time.
+    </div>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="step todo" id="step-3">
+    <h2>Step 3 &mdash; What will be deployed</h2>
+    <p>These constructor values are locked. Check them against the contract source before deploying.</p>
+    <table class="kv">
+      <tr><th>Owner</th><td><code class="mono">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code><br>My Wallet</td></tr>
+      <tr><th>Revenue wallet</th><td><code class="mono">0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code><br>Binance Agentic Wallet — mint payments go here</td></tr>
+      <tr><th>Agent ID registry</th><td><code class="mono">0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F</code><br>SPACE ID (.ai Agent ID)</td></tr>
+      <tr><th>Base URI</th><td><code class="mono">https://zigzoo.xyz/metadata/</code><br>Metadata folder (tokenURI = baseURI + tokenId + “.json”)</td></tr>
+      <tr><th>Deck hash</th><td><code class="mono">0x4e5e9cf69f907caacc6a4347eca38114d2b31afeaa46e0578ed94826307b4e77</code><br>keccak256(“ZIGZOO-DECK-SEED-2026-11-06”) — 5,000-entry draw order, verified off-chain</td></tr>
+      <tr><th>Supply / ladder</th><td>5,000 tokens. Mint #1 FREE, #2–10: 0.0002 BNB, #11–20: 0.0004 BNB, #21–30: 0.0008 BNB, max 30/wallet. Minting starts OFF.</td></tr>
+    </table>
+    <p class="status-line"><strong>Live gas price:</strong> <span id="gas-price">—</span></p>
+    <p class="status-line"><strong>Estimated gas:</strong> <span id="gas-estimate">—</span></p>
+    <p class="cost" id="cost-bnb">— BNB</p>
+    <p class="status-line"><span id="cost-idr">—</span></p>
+    <p class="note" id="estimate-status">Connect My Wallet first to get a live estimate.</p>
+    <button class="btn ghost" id="refresh-estimate-btn" type="button">Refresh estimate</button>
+  </section>
+
+  <!-- Step 4 -->
+  <section class="step todo" id="step-4">
+    <h2>Step 4 &mdash; Deploy</h2>
+    <p>One transaction, sent from My Wallet. Your wallet will show the exact cost &mdash; check it matches the estimate above before you confirm. Minting stays <strong>off</strong> after deploy.</p>
+    <button class="btn primary" id="deploy-btn" type="button" disabled>DEPLOY CONTRACT</button>
+    <p class="status-line" id="deploy-status">Waiting for steps 1–3.</p>
+    <p class="status-line hidden" id="deploy-tx-row"><strong>Transaction:</strong> <a id="deploy-tx-link" href="#" target="_blank" rel="noopener"><code class="mono" id="deploy-tx"></code></a></p>
+    <div id="deployed-row" class="hidden">
+      <p class="status-line"><strong>Contract address:</strong><br><code class="mono" id="deployed-address"></code>
+        <button class="btn small ghost" id="copy-address-btn" type="button">Copy</button></p>
+      <p><a id="deployed-address-link" href="#" target="_blank" rel="noopener">View contract on BscScan</a> &middot;
+         <a id="deployed-bscscan-link" href="#" target="_blank" rel="noopener">Verify source on BscScan</a></p>
+    </div>
+  </section>
+
+  <!-- Step 5 -->
+  <section class="step todo" id="step-5">
+    <h2>Step 5 &mdash; Activate minting</h2>
+    <p>After the contract is deployed (and verified on BscScan), turn minting on with <code>setMintActive(true)</code>. This is a second, small transaction from the owner wallet. Do this only when the site is ready to go live.</p>
+    <label for="activate-address"><strong>Contract address</strong></label>
+    <input class="addr" id="activate-address" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="0x… (filled in automatically after deploy)">
+    <p class="status-line" id="activate-estimate">Enter the deployed contract address first.</p>
+    <button class="btn ghost small" id="refresh-activate-btn" type="button">Refresh activation estimate</button>
+    <button class="btn primary" id="activate-btn" type="button" disabled>ACTIVATE MINT</button>
+    <p class="status-line" id="activate-status">Waiting for deploy.</p>
+    <p class="status-line hidden" id="activate-tx-row"><strong>Transaction:</strong> <a id="activate-tx-link" href="#" target="_blank" rel="noopener"><code class="mono" id="activate-tx"></code></a></p>
+  </section>
+
+  <div id="done-box" class="done-box hidden">
+    <h2>Launch checklist</h2>
+    <ol>
+      <li><strong>Verify the source on BscScan</strong> — open the contract on BscScan &rarr; Contract &rarr; Verify and Publish, compiler 0.8.24, optimizer runs 200, license MIT.</li>
+      <li><strong>Update the site</strong> — replace the <code>0x0000…0000</code> placeholder with the new contract address in <code>index.html</code>, <code>llms.txt</code> and <code>agent-skill.md</code>, and flip COMING SOON to live.</li>
+      <li><strong>Publish the site + images + metadata</strong> to GitHub Pages (zigzoo.xyz) so <code>https://zigzoo.xyz/metadata/</code> and <code>https://zigzoo.xyz/images/</code> serve the files.</li>
+      <li><strong>Announce the launch</strong> on X (@zigzooNFT).</li>
+    </ol>
+  </div>
+
+  <footer class="site-footer">
+    <p>Zigzoo — owner deploy tool. Not a public page. Contract source is verifiable on BscScan; it is not an independent audit.</p>
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="deploy.js"></script>
+</body>
+</html>

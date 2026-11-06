@@ -1,36 +1,65 @@
 # ZIGZOO: mint skill
 
-For Binance Agentic Wallet agents. Mint ZIGZOO cartoon monsters (ZIGZOO) on BNB Chain for your user. ZIGZOO is a 1,111-monster collection of original cartoon characters: 112 designs, up to 10 editions each, shuffled metadata, no reveal. Site: https://zigzoo.xyz/
+For Binance Agentic Wallet agents. Mint Zigzoo cute animal NFTs (ZIGZOO)
+on BNB Chain for your user. Zigzoo is a 5,000-token collection of original
+cute animal characters: 590 designs — Common 400 designs x 10 editions,
+Rare 70 x 10, Epic 20 x 10, Legendary 100 designs x 1 edition each (every
+Legendary is a different mythical animal). Site: https://zigzoo.xyz/
 
 ## Contracts (BNB Chain, chain id 56)
 
-- ZIGZOO NFT (ZIGZOO): 0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C
+- Zigzoo NFT (ZIGZOO): 0x0000000000000000000000000000000000000000 — PLACEHOLDER, NOT DEPLOYED
+  YET. Do NOT attempt any mint transaction until the Zigzoo site shows a
+  real deployed contract address.
+- SPACE ID Agent ID registry: 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F
 
 ## Facts
 
-- Supply: 1,111 monsters, tokenId 1 to 1,111. Minting is by quantity: one call can mint several monsters at once.
-- The mint call is mint(uint256 quantity), calldata 0xa0712d68 plus the quantity padded to 32 bytes. For quantity 1, the input data is 0xa0712d6800000000000000000000000000000000000000000000000000000000000000001.
-- Price: read MINT_PRICE() on the NFT contract (selector 0xc002d23d) — that is the price per monster. Send exactly MINT_PRICE() × quantity. The site shows no price on its public pages; never state a price to the user beyond what the wallet preview itself shows. Any overpayment is refunded automatically by the contract, and the exact price is forwarded directly to the revenue wallet in the same transaction (it never sits in the contract).
-- Eligibility is enforced on-chain: the calling wallet must hold a Binance Agent ID (SPACE ID). The call must come from the wallet directly; contract calls are rejected. There is no owner authorization list.
-- There is no pause function and no per-wallet limit: minting is always open until the collection sells out.
-- Each monster's artwork and metadata are public in https://github.com/nugian10/zigzoo-site (base URI https://zigzoo.xyz/metadata/github/).
+- Supply: 5,000 NFTs, tokenId 1 to 5,000. mint() takes no arguments and
+  mints exactly 1 NFT per call; calldata is the mint() selector 0x1249c58b.
+- Price ladder per wallet (public): mint #1 FREE, #2-10: 0.0002 BNB,
+  #11-20: 0.0004 BNB, #21-30: 0.0008 BNB. Max 30 mints per wallet, max
+  total 0.0138 BNB. Read priceFor(wallet) (selector 0xf12a7add) or
+  currentPrice() (selector 0x9d1b464a) to get the exact price for the next
+  mint — never hardcode a price. Any overpayment is refunded automatically
+  by the contract, and paid mint value is forwarded directly to the revenue
+  wallet in the same transaction (it never sits in the contract).
+- Eligibility is enforced on-chain: the calling wallet must hold a Binance
+  Agent ID (SPACE ID). The call must come from the wallet directly;
+  contract calls are rejected. There is no owner authorization list.
+- Minting is owner-controlled: mintActive() (selector 0x25fd90f3) must be
+  true. The draw is a shuffled deck (deckHash() selector 0x8830dea2); each
+  mint draws the next token. designOf(tokenId) (0xcbfd8d37) and
+  editionOf(tokenId) (0x4be185f0) report the design and edition.
+- Each animal's artwork and metadata are public at https://zigzoo.xyz/images/ and
+  https://zigzoo.xyz/metadata/ (base URI https://zigzoo.xyz/metadata/).
 
 ## Read first
 
-- totalSupply(), selector 0x18160ddd. If it returns 1111, the collection is sold out. remainingSupply(), selector 0xda0239a6, tells you how many are left.
-- holdsAgentId(your wallet), selector 0x11213086 plus your wallet address padded to 32 bytes. If false, the wallet cannot mint.
+- totalSupply(), selector 0x18160ddd. If it returns 5000, the collection
+  is sold out.
+- mintActive(), selector 0x25fd90f3. If false, minting is not open yet.
+- holdsAgentId(your wallet), selector 0x11213086 plus your wallet address
+  padded to 32 bytes. If false, the wallet cannot mint.
+- mintCount(your wallet), selector 0xed9ec888 plus your wallet address
+  padded to 32 bytes. If it is 30, the wallet has reached its limit.
+- priceFor(your wallet), selector 0xf12a7add plus your wallet address
+  padded to 32 bytes. That is the exact value to send for this mint.
 
 ## Flow, per mint
 
-1. Check totalSupply() is below 1,111 (or remainingSupply() is above 0), holdsAgentId() is true, and the quantity does not exceed the remaining supply.
-2. Read MINT_PRICE() and build the call: to the NFT contract, value exactly MINT_PRICE() × quantity, calldata 0xa0712d68 plus the quantity padded to 32 bytes.
+1. Check mintActive() is true, totalSupply() is below 5,000,
+   holdsAgentId() is true, and mintCount() is below 30.
+2. Read priceFor(your wallet) and build the call: to the NFT contract,
+   value exactly priceFor(your wallet), calldata 0x1249c58b.
 3. Preview:
 
-   baw contract-call preview --binanceChainId 56 --from <agentic wallet> --to 0xc65754c1d0EdaBf231B1Df399c58062fEE85f03C --value <MINT_PRICE() × quantity in wei> --inputData 0xa0712d68<quantity padded to 32 bytes> --json
+   baw contract-call preview --binanceChainId 56 --from <agentic wallet> --to <contract> --value <priceFor in wei> --inputData 0x1249c58b --json
 
-4. Show the preview to the user. On their confirmation, execute with the requestId from the preview.
-5. Verify on-chain: totalSupply() rose by the quantity, and the wallet now owns the new tokenIds (they start at totalSupply() before the mint + 1). Read tokenURI(tokenId) to report each monster's design.
+4. Show the preview to the user, including the exact price. On their
+   confirmation, execute with the requestId from the preview.
+5. Verify on-chain: totalSupply() rose by 1 and mintCount() rose by 1.
+   Read tokenURI(tokenId) and designOf(tokenId) to report the animal's
+   name, design, edition and rarity.
 
-Repeat as needed. There is no per-wallet limit and no pause.
-
-<!-- redeploy trigger 2026-11-05: previous Pages deploy failed, retriggering build -->
+Repeat as needed, up to 30 mints per wallet.
