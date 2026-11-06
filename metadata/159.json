@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #159",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-017-pancake-donkey-0-272e3b8d-5654-4380-9246-1a6bffa9c9bb.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Pancake"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "8 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "17"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

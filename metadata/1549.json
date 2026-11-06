@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #1549",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-156-azalea-hummingbird-0-c6523e1b-48b2-4300-821f-388e2bb76eee.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Azalea"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "8 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "156"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

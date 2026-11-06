@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #1468",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-148-iris-goldfish-0-1c6283fb-1459-4956-b603-9406c55e64f6.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Iris"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "7 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "148"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

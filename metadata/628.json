@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #628",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-064-tart-robin-0-571aa5f0-63b6-4cb0-a4cf-83ba7a1294b5.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Tart"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "7 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "64"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

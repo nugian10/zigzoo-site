@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #368",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-038-honey-snake-0-cc58419d-d68c-44e8-ac61-e3938ac2034c.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Honey"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "7 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "38"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

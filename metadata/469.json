@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #469",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-048-lollipop-turtle-0-0e9370ce-d9ef-4627-939b-00ea96f90acf.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Lollipop"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "8 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "48"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

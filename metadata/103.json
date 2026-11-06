@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #103",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-luna-owl-lantern-0-dcea7055-e802-42b1-92fb-1d59bd87ab79.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Luna"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "2 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "12"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Epic"
+  }
+ ]
+}
