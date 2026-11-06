@@ -9,7 +9,7 @@ body {
   line-height: 1.55;
 }
 img { max-width: 100%; height: auto; display: block; }
-a { color: #b3541e; }
+a { color: #b3541e; overflow-wrap: anywhere; }
 a:focus-visible, button:focus-visible { outline: 3px solid #b3541e; outline-offset: 2px; }
 code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 code { overflow-wrap: anywhere; }
@@ -161,7 +161,8 @@ dl dd { margin: 4px 0 0; }
   text-align: center; color: #5c4f36; font-size: 15px;
 }
 .site-footer p { margin: 4px 0; }
-.site-footer a { color: #221d12; font-weight: 700; }
+.site-footer a { color: #221d12; font-weight: 700; display: inline-block; padding: 10px 8px; min-height: 44px; }
+main a:not(.btn) { display: inline-block; padding: 8px 2px; min-height: 44px; }
 
 @media (min-width: 640px) {
   .gallery { grid-template-columns: repeat(2, 1fr); }
