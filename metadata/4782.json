@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4782",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-480-asparagus-zebra-0-35d5cebd-9a84-4f8b-ac9c-e7957aecebaf.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Asparagus"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "480"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Epic"
+  }
+ ]
+}

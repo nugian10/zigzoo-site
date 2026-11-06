@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4213",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-423-pear-wombat-0-64b07d5c-d25d-4e49-b418-710b3b096356.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Pear"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "2 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "423"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

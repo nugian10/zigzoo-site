@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4996",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-586-ness-nessie-0-ea998766-7bdd-4ed4-8ef9-6f1f03d81c9a.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Ness"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 1"
+  },
+  {
+   "trait_type": "Design",
+   "value": "586"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Legendary"
+  }
+ ]
+}

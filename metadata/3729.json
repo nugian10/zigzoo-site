@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3729",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-374-tempeh-hamster-0-2df7c0dc-aeab-49f3-9e60-8bfbcc3d5981.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Tempeh"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "8 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "374"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

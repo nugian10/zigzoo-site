@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4907",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-497-rinrin-kirin-0-4dec8479-49cc-49e7-952b-a50f44f9bb95.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Rinrin"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 1"
+  },
+  {
+   "trait_type": "Design",
+   "value": "497"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Legendary"
+  }
+ ]
+}

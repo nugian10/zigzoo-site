@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3505",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-352-dough-kangaroo-0-375bb41e-6d2f-49ec-a2b6-0f70b1f1fe5e.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Dough"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "4 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "352"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

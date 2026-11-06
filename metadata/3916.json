@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3916",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-393-oolong-chipmunk-0-d47dbf08-1d81-4d70-b0b4-a01cdc14706b.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Oolong"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "5 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "393"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

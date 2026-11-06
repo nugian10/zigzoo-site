@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3572",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-359-lime-cardinal-0-b3ba5100-d3e8-4b00-85c2-5e68bba91794.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Lime"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "359"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

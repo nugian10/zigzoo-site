@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4632",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-465-chard-sloth-0-be4f3fa8-0fe6-4a6b-a833-6e85deeef852.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Chard"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "465"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

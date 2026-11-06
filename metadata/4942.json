@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4942",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-532-kappy-kappa-0-077a0ecd-1586-42a4-a1b7-1ffaa83c7113.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Kappy"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 1"
+  },
+  {
+   "trait_type": "Design",
+   "value": "532"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Legendary"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4381",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-439-kabosu-robin-0-dce51a1c-9d1d-40d4-8586-449bde2757e0.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Kabosu"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "10 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "439"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4989",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-579-bai-bai-ze-0-a6f55a27-4790-41c7-a97c-ce1b7f7c6f19.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Bai"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 1"
+  },
+  {
+   "trait_type": "Design",
+   "value": "579"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Legendary"
+  }
+ ]
+}

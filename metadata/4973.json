@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4973",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-563-vampy-vampire-0-55be789e-1e00-44b5-ba1f-48e241c1f7ff.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Vampy"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 1"
+  },
+  {
+   "trait_type": "Design",
+   "value": "563"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Legendary"
+  }
+ ]
+}

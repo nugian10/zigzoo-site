@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3942",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-396-milk-dog-0-6f99ea09-5872-4d0e-850c-460e01f444ed.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Milk"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "396"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

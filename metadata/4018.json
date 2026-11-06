@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4018",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-403-carob-cardinal-0-f96e37c1-dce5-45ab-88c0-673aeed19475.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Carob"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "7 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "403"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

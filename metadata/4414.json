@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4414",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-443-blood-duck-0-d72b7834-5bdf-4130-968b-e2b85e102cdc.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Blood"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "3 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "443"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

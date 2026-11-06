@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4603",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-462-arugula-panda-0-64653769-872b-470a-b3ce-4f5c7fea6a90.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Arugula"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "2 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "462"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

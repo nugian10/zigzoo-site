@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4433",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-445-navel-parrot-0-ee23146e-604c-4d00-9f93-ce6cac54028b.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Navel"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "2 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "445"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

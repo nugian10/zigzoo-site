@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3931",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-394-pu-erh-crow-0-2be58b3f-8f2d-4af1-a303-5c7bdaf62bce.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Pu-erh"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "10 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "394"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

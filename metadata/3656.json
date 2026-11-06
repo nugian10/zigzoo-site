@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3656",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-367-jelly-chipmunk-0-a3ef017c-e4c7-405f-a777-bd808b773ffe.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Jelly"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "5 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "367"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

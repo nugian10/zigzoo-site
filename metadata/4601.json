@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4601",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-461-watercress-bat-0-c33e21d4-2c23-49cd-9b9e-dd89fd57011a.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Watercress"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "10 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "461"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

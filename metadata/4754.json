@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4754",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-477-cauliflower-seal-0-b5a6d3b5-8362-44c6-b140-007bc8bf8295.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Cauliflower"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "3 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "477"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Epic"
+  }
+ ]
+}

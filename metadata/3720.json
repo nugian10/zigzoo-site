@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3720",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-373-sauerkraut-butterfl-0-d209837f-8213-4e78-bb55-79c645b946f6.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Sauerkraut"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "9 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "373"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

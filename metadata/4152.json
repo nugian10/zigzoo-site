@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4152",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-417-blueberry-zebra-0-f1d87c44-1bfd-4b74-8156-1b6f4bd174ba.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Blueberry"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "1 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "417"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

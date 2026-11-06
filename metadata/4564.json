@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4564",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-458-horseradish-seahors-0-f56c5997-21e0-475e-8866-897f70e9add3.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Horseradish"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "3 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "458"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

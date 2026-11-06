@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3465",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-348-loukoum-bear-0-433575ee-1e87-4487-aa9c-536910dea57d.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Loukoum"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "4 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "348"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

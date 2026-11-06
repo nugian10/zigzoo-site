@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4286",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-430-starfruit-hamster-0-7c79a3fd-8eee-4525-877a-00f76f6137d8.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Starfruit"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "5 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "430"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

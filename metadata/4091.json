@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4091",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-410-elderberry-owl-0-34bf0820-dd01-4ed1-907f-514d88879787.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Elderberry"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "10 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "410"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

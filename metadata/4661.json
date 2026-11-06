@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4661",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-467-green-elephant-0-ce20d2cf-59fc-4cc7-bb01-70a043f9f280.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Green"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "10 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "467"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

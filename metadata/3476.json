@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3476",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-349-turkish-puffin-0-a9b2a2d2-1de3-4c0e-87d5-10ab4b2ca100.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Turkish"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "5 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "349"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

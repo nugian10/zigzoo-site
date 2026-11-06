@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4145",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-416-cranberry-leopard-0-d493e15d-895b-4710-ba4c-ae0716b45e05.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Cranberry"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "4 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "416"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

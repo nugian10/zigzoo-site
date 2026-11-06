@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4650",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-466-collard-snail-0-1010a18c-3eaf-433e-af98-6f7a954d8873.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Collard"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "9 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "466"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

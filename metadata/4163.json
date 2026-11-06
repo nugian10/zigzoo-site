@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4163",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-418-raspberry-cheetah-0-eaa761e0-c405-4ed2-a755-b9a5d7722535.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Raspberry"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "2 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "418"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

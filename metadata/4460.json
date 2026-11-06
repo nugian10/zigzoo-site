@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4460",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-447-seville-hummingbird-0-745a3763-9b75-41ef-bf79-d6b1c6289de1.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Seville"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "9 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "447"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

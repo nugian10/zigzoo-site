@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4045",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-406-prune-swan-0-3af17a27-3c1d-4efe-9ce3-4479a86e379a.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Prune"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "4 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "406"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

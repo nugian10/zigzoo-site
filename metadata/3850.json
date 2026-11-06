@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3850",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-386-ramune-llama-0-a84cc994-7f6f-480f-b783-dbf828dfa092.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Ramune"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "9 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "386"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

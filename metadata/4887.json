@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4887",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-490-daikon-cow-0-71059cd7-8908-4b17-81d6-046d746a0b6b.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Daikon"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "6 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "490"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Epic"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3443",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-346-pavlova-firefly-0-10c4f332-d096-419e-b485-af5728cafe96.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Pavlova"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "2 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "346"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

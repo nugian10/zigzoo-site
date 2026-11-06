@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3365",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-338-rhum-walrus-0-514ec896-72f1-4492-af25-5f7eb50b4089.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Rhum"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "4 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "338"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

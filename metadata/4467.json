@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4467",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-448-bergamot-ostrich-0-086a3580-460b-4f31-b95d-afd7154645fa.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Bergamot"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "6 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "448"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

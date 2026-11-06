@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4627",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-464-kale-chinchilla-0-1e754da1-e51c-4696-959d-8a0ab13073ab.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Kale"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "6 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "464"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4308",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-432-quince-yak-0-71ab6d70-faf9-444e-a823-3e97745b6038.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Quince"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "7 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "432"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

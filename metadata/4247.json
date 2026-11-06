@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4247",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-426-papaya-dog-0-d3fcc588-9841-451c-a1a9-1e98862a04f6.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Papaya"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "6 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "426"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4280",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-429-dragonfruit-giraffe-0-a1464691-77e2-4994-b75e-3706fc111090.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Dragonfruit"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "9 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "429"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Rare"
+  }
+ ]
+}

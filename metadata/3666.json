@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3666",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-368-marmalade-octopus-0-6832e739-4c17-4d6c-9fef-2645b155128f.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Marmalade"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "5 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "368"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

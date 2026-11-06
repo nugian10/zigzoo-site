@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3594",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-361-cobbler-robin-0-b1c465a3-1552-40b1-aaac-006f39fd74ef.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Cobbler"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "3 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "361"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3417",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-343-br-l-e-hedgehog-0-01928cd6-4ddf-43e4-90b5-6137dd3ccc5f.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Br\u00fbl\u00e9e"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "6 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "343"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #3459",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-347-baklava-chameleon-0-7a8372d9-ae77-4922-b549-e16b1326bfe3.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Baklava"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "8 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "347"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Common"
+  }
+ ]
+}

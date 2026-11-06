@@ -1,0 +1,24 @@
+{
+ "name": "ZIGZOO #4860",
+ "description": "A collection of 5,000 cute animal characters on BNB Smart Chain. Each design has up to 10 editions; Legendary designs are 1 of 1.",
+ "image": "https://zigzoo.xyz/images/media-generation-design-487-turnip-puffin-0-be6ede33-a8c7-4f46-b6f9-5043d1793574.webp",
+ "external_url": "",
+ "attributes": [
+  {
+   "trait_type": "Character",
+   "value": "Turnip"
+  },
+  {
+   "trait_type": "Edition",
+   "value": "9 of 10"
+  },
+  {
+   "trait_type": "Design",
+   "value": "487"
+  },
+  {
+   "trait_type": "Rarity",
+   "value": "Epic"
+  }
+ ]
+}
