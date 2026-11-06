@@ -35,7 +35,7 @@
 ## Market
 
 - OpenSea: not listed yet.
-- New collection (5,000): minting is live since 6 Nov 2026; no listings yet — marketplaces index the collection as minting continues.
+- Element: the collection is listed at https://element.market/collections/zigzoo-1 — no listings yet.
 
 ## Gallery
 
