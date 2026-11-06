@@ -137,59 +137,38 @@
     </ol>
 
     <h3>Prompt for your agent</h3>
-    <p>Copy everything in the box and paste it to your agent:</p>
-    <pre class="prompt">You are an AI agent minting a Zigzoo NFT for your user. Zigzoo is a
-collection of 5,000 cute animal character NFTs (ERC-721, symbol ZIGZOO)
-on BNB Smart Chain (chain ID 56). There are 590 designs: Common 400
-designs x 10 editions (4,000 tokens), Rare 70 x 10 (700), Epic 20 x 10
-(200), and Legendary 100 designs x 1 edition each (100) — every Legendary
-is a different mythical animal. Images and metadata are public at
-https://zigzoo.xyz/images/ and https://zigzoo.xyz/metadata/.
+    <p><button type="button" class="btn copy-btn" id="copy-prompt">Copy prompt</button></p>
+    <pre class="prompt" id="agent-prompt">You are an AI agent minting a Zigzoo NFT for your user on BNB Smart
+Chain (chain 56). Zigzoo: 5,000 ERC-721 (ZIGZOO), agent-only,
+max 30 mints per wallet.
 
-CONTRACT STATUS: NOT DEPLOYED YET. The contract address is
-0x0000000000000000000000000000000000000000 (placeholder). Do NOT attempt
-any mint transaction until the Zigzoo site shows a real deployed contract
-address. When the contract is live, this prompt and the site will show it.
+CONTRACT: NOT DEPLOYED YET. Address:
+0x0000000000000000000000000000000000000000 (placeholder). Do NOT mint
+until https://zigzoo.xyz/ shows a real contract address.
 
-WHEN LIVE — FACTS:
-- Contract: &lt;deployed address, shown on https://zigzoo.xyz/&gt;
-- SPACE ID Agent ID gate (registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F):
-  only a wallet holding a Binance Agent ID can mint. The contract checks
-  holdsAgentId on-chain. Contract calls are rejected (NoContracts).
-  There is no owner allowlist.
-- mint() takes NO arguments and mints exactly 1 NFT per call.
-- Price ladder per wallet (public): mint #1 FREE, #2-10: 0.0002 BNB,
-  #11-20: 0.0004 BNB, #21-30: 0.0008 BNB. Max 30 mints per wallet.
-  Max total per wallet: 0.0138 BNB. Read priceFor(your wallet) or
-  currentPrice() on the contract to get the exact price for the next mint
-  — never hardcode a price. Any overpayment is refunded automatically,
-  and paid mint value is forwarded directly to the revenue wallet.
-- Minting is owner-controlled (mintActive). The draw is a shuffled deck
-  (deckHash on-chain); each mint draws the next token. Rarity is rolled
-  by the deck: Common 80%, Rare 14%, Epic 4%, Legendary 2%.
+WHEN LIVE:
+- Only a wallet holding a SPACE ID Agent ID can mint (registry
+  0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F; the contract checks
+  holdsAgentId on-chain). Contract calls are rejected.
+- mint() takes NO arguments and mints 1 NFT per call.
+- Price per wallet: #1 FREE, #2-10: 0.0002 BNB, #11-20: 0.0004 BNB,
+  #21-30: 0.0008 BNB (max total 0.0138 BNB). Read priceFor(your wallet)
+  for the exact price — never hardcode it.
 
-WHEN LIVE — FLOW, per mint:
-1. Read totalSupply() (selector 0x18160ddd) and mintActive()
-   (0x25fd90f3). If totalSupply is 5000, it is sold out. If mintActive
-   is false, minting is not open yet.
-2. Read holdsAgentId(your wallet) (0x11213086 + wallet padded to 32
-   bytes). If false, the wallet cannot mint.
-3. Read mintCount(your wallet) (0xed9ec888 + wallet padded to 32
-   bytes). If it is 30, the wallet has reached its limit.
-4. Read priceFor(your wallet) (0xf12a7add + wallet padded to 32 bytes)
-   — that is the exact value to send for this mint.
+FLOW, per mint:
+1. Read mintActive() and totalSupply(). If 5000, sold out; if
+   mintActive is false, not open yet.
+2. Read holdsAgentId(your wallet). If false, the wallet cannot mint.
+3. Read mintCount(your wallet). If 30, the wallet is at its limit.
+4. Read priceFor(your wallet) — the exact value to send.
 5. Preview:
-   baw contract-call preview --binanceChainId 56 --from &lt;agentic wallet&gt;
-   --to &lt;contract&gt; --value &lt;priceFor in wei&gt; --inputData 0x1249c58b --json
-6. Show the preview to the user, including the exact price. On their
-   confirmation, execute with the requestId from the preview.
-7. Verify on-chain: totalSupply() rose by 1 and mintCount() rose by 1.
-   Read tokenURI(new tokenId) and designOf(new tokenId)
-   (0xcbfd8d37 + tokenId padded to 32 bytes) to report the design,
-   edition and rarity to the user.
+   baw contract-call preview --binanceChainId 56 --from &lt;agentic wallet&gt; --to &lt;contract&gt; --value &lt;priceFor in wei&gt; --inputData 0x1249c58b --json
+6. Show the preview to the user. Execute with the preview&#x27;s requestId
+   only after they confirm.
+7. Verify: totalSupply() and mintCount() each rose by 1; read
+   tokenURI(new tokenId) and report the animal.
 
-Repeat as needed, up to 30 mints per wallet. Do not mint for a wallet
-that does not hold an Agent ID, and never send more than priceFor().</pre>
+Never mint without an Agent ID; never send more than priceFor().</pre>
 
     <h3>Contract</h3>
     <p><strong>Status: not deployed yet.</strong><br>
@@ -253,6 +232,51 @@ that does not hold an Agent ID, and never send more than priceFor().</pre>
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeMenu();
+  });
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('copy-prompt');
+  var box = document.getElementById('agent-prompt');
+  if (!btn || !box) return;
+  var original = btn.textContent;
+  var timer = null;
+  function showCopied() {
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(function () {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 2000);
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'absolute';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  btn.addEventListener('click', function () {
+    var text = box.textContent;
+    function done(ok) {
+      if (ok) { showCopied(); }
+      else { btn.textContent = 'Copy failed - select the text manually'; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        function () { done(true); },
+        function () { done(fallbackCopy(text)); });
+    } else {
+      done(fallbackCopy(text));
+    }
   });
 })();
 </script>

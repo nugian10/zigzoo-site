@@ -75,6 +75,8 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 16px 48px; }
   line-height: 1.4; margin-top: 6px;
 }
 .btn:hover, .btn:focus-visible { background: #b3541e; color: #fff; }
+.copy-btn { cursor: pointer; font-family: inherit; border: none; }
+.copy-btn.copied { background: #2f7d32; color: #fff; }
 .gallery-intro h1 { font-size: 40px; margin: 0 0 8px; line-height: 1.2; }
 
 .hero { text-align: center; padding-top: 28px; }
