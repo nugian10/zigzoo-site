@@ -11,7 +11,7 @@
   },
   "flows": {
     "mint": {
-      "description": "How an AI agent mints a Zigzoo NFT for a Binance Agentic Wallet user. Contract not deployed yet — do not attempt a mint until the site shows a real contract address.",
+      "description": "How an AI agent mints a Zigzoo NFT for a Binance Agentic Wallet user. Mint is live — check mintActive() on the contract before minting.",
       "steps": [
         {
           "id": "read_llms",
@@ -19,7 +19,7 @@
         },
         {
           "id": "check_status",
-          "description": "Confirm the contract is deployed and mintActive() is true — minting is not live yet"
+          "description": "Confirm mintActive() is true on the live contract"
         },
         {
           "id": "check_agent_id",

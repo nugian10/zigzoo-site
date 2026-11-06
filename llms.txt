@@ -5,11 +5,11 @@
 ## Site
 
 - Website: https://zigzoo.xyz/
-- Mint status: COMING SOON — the contract is NOT deployed yet. Minting is not live.
+- Mint status: LIVE — minting is open since 6 Nov 2026.
 - Total supply: 5,000 NFTs (590 designs: Common 400 designs x 10 editions, Rare 70 x 10, Epic 20 x 10, Legendary 100 designs x 1 edition each — every Legendary is a different mythical animal)
 - Blockchain: BNB Smart Chain Mainnet, Chain ID 56
-- Contract: 0x0000000000000000000000000000000000000000 (placeholder — not deployed yet)
-- Contract source: to be verified on BscScan after deploy
+- Contract: 0x09ADA5A12293C30D75b97c56E34967E8a4326a3C (deployed 6 Nov 2026, mint live)
+- Contract source: verified on BscScan — https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C#code
 - SPACE ID Agent ID registry: 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F
 - Owner: the deployer's wallet. Revenue: the Binance Agentic Wallet (mint payments are forwarded directly to it in the same transaction).
 - Base URI: https://zigzoo.xyz/metadata/ (artwork + metadata hosted on GitHub Pages)
@@ -36,7 +36,7 @@
 
 - Old collection (1,111 supply, 19 minted) on Element: https://element.market/collections/zigzoo — 19 items, no listings or sales yet.
 - OpenSea: not listed yet.
-- New collection (5,000): no listings yet — trading starts after mint opens and marketplaces index the collection.
+- New collection (5,000): minting is live since 6 Nov 2026; no listings yet — marketplaces index the collection as minting continues.
 
 ## Gallery
 

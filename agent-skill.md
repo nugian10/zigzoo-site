@@ -8,9 +8,7 @@ Legendary is a different mythical animal). Site: https://zigzoo.xyz/
 
 ## Contracts (BNB Chain, chain id 56)
 
-- Zigzoo NFT (ZIGZOO): 0x0000000000000000000000000000000000000000 — PLACEHOLDER, NOT DEPLOYED
-  YET. Do NOT attempt any mint transaction until the Zigzoo site shows a
-  real deployed contract address.
+- Zigzoo NFT (ZIGZOO): 0x09ADA5A12293C30D75b97c56E34967E8a4326a3C — deployed 6 Nov 2026, mint is LIVE.
 - SPACE ID Agent ID registry: 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F
 
 ## Facts
