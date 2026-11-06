@@ -167,6 +167,31 @@ dl dd { margin: 4px 0 0; }
   .stats { grid-template-columns: repeat(4, 1fr); }
   .hero h1 { font-size: 84px; }
 }
+.roadmap { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 14px; }
+.phase { border: 3px solid #221d12; border-radius: 16px; padding: 16px 18px; background: #fff; }
+.phase h3 { margin: 4px 0 6px; }
+.phase p { margin: 0; }
+.phase-status {
+  display: inline-block; font-weight: 800; font-size: 13px;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 999px;
+}
+.phase.done .phase-status { background: #e8f5d8; color: #3f6212; }
+.phase.current { border-color: #f5b301; }
+.phase.current .phase-status { background: #fef3c7; color: #92400e; }
+.phase.current .dot {
+  display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+  background: #b45309; margin-right: 6px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+.phase.next .phase-status { background: #efe9d8; color: #6b5d43; }
+.market-list { padding-left: 22px; }
+.market-list li { margin: 12px 0; padding-left: 4px; }
+
 @media (min-width: 900px) {
   .gallery { grid-template-columns: repeat(3, 1fr); }
   .tiers { grid-template-columns: repeat(4, 1fr); }

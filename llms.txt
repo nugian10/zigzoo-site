@@ -32,6 +32,12 @@
 - Full agent instructions: https://zigzoo.xyz/agent-skill.md
 - Agent prompt: on the homepage at https://zigzoo.xyz/#agent-mint
 
+## Market
+
+- Old collection (1,111 supply, 19 minted) on Element: https://element.market/collections/zigzoo — 19 items, no listings or sales yet.
+- OpenSea: not listed yet.
+- New collection (5,000): no listings yet — trading starts after mint opens and marketplaces index the collection.
+
 ## Gallery
 
 20 featured characters are shown on the gallery page at https://zigzoo.xyz/gallery.html, each with a name, rarity and story. The full collection has 590 designs.
