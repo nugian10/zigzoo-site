@@ -34,7 +34,7 @@
 
 ## Gallery
 
-30 featured characters are shown on the homepage, each with a name, rarity and story. The full collection has 590 designs.
+20 featured characters are shown on the homepage, each with a name, rarity and story. The full collection has 590 designs.
 
 ## Links
 
