@@ -34,7 +34,6 @@
 
 ## Market
 
-- Old collection (1,111 supply, 19 minted) on Element: https://element.market/collections/zigzoo — 19 items, no listings or sales yet.
 - OpenSea: not listed yet.
 - New collection (5,000): minting is live since 6 Nov 2026; no listings yet — marketplaces index the collection as minting continues.
 
