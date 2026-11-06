@@ -171,7 +171,17 @@
 <body>
 <header class="site-header">
   <a class="logo" href="/">ZIGZOO</a>
+  <nav class="site-nav" id="site-nav" aria-label="Sections">
+    <ul>
+      <li><a href="#price">Price ladder</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#rarity">Rarity</a></li>
+      <li><a href="#agent-mint">Mint with agent</a></li>
+      <li><a href="#faq">Questions</a></li>
+    </ul>
+  </nav>
   <span class="status-pill">COMING SOON</span>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
 
 <main>
@@ -527,5 +537,31 @@ that does not hold an Agent ID, and never send more than priceFor().</pre>
   <p>Zigzoo &mdash; 5,000 cute animal NFTs on BNB Smart Chain.</p>
   <p>Contract not deployed yet. Minting is not live.</p>
 </footer>
+<script>
+(function () {
+  var btn = document.getElementById('menu-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+  function closeMenu() {
+    btn.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('open');
+  }
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('click', function (e) {
+    if (!nav.classList.contains('open')) return;
+    if (e.target.closest('.site-header')) return;
+    closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
+</script>
 </body>
 </html>
