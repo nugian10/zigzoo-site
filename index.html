@@ -190,35 +190,7 @@
 
     <h3>Prompt for your agent</h3>
     <p><button type="button" class="btn copy-btn" id="copy-prompt">Copy prompt</button></p>
-    <pre class="prompt" id="agent-prompt">You are an AI agent minting a Zigzoo NFT for your user on BNB Smart
-Chain (chain 56). Zigzoo: 5,000 ERC-721 (ZIGZOO), agent-only,
-max 30 mints per wallet.
-
-CONTRACT: 0x09ADA5A12293C30D75b97c56E34967E8a4326a3C — deployed, mint is LIVE.
-
-WHEN LIVE:
-- Only a wallet holding a SPACE ID Agent ID can mint (registry
-  0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F; the contract checks
-  holdsAgentId on-chain). Contract calls are rejected.
-- mint() takes NO arguments and mints 1 NFT per call.
-- Price per wallet: #1 FREE, #2-10: 0.0002 BNB, #11-20: 0.0004 BNB,
-  #21-30: 0.0008 BNB (max total 0.0138 BNB). Read priceFor(your wallet)
-  for the exact price — never hardcode it.
-
-FLOW, per mint:
-1. Read mintActive() and totalSupply(). If 5000, sold out; if
-   mintActive is false, not open yet.
-2. Read holdsAgentId(your wallet). If false, the wallet cannot mint.
-3. Read mintCount(your wallet). If 30, the wallet is at its limit.
-4. Read priceFor(your wallet) — the exact value to send.
-5. Preview:
-   baw contract-call preview --binanceChainId 56 --from &lt;agentic wallet&gt; --to &lt;contract&gt; --value &lt;priceFor in wei&gt; --inputData 0x1249c58b --json
-6. Show the preview to the user. Execute with the preview&#x27;s requestId
-   only after they confirm.
-7. Verify: totalSupply() and mintCount() each rose by 1; read
-   tokenURI(new tokenId) and report the animal.
-
-Never mint without an Agent ID; never send more than priceFor().</pre>
+    <pre class="prompt" id="agent-prompt">You are an AI agent minting a Zigzoo NFT for your user on BNB Smart Chain (chain 56). Read https://zigzoo.xyz/agent-skill.md and follow it exactly — it has the contract address, price ladder, checks and the mint flow. Show the user a preview with the exact price, and mint only after they confirm. Never mint without a SPACE ID Agent ID; never send more than priceFor().</pre>
 
     <h3>Contract</h3>
     <p><strong>Status: LIVE &mdash; mint is open.</strong><br>
