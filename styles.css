@@ -195,6 +195,19 @@ main a:not(.btn) { display: inline-block; padding: 8px 2px; min-height: 44px; }
 .market-list { padding-left: 22px; }
 .market-list li { margin: 12px 0; padding-left: 4px; }
 
+.check-intro h1 { font-size: 40px; margin: 0 0 8px; line-height: 1.2; }
+.check-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin: 20px 0 8px; }
+.check-form label { font-weight: 800; display: block; margin-bottom: 6px; }
+.check-form input {
+  font-family: inherit; font-size: 18px; padding: 12px 14px;
+  border: 3px solid #221d12; border-radius: 12px; background: #fff;
+  width: 180px; min-height: 48px;
+}
+.check-btn { cursor: pointer; font-family: inherit; border: none; margin-top: 0; }
+.check-status { min-height: 24px; font-weight: 700; color: #7a5c2e; }
+.check-result { margin-top: 8px; }
+.check-card { max-width: 480px; }
+
 @media (min-width: 900px) {
   .gallery { grid-template-columns: repeat(3, 1fr); }
   .tiers { grid-template-columns: repeat(4, 1fr); }

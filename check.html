@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check your Zigzoo NFT</title>
+<meta name="description" content="Look up any Zigzoo NFT by its token number and see the animal, its rarity and edition. 5,000 cute animal NFTs on BNB Smart Chain.">
+<meta property="og:title" content="Check your Zigzoo NFT">
+<meta property="og:description" content="Enter your token number and see your Zigzoo animal, its rarity and edition.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zigzoo.xyz/check.html">
+<meta property="og:image" content="https://zigzoo.xyz/images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/">ZIGZOO</a>
+  <nav class="site-nav" id="site-nav" aria-label="Sections">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="check.html">Check your NFT</a></li>
+      <li><a href="index.html#price">Price ladder</a></li>
+      <li><a href="index.html#rarity">Rarity</a></li>
+      <li><a href="index.html#roadmap">Roadmap</a></li>
+      <li><a href="index.html#market">Market</a></li>
+      <li><a href="index.html#agent-mint">Mint with agent</a></li>
+      <li><a href="index.html#faq">Questions</a></li>
+    </ul>
+  </nav>
+  <span class="status-pill live">MINT IS LIVE</span>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<main>
+  <section class="section check-intro">
+    <h1>Check your NFT</h1>
+    <p>Minted a Zigzoo and want to see which animal you got? Enter your
+      token number (1 to 5,000) below. You can also share a link like
+      <code>zigzoo.xyz/check.html?id=1222</code>.</p>
+    <form id="check-form" class="check-form">
+      <label for="token-id">Token number</label>
+      <input id="token-id" name="id" type="number" min="1" max="5000" inputmode="numeric" placeholder="e.g. 1222" required>
+      <button type="submit" class="btn check-btn">Show my NFT</button>
+    </form>
+    <p id="check-status" class="check-status" aria-live="polite"></p>
+    <div id="check-result" class="check-result"></div>
+    <p class="note">Tip: your agent tells you the token number right after
+      minting. You can also find it on
+      <a href="https://element.market/collections/zigzoo-1" target="_blank" rel="noopener">Element</a>
+      or
+      <a href="https://bscscan.com/token/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener">BscScan</a>.</p>
+    <p><a href="index.html">&larr; Back to the main page</a></p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Zigzoo &mdash; 5,000 cute animal NFTs on BNB Smart Chain.</p>
+  <p>Minting is live. Contract: <a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener"><code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></a></p>
+  <p><a href="https://x.com/zigzooNFT" target="_blank" rel="noopener">&#120143; Follow Zigzoo on X</a></p>
+</footer>
+<script>
+(function () {
+  var btn = document.getElementById('menu-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+  function closeMenu() {
+    btn.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('open');
+  }
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('click', function (e) {
+    if (!nav.classList.contains('open')) return;
+    if (e.target.closest('.site-header')) return;
+    closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
+</script>
+<script>
+(function () {
+  var form = document.getElementById('check-form');
+  var input = document.getElementById('token-id');
+  var result = document.getElementById('check-result');
+  var status = document.getElementById('check-status');
+  if (!form || !input || !result) return;
+  function attr(data, key) {
+    var list = data.attributes || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].trait_type === key) return list[i].value;
+    }
+    return '';
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function lookup(id) {
+    var n = parseInt(id, 10);
+    if (!n || n < 1 || n > 5000) {
+      if (status) status.textContent = 'Enter a token number from 1 to 5000.';
+      result.innerHTML = '';
+      return;
+    }
+    if (status) status.textContent = 'Looking up Zigzoo #' + n + '...';
+    result.innerHTML = '';
+    fetch('https://zigzoo.xyz/metadata/' + n + '.json')
+      .then(function (r) { if (!r.ok) throw new Error('not found'); return r.json(); })
+      .then(function (data) {
+        var rarity = attr(data, 'Rarity');
+        var edition = attr(data, 'Edition');
+        var design = attr(data, 'Design');
+        var character = attr(data, 'Character');
+        if (status) status.textContent = '';
+        result.innerHTML =
+          '<article class="card check-card">' +
+            '<img src="' + esc(data.image) + '" alt="' + esc(data.name) + '" width="640" height="640">' +
+            '<div class="card-body">' +
+              '<h3>' + esc(data.name) + '</h3>' +
+              (rarity ? '<p class="rarity ' + esc(String(rarity).toLowerCase()) + '">' + esc(rarity) + '</p>' : '') +
+              '<p>' + (character ? esc(character) : '') +
+              (design ? ' &middot; Design ' + esc(design) : '') +
+              (edition ? ' &middot; Edition ' + esc(edition) : '') + '</p>' +
+              '<p><a href="https://element.market/collections/zigzoo-1" target="_blank" rel="noopener">View on Element</a> &middot; ' +
+              '<a href="https://bscscan.com/nft/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C/' + n + '" target="_blank" rel="noopener">View on BscScan</a></p>' +
+            '</div>' +
+          '</article>';
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('id', String(n));
+          window.history.replaceState(null, '', url.toString());
+        } catch (e) {}
+      })
+      .catch(function () {
+        if (status) status.textContent = 'Could not find Zigzoo #' + n + '. It may not be minted yet.';
+      });
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    lookup(input.value.trim());
+  });
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var preset = params.get('id');
+    if (preset) { input.value = preset; lookup(preset); }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
