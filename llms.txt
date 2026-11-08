@@ -32,6 +32,11 @@
 - Full agent instructions: https://zigzoo.xyz/agent-skill.md
 - Agent prompt: on the homepage at https://zigzoo.xyz/#agent-mint
 
+## Check
+
+- Check a wallet: on the homepage at https://zigzoo.xyz/#check-wallet — paste any wallet address to see its NFTs, mint count, next mint price and Agent ID status.
+- Check your NFT: https://zigzoo.xyz/check.html — look up one NFT by token number (1-5000) to see its animal, rarity and edition.
+
 ## Market
 
 - OpenSea: not listed yet.
@@ -45,5 +50,6 @@
 
 - Site: https://zigzoo.xyz/
 - Gallery: https://zigzoo.xyz/gallery.html
+- Check your NFT: https://zigzoo.xyz/check.html
 - Agent skill: https://zigzoo.xyz/agent-skill.md
 - Repository: https://github.com/nugian10/zigzoo-site
