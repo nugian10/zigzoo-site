@@ -35,7 +35,7 @@
 ## Market
 
 - OpenSea: not listed yet.
-- Element: the collection is listed at https://element.market/collections/zigzoo-1 — no listings yet.
+- Element: the collection is listed at https://element.market/collections/zigzoo-1 — the market is open.
 
 ## Gallery
 
