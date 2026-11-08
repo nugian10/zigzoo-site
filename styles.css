@@ -207,6 +207,12 @@ main a:not(.btn) { display: inline-block; padding: 8px 2px; min-height: 44px; }
 .check-status { min-height: 24px; font-weight: 700; color: #7a5c2e; }
 .check-result { margin-top: 8px; }
 .check-card { max-width: 480px; }
+.check-form input#wallet-address { width: 100%; max-width: 460px; }
+.wallet-card {
+  background: #fff; border: 3px solid #221d12; border-radius: 16px;
+  padding: 16px 18px; max-width: 480px;
+}
+.wallet-card p { margin: 8px 0; }
 
 @media (min-width: 900px) {
   .gallery { grid-template-columns: repeat(3, 1fr); }
