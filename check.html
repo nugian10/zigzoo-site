@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Check a wallet — Zigzoo</title>
-<meta name="description" content="Check any wallet's Zigzoo NFTs, mint count and next mint price — or look up a single NFT by its token number. 5,000 cute animal NFTs on BNB Smart Chain.">
-<meta property="og:title" content="Check a wallet — Zigzoo">
-<meta property="og:description" content="Enter a wallet address to see its Zigzoo NFTs, mint count and next mint price — or look up one NFT by token number.">
+<title>Check your Zigzoo NFT</title>
+<meta name="description" content="Look up any Zigzoo NFT by its token number and see the animal, its rarity and edition. 5,000 cute animal NFTs on BNB Smart Chain.">
+<meta property="og:title" content="Check your Zigzoo NFT">
+<meta property="og:description" content="Enter your token number and see your Zigzoo animal, its rarity and edition.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zigzoo.xyz/check.html">
 <meta property="og:image" content="https://zigzoo.xyz/images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp">
@@ -19,7 +19,6 @@
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="check.html">Check a wallet</a></li>
       <li><a href="index.html#price">Price ladder</a></li>
       <li><a href="index.html#rarity">Rarity</a></li>
       <li><a href="index.html#roadmap">Roadmap</a></li>
@@ -34,20 +33,7 @@
 
 <main>
   <section class="section check-intro">
-    <h1>Check a wallet</h1>
-    <p>Paste any wallet address to see how many Zigzoo NFTs it holds, how
-      many it has minted, its next mint price, and whether it holds a
-      SPACE ID Agent ID. Nothing is connected — this only reads the
-      blockchain.</p>
-    <form id="wallet-form" class="check-form">
-      <label for="wallet-address">Wallet address</label>
-      <input id="wallet-address" name="wallet" type="text" inputmode="text" placeholder="e.g. 0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7" required>
-      <button type="submit" class="btn check-btn">Check wallet</button>
-    </form>
-    <p id="wallet-status" class="check-status" aria-live="polite"></p>
-    <div id="wallet-result" class="check-result"></div>
-
-    <h2>Check your NFT</h2>
+    <h1>Check your NFT</h1>
     <p>Minted a Zigzoo and want to see which animal you got? Enter your
       token number (1 to 5,000) below. You can also share a link like
       <code>zigzoo.xyz/check.html?id=1222</code>.</p>
@@ -163,86 +149,6 @@
   try {
     var params = new URLSearchParams(window.location.search);
     var preset = params.get('id');
-    if (preset) { input.value = preset; lookup(preset); }
-  } catch (e) {}
-})();
-</script>
-<script>
-(function () {
-  var form = document.getElementById('wallet-form');
-  var input = document.getElementById('wallet-address');
-  var status = document.getElementById('wallet-status');
-  var result = document.getElementById('wallet-result');
-  if (!form || !input || !result) return;
-  var NFT = '0x09ADA5A12293C30D75b97c56E34967E8a4326a3C';
-  var RPCS = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
-  function pad(addr) { return '000000000000000000000000' + addr.slice(2).toLowerCase(); }
-  function esc(s) {
-    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  }
-  function callRpc(rpc, to, data) {
-    return fetch(rpc, { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_call',
-        params: [{ to: to, data: data }, 'latest'] }) })
-      .then(function (r) { return r.json(); })
-      .then(function (j) { if (!j.result) throw new Error('no result'); return j.result; });
-  }
-  function tryRpc(i, to, data) {
-    if (i >= RPCS.length) return Promise.reject(new Error('all RPCs failed'));
-    return callRpc(RPCS[i], to, data).catch(function () { return tryRpc(i + 1, to, data); });
-  }
-  function fmtBnb(weiHex) {
-    var wei = BigInt(weiHex);
-    if (wei === 0n) return 'FREE';
-    var whole = wei / 1000000000000000000n;
-    var frac = wei % 1000000000000000000n;
-    var fracStr = frac.toString().padStart(18, '0').replace(/0+$/, '');
-    return whole.toString() + (fracStr ? '.' + fracStr : '') + ' BNB';
-  }
-  function lookup(addr) {
-    if (!/^0x[0-9a-fA-F]{40}$/.test(addr)) {
-      if (status) status.textContent = 'Enter a valid wallet address starting with 0x (40 characters).';
-      result.innerHTML = '';
-      return;
-    }
-    if (status) status.textContent = 'Checking wallet...';
-    result.innerHTML = '';
-    Promise.all([
-      tryRpc(0, NFT, '0x70a08231' + pad(addr)),
-      tryRpc(0, NFT, '0xed9ec888' + pad(addr)),
-      tryRpc(0, NFT, '0xf12a7add' + pad(addr)),
-      tryRpc(0, NFT, '0x11213086' + pad(addr))
-    ]).then(function (vals) {
-      var held = parseInt(vals[0], 16);
-      var minted = parseInt(vals[1], 16);
-      var price = fmtBnb(vals[2]);
-      var hasId = parseInt(vals[3], 16) === 1;
-      if (status) status.textContent = '';
-      result.innerHTML =
-        '<div class="wallet-card">' +
-          '<p><strong>Wallet:</strong> <code>' + esc(addr) + '</code></p>' +
-          '<p><strong>NFTs held:</strong> ' + held + '</p>' +
-          '<p><strong>Total minted:</strong> ' + minted + '</p>' +
-          '<p><strong>Next mint price:</strong> ' + esc(price) + '</p>' +
-          '<p><strong>Agent ID:</strong> ' + (hasId ? 'Yes' : 'No') + '</p>' +
-          '<p><a href="https://bscscan.com/address/' + esc(addr) + '" target="_blank" rel="noopener">View on BscScan</a></p>' +
-        '</div>';
-      try {
-        var url = new URL(window.location.href);
-        url.searchParams.set('wallet', addr);
-        window.history.replaceState(null, '', url.toString());
-      } catch (e) {}
-    }).catch(function () {
-      if (status) status.textContent = 'Could not read the wallet. Check the address and try again.';
-    });
-  }
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    lookup(input.value.trim());
-  });
-  try {
-    var params = new URLSearchParams(window.location.search);
-    var preset = params.get('wallet');
     if (preset) { input.value = preset; lookup(preset); }
   } catch (e) {}
 })();
