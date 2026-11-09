@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zigzoo — 5,000 Cute Animal NFTs on BNB Chain</title>
-<meta name="description" content="Zigzoo: 5,000 cute animal character NFTs on BNB Smart Chain. Agent-only mint, first mint free. 590 designs, 4 rarity tiers, 100 one-of-one Legendary mythical animals.">
-<meta property="og:title" content="Zigzoo — 5,000 Cute Animal NFTs">
-<meta property="og:description" content="Agent-only mint on BNB Chain. First mint free. 100 one-of-one Legendary mythical animals.">
+<title data-i18n-title="meta.title.index">Zigzoo — BNBチェーンのかわいい動物NFT 5,000体</title>
+<meta name="description" data-i18n-desc="meta.desc.index" content="Zigzoo：BNBスマートチェーン上の5,000体のかわいい動物キャラクターNFT。エージェント専用ミント、初回ミント無料。590デザイン、4つのレアリティ、100体の1 of 1レジェンダリー幻獣。">
+<meta property="og:title" content="Zigzoo — BNBチェーンのかわいい動物NFT 5,000体">
+<meta property="og:description" content="BNBチェーンのエージェント専用ミント。初回ミント無料。100体の1 of 1レジェンダリー幻獣。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zigzoo.xyz/">
 <meta property="og:image" content="https://zigzoo.xyz/images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp">
 <link rel="stylesheet" href="styles.css">
+<script src="i18n.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
+  "inLanguage": "ja",
   "name": "Zigzoo",
-  "description": "5,000 cute animal character NFTs on BNB Smart Chain. Agent-only mint, first mint free.",
+  "description": "BNBスマートチェーン上の5,000体のかわいい動物キャラクターNFT。エージェント専用ミント、初回ミント無料。",
   "url": "https://zigzoo.xyz/"
 }
 </script>
@@ -26,243 +28,206 @@
   <a class="logo" href="/">ZIGZOO</a>
   <nav class="site-nav" id="site-nav" aria-label="Sections">
     <ul>
-      <li><a href="#price">Price ladder</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="#rarity">Rarity</a></li>
-      <li><a href="#roadmap">Roadmap</a></li>
-      <li><a href="#market">Market</a></li>
-      <li><a href="#agent-mint">Mint with agent</a></li>
-      <li><a href="#faq">Questions</a></li>
+      <li><a href="#price" data-i18n="nav.price">価格表</a></li>
+      <li><a href="gallery.html" data-i18n="nav.gallery">ギャラリー</a></li>
+      <li><a href="#rarity" data-i18n="nav.rarity">レアリティ</a></li>
+      <li><a href="#roadmap" data-i18n="nav.roadmap">ロードマップ</a></li>
+      <li><a href="#market" data-i18n="nav.market">マーケット</a></li>
+      <li><a href="#agent-mint" data-i18n="nav.agentmint">エージェントでミント</a></li>
+      <li><a href="#faq" data-i18n="nav.faq">よくある質問</a></li>
     </ul>
   </nav>
-  <span class="status-pill live">MINT IS LIVE</span>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" data-lang="ja" class="active">日本語</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+  <span class="status-pill live" data-i18n="status.live">ミント受付中</span>
   <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
 
 <main>
   <section class="hero">
-    <p class="eyebrow">5,000 cute animals &middot; BNB Chain &middot; Agent-only mint</p>
+    <p class="eyebrow" data-i18n="hero.eyebrow">5,000体のかわいい動物 · BNB Chain · エージェント専用ミント</p>
     <h1>Zigzoo</h1>
-    <p class="tagline">Five thousand cute animals, each with a name and a story.
-      Your first mint is free.</p>
+    <p class="tagline" data-i18n="hero.tagline">5,000体のかわいい動物たち。それぞれに名前と物語があります。初回ミントは無料です。</p>
     <div class="hero-images">
-      <img src="images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp" alt="Mochi the orange tabby cat" width="640" height="640">
-      <img src="images/media-generation-legendary-dragon-draco-0-4f22cef7-4677-4952-b957-d3a1c152144a.webp" alt="Draco the dragon" width="640" height="640">
-      <img src="images/media-generation-luna-owl-lantern-0-dcea7055-e802-42b1-92fb-1d59bd87ab79.webp" alt="Luna the owl" width="640" height="640">
+      <img src="images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp" alt="Mochi（オレンジのトラ猫）" data-i18n-alt="alt.hero_mochi" width="640" height="640">
+      <img src="images/media-generation-legendary-dragon-draco-0-4f22cef7-4677-4952-b957-d3a1c152144a.webp" alt="Draco（ドラゴン）" data-i18n-alt="alt.492" width="640" height="640">
+      <img src="images/media-generation-luna-owl-lantern-0-dcea7055-e802-42b1-92fb-1d59bd87ab79.webp" alt="Luna（フクロウ）" data-i18n-alt="alt.12" width="640" height="640">
     </div>
     <div class="status-box">
-      <strong>MINT IS LIVE &mdash; minting is open.</strong>
-      <p>The mint contract is deployed and minting is open. Send your AI
-      agent to this page and it will know exactly what to do.</p>
+      <strong data-i18n-html="hero.status">ミント受付中 — ミントはオープンしています。</strong>
+      <p data-i18n="hero.status_p">ミントコントラクトはデプロイ済みで、ミントは受付中です。AIエージェントをこのページに送ると、エージェントはすべきことを正確に理解します。</p>
     </div>
     <div class="stats">
-      <div><strong>5,000</strong><span>total supply</span></div>
-      <div><strong>590</strong><span>designs</span></div>
-      <div><strong>100</strong><span>one-of-one Legendary</span></div>
-      <div><strong>FREE</strong><span>first mint</span></div>
-      <div class="wide"><strong id="minted-count">&hellip;</strong><span>minted so far</span></div>
+      <div><strong>5,000</strong><span data-i18n="stat.supply">総供給量</span></div>
+      <div><strong>590</strong><span data-i18n="stat.designs">デザイン</span></div>
+      <div><strong>100</strong><span data-i18n="stat.legendary">1 of 1レジェンダリー</span></div>
+      <div><strong data-i18n="stat.free_v">無料</strong><span data-i18n="stat.free">初回ミント</span></div>
+      <div class="wide"><strong id="minted-count">&hellip;</strong><span data-i18n="stat.minted">これまでのミント数</span></div>
     </div>
   </section>
 
   <section id="price" class="section">
-    <h2>Price ladder</h2>
-    <p>One wallet can mint up to 30 Zigzoo NFTs. The price depends on how
-      many that wallet has already minted. The first one is free.</p>
+    <h2 data-i18n="sec.price">価格表</h2>
+    <p data-i18n="price.intro">1ウォレットで最大30体のZigzoo NFTをミントできます。価格はそのウォレットがすでにミントした回数によって決まります。初回は無料です。</p>
     <table class="ladder">
-      <thead><tr><th>Mint #</th><th>Price (BNB)</th></tr></thead>
+      <thead><tr><th data-i18n="price.th_mint">ミント回数</th><th data-i18n="price.th_price">価格（BNB）</th></tr></thead>
       <tbody>
-        <tr><td>#1</td><td><strong>FREE</strong></td></tr>
+        <tr><td>#1</td><td><strong data-i18n="price.free">無料</strong></td></tr>
         <tr><td>#2 &ndash; #10</td><td>0.0002</td></tr>
         <tr><td>#11 &ndash; #20</td><td>0.0004</td></tr>
         <tr><td>#21 &ndash; #30</td><td>0.0008</td></tr>
       </tbody>
     </table>
-    <p class="note">Max 30 mints per wallet. Max total per wallet: 0.0138 BNB.
-      The exact price for your next mint is always read from the contract
-      before you sign &mdash; never trust a price from anywhere else.</p>
+    <p class="note" data-i18n="price.note">1ウォレット最大30回まで。1ウォレットの最大合計：0.0138 BNB。次のミントの正確な価格は、署名前に必ずコントラクトから読み取ります — ほかの場所の価格を信じないでください。</p>
   </section>
 
   <section id="gallery" class="section">
-    <h2>Meet the animals</h2>
-    <p>20 featured characters from the collection. Every design has a name
-      and a story &mdash; and every Legendary is a different mythical animal,
-      one of one.</p>
+    <h2 data-i18n="sec.gallery">動物たちに会おう</h2>
+    <p data-i18n="gallery.intro">コレクションから注目の20キャラクター。すべてのデザインに名前と物語があります — そしてすべてのレジェンダリーは、それぞれ異なる幻獣の1 of 1です。</p>
     <div class="hero-images">
-      <img src="images/media-generation-kiko-red-panda-0-505cd760-2be6-4a69-b164-ce0c4a9b68ae.webp" alt="Kiko the red panda" loading="lazy" width="640" height="640">
-      <img src="images/media-generation-boba-panda-0-22677c31-d0e8-48d2-bba4-048698c64a60.webp" alt="Boba the panda" loading="lazy" width="640" height="640">
-      <img src="images/media-generation-daisy-duck-flower-0-5e6899f9-1836-481a-8fda-30f39ad15bba.webp" alt="Daisy the duck" loading="lazy" width="640" height="640">
+      <img src="images/media-generation-kiko-red-panda-0-505cd760-2be6-4a69-b164-ce0c4a9b68ae.webp" alt="Kiko（レッサーパンダ）" data-i18n-alt="alt.2" loading="lazy" width="640" height="640">
+      <img src="images/media-generation-boba-panda-0-22677c31-d0e8-48d2-bba4-048698c64a60.webp" alt="Boba（パンダ）" data-i18n-alt="alt.3" loading="lazy" width="640" height="640">
+      <img src="images/media-generation-daisy-duck-flower-0-5e6899f9-1836-481a-8fda-30f39ad15bba.webp" alt="Daisy（アヒル）" data-i18n-alt="alt.9" loading="lazy" width="640" height="640">
     </div>
-    <p><a class="btn" href="gallery.html">View the gallery &rarr;</a></p>
+    <p><a class="btn" href="gallery.html" data-i18n="gallery.view">ギャラリーを見る →</a></p>
   </section>
 
   <section id="rarity" class="section">
-    <h2>Rarity</h2>
-    <p>Four tiers. The rarer the tier, the fewer tokens exist.</p>
+    <h2 data-i18n="sec.rarity">レアリティ</h2>
+    <p data-i18n="rarity.intro">4つのティア。レアなティアほどトークンは少なくなります。</p>
     <div class="tiers">
       <div class="tier-card common">
         <h3>Common</h3>
         <p class="count">4,000</p>
-        <p>400 designs &times; 10 editions. Everyday cute animals on cream paper.</p>
+        <p data-i18n="rarity.common">400デザイン × 10エディション。クリーム色の紙の上に描かれた、日常のかわいい動物たち。</p>
       </div>
       <div class="tier-card rare">
         <h3>Rare</h3>
         <p class="count">700</p>
-        <p>70 designs &times; 10 editions. The most charming animals of Zigzoo.</p>
+        <p data-i18n="rarity.rare">70デザイン × 10エディション。ジグズーで最も魅力的な動物たち。</p>
       </div>
       <div class="tier-card epic">
         <h3>Epic</h3>
         <p class="count">200</p>
-        <p>20 designs &times; 10 editions. Animals with royal accessories.</p>
+        <p data-i18n="rarity.epic">20デザイン × 10エディション。王族のアクセサリーを身につけた動物たち。</p>
       </div>
       <div class="tier-card legendary">
         <h3>Legendary</h3>
         <p class="count">100</p>
-        <p>100 designs &times; 1 edition. Every one is a different mythical
-          animal &mdash; dragon, phoenix, unicorn and more &mdash; in gold,
-          under a starry night sky. One of one, forever.</p>
+        <p data-i18n="rarity.legendary">100デザイン × 1エディション。すべて異なる幻獣 — ドラゴン、フェニックス、ユニコーンなど — 金色に輝き、星空の下にいます。永遠の1 of 1。</p>
       </div>
     </div>
   </section>
 
   <section id="roadmap" class="section">
-    <h2>Roadmap</h2>
-    <p>Four phases, with honest status. No dates are promised &mdash; each
-      phase starts when the previous one is done.</p>
+    <h2 data-i18n="sec.roadmap">ロードマップ</h2>
+    <p data-i18n="roadmap.intro">4つのフェーズを正直なステータスで表示します。日程は約束しません — 各フェーズは前のフェーズが完了してから始まります。</p>
     <ol class="roadmap">
       <li class="phase done">
-        <span class="phase-status">&#10003; Done</span>
-        <h3>Phase 1 &mdash; Artwork &amp; contract ready</h3>
-        <p>590 designs finished, 5,000 metadata files ready, contract
-          built and fully tested (20/20 tests), site live.</p>
+        <span class="phase-status" data-i18n="rm.done">✓ 完了</span>
+        <h3 data-i18n="rm1.h">フェーズ1 — アートワークとコントラクトの準備</h3>
+        <p data-i18n="rm1.p">590デザイン完成、5,000件のメタデータファイル準備済み、コントラクト構築・全テスト合格（20/20）、サイト公開済み。</p>
       </li>
       <li class="phase done">
-        <span class="phase-status">&#10003; Done</span>
-        <h3>Phase 2 &mdash; Deploy &amp; verify</h3>
-        <p>Deployed 6 Nov 2026 from the owner's wallet, source verified on
-          BscScan, contract address filled into the site.</p>
+        <span class="phase-status" data-i18n="rm.done">✓ 完了</span>
+        <h3 data-i18n="rm2.h">フェーズ2 — デプロイと検証</h3>
+        <p data-i18n="rm2.p">2026年11月6日にオーナーのウォレットからデプロイ、BscScanでソース検証済み、コントラクトアドレスをサイトに記載済み。</p>
       </li>
       <li class="phase done">
-        <span class="phase-status">&#10003; Done</span>
-        <h3>Phase 3 &mdash; Mint opens</h3>
-        <p>Free first mint per wallet, price ladder live. Mint opened
-          6 Nov 2026 &mdash; minting is live now.</p>
+        <span class="phase-status" data-i18n="rm.done">✓ 完了</span>
+        <h3 data-i18n="rm3.h">フェーズ3 — ミント開始</h3>
+        <p data-i18n="rm3.p">1ウォレットの初回ミント無料、価格表が公開。ミントは2026年11月6日に開始 — 現在受付中です。</p>
       </li>
       <li class="phase next">
-        <span class="phase-status">Next</span>
-        <h3>Phase 4 &mdash; Secondary market</h3>
-        <p>The collection appears on marketplaces so holders can list
-          and trade.</p>
+        <span class="phase-status" data-i18n="rm.next">次へ</span>
+        <h3 data-i18n="rm4.h">フェーズ4 — セカンダリーマーケット</h3>
+        <p data-i18n="rm4.p">コレクションがマーケットプレイスに掲載され、ホルダーが出品と取引ができるようになります。</p>
       </li>
     </ol>
   </section>
 
   <section id="market" class="section">
-    <h2>Where to trade</h2>
-    <p>The market is open &mdash; the collection is listed on Element,
-      where holders can list and trade.</p>
+    <h2 data-i18n="sec.market">取引場所</h2>
+    <p data-i18n="market.intro">マーケットはオープンしています — コレクションはElementに掲載されており、ホルダーが出品と取引ができます。</p>
     <ul class="market-list">
-      <li><strong>OpenSea</strong> &mdash; Not listed yet &mdash; appears
-        after mint opens.</li>
-      <li><strong>Element</strong> &mdash; the collection is listed:
+      <li><strong>OpenSea</strong> &mdash; <span data-i18n="market.opensea">まだ掲載されていません — ミント開始後に表示されます。</span></li>
+      <li><strong>Element</strong> &mdash; <span data-i18n="market.element">コレクションが掲載されています：</span>
         <a href="https://element.market/collections/zigzoo-1">element.market/collections/zigzoo-1</a>.</li>
     </ul>
-    <p>The first mint is free. Minting is agent-only &mdash; see
-      <a href="#agent-mint">Mint with your AI agent</a>.</p>
+    <p data-i18n-html="market.free">初回ミントは無料です。ミントはエージェント専用です — <a href="#agent-mint">AIエージェントでミント</a>をご覧ください。</p>
   </section>
 
   <section id="agent-mint" class="section">
-    <h2>Mint with your AI agent</h2>
-    <p>Zigzoo is agent-only: there is no mint button on this page. Give the
-      prompt below to your AI agent (for example your Binance Agentic Wallet
-      agent) and it will mint for you.</p>
+    <h2 data-i18n="sec.agentmint">AIエージェントでミント</h2>
+    <p data-i18n="agentmint.intro">Zigzooはエージェント専用です。このページにミントボタンはありません。下のプロンプトをAIエージェント（例えばBinance Agentic Walletのエージェント）に渡すと、エージェントがあなたの代わりにミントします。</p>
 
-    <h3>Don't have an AI agent yet?</h3>
+    <h3 data-i18n="agent.no_agent">AIエージェントをまだ持っていませんか？</h3>
     <ol class="steps">
-      <li>Install the <strong>Binance Wallet</strong> app (not the Binance
-        exchange app).</li>
-      <li>Activate the Agentic Wallet and claim your free Agent ID name
-        (like <code>name.ai</code>).</li>
-      <li>Copy the prompt below and paste it to your agent in the Binance
-        Wallet app.</li>
-      <li>Your agent shows a preview &mdash; confirm, and it mints for
-        you.</li>
+      <li data-i18n-html="agent.s1"><strong>Binance Wallet</strong>アプリをインストールします（Binance取引所アプリではありません）。</li>
+      <li data-i18n-html="agent.s2">Agentic Walletを有効化し、無料のエージェントID名（<code>name.ai</code>のような名前）を取得します。</li>
+      <li data-i18n-html="agent.s3">下のプロンプトをコピーし、Binance Walletアプリでエージェントに貼り付けます。</li>
+      <li data-i18n-html="agent.s4">エージェントがプレビューを表示します — 確認すると、エージェントがあなたの代わりにミントします。</li>
     </ol>
 
-    <h3>How it works</h3>
+    <h3 data-i18n="agent.how">仕組み</h3>
     <ol class="steps">
-      <li>Your agent reads this page and the skill file
-        (<a href="agent-skill.md">agent-skill.md</a>).</li>
-      <li>It checks the mint is open and your wallet holds a SPACE ID
-        Agent ID.</li>
-      <li>It reads the exact price for your next mint from the contract.</li>
-      <li>It shows you a preview &mdash; including the exact price &mdash;
-        and only mints after you confirm.</li>
-      <li>It verifies the mint on-chain and tells you which animal you got.</li>
+      <li data-i18n-html="agent.w1">エージェントがこのページとスキルファイル（<a href="agent-skill.md">agent-skill.md</a>）を読みます。</li>
+      <li data-i18n-html="agent.w2">ミントが受付中で、ウォレットがSPACE IDエージェントIDを持っていることを確認します。</li>
+      <li data-i18n-html="agent.w3">次のミントの正確な価格をコントラクトから読み取ります。</li>
+      <li data-i18n-html="agent.w4">プレビューを表示します — 正確な価格を含みます — あなたが確認した後にのみミントします。</li>
+      <li data-i18n-html="agent.w5">ミントをオンチェーンで確認し、どの動物を手に入れたかを伝えます。</li>
     </ol>
 
-    <h3>Prompt for your agent</h3>
-    <p><button type="button" class="btn copy-btn" id="copy-prompt">Copy prompt</button></p>
+    <h3 data-i18n="agent.prompt_h">エージェント用プロンプト</h3>
+    <p><button type="button" class="btn copy-btn" id="copy-prompt" data-i18n="common.copy_prompt">プロンプトをコピー</button></p>
     <pre class="prompt" id="agent-prompt">You are an AI agent minting a Zigzoo NFT for your user on BNB Smart Chain (chain 56). Read https://zigzoo.xyz/agent-skill.md and follow it exactly — it has the contract address, price ladder, checks and the mint flow. Show the user a preview with the exact price, and mint only after they confirm. Never mint without a SPACE ID Agent ID; never send more than priceFor().</pre>
 
-    <h3>Contract</h3>
-    <p><strong>Status: LIVE &mdash; mint is open.</strong><br>
-      Contract address: <code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code>
-      (<a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener">view on BscScan</a>).<br>
-      SPACE ID Agent ID registry: <code>0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F</code><br>
-      Chain: BNB Smart Chain, chain ID 56. Token: ERC-721, symbol ZIGZOO.</p>
+    <h3 data-i18n="agent.contract">コントラクト</h3>
+    <p data-i18n-html="agent.contract_p"><strong>ステータス：受付中 — ミントはオープンしています。</strong><br>
+      コントラクトアドレス：<code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code>
+      (<a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener">BscScanで見る</a>).<br>
+      SPACE IDエージェントIDレジストリ：<code>0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F</code><br>
+      チェーン：BNB Smart Chain、チェーンID 56。トークン：ERC-721、シンボルZIGZOO。</p>
   </section>
 
   <section id="check-wallet" class="section">
-    <h2>Check a wallet</h2>
-    <p>Paste any wallet address to see how many Zigzoo NFTs it holds, how
-      many it has minted, its next mint price, and whether it holds a
-      SPACE ID Agent ID. Nothing is connected — this only reads the
-      blockchain.</p>
+    <h2 data-i18n="check.wallet_h">ウォレットをチェック</h2>
+    <p data-i18n="check.wallet_p">ウォレットアドレスを貼り付けると、そのウォレットが持つZigzoo NFTの数、ミント回数、次回ミント価格、SPACE IDエージェントIDを持っているかどうかが表示されます。何も接続しません — ブロックチェーンを読み取るだけです。</p>
     <form id="wallet-form" class="check-form">
-      <label for="wallet-address">Wallet address</label>
-      <input id="wallet-address" name="wallet" type="text" inputmode="text" placeholder="e.g. 0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7" required>
-      <button type="submit" class="btn check-btn">Check wallet</button>
+      <label for="wallet-address" data-i18n="check.wallet_label">ウォレットアドレス</label>
+      <input id="wallet-address" name="wallet" type="text" inputmode="text" placeholder="例：0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7" data-i18n-placeholder="check.wallet_ph" required>
+      <button type="submit" class="btn check-btn" data-i18n="check.wallet_btn">ウォレットをチェック</button>
     </form>
     <p id="wallet-status" class="check-status" aria-live="polite"></p>
     <div id="wallet-result" class="check-result"></div>
-    <p>Want to look up one NFT by its token number?
-      <a href="check.html">Check your NFT</a>.</p>
+    <p data-i18n-html="check.to_nft">トークン番号で1つのNFTを調べたいですか？<a href="check.html">NFTをチェック</a>。</p>
   </section>
 
   <section id="faq" class="section">
-    <h2>Questions</h2>
+    <h2 data-i18n="sec.faq">よくある質問</h2>
     <dl>
-      <dt>When can I mint?</dt>
-      <dd>Now &mdash; minting is live. Ask your AI agent to mint for you;
-        the first mint per wallet is free.</dd>
-      <dt>How much does it cost?</dt>
-      <dd>Your first mint is free. After that the price rises per wallet:
-        0.0002, 0.0004, then 0.0008 BNB. See the price ladder above.</dd>
-      <dt>How is the animal chosen?</dt>
-      <dd>Every mint draws the next token from a shuffled deck, recorded
-        on-chain as a deck hash. The draw is random by deck order, not by
-        choice &mdash; your animal is a surprise.</dd>
-      <dt>Can I mint from a browser wallet?</dt>
-      <dd>No. Minting is agent-only by design: only a wallet holding a
-        SPACE ID Agent ID can mint, and the mint must be made by an AI
-        agent for its user.</dd>
-      <dt>Where do I see my NFT after minting?</dt>
-      <dd>Use Check a wallet below the mint prompt &mdash; paste your wallet
-        address to see your NFTs, mint count and next price. Or look up one
-        NFT by its token number on the
-        <a href="check.html">Check your NFT</a> page.</dd>
-      <dt>What if my agent says I don't have an Agent ID?</dt>
-      <dd>Claim a free Agent ID in the Binance Wallet app &mdash; see
-        &ldquo;Don't have an AI agent yet?&rdquo; above &mdash; then ask your
-        agent to try again.</dd>
+      <dt data-i18n="faq.q1">いつミントできますか？</dt>
+      <dd data-i18n="faq.a1">今すぐできます — ミント受付中です。AIエージェントにミントを依頼してください。1ウォレットの初回ミントは無料です。</dd>
+      <dt data-i18n="faq.q2">いくらかかりますか？</dt>
+      <dd data-i18n="faq.a2">初回ミントは無料です。その後、ウォレットごとに価格が上がります：0.0002、0.0004、そして0.0008 BNB。上の価格表をご覧ください。</dd>
+      <dt data-i18n="faq.q3">動物はどうやって決まりますか？</dt>
+      <dd data-i18n="faq.a3">毎回のミントでは、シャッフルされたデッキから次のトークンが引かれます。デッキハッシュとしてオンチェーンに記録されています。抽選はデッキの順番によるランダムで、選ぶことはできません — 動物はお楽しみです。</dd>
+      <dt data-i18n="faq.q4">ブラウザウォレットからミントできますか？</dt>
+      <dd data-i18n="faq.a4">いいえ。ミントは設計上エージェント専用です。SPACE IDエージェントIDを持つウォレットだけがミントでき、ミントはAIエージェントがユーザーの代わりに行います。</dd>
+      <dt data-i18n="faq.q5">ミントした後、NFTはどこで見られますか？</dt>
+      <dd data-i18n-html="faq.a5">ミントプロンプトの下にあるウォレットチェックを使いましょう — ウォレットアドレスを貼り付けると、NFT、ミント回数、次回価格が表示されます。または<a href="check.html">NFTチェックページ</a>でトークン番号から1つのNFTを調べることもできます。</dd>
+      <dt data-i18n="faq.q6">エージェントがエージェントIDを持っていないと言ったらどうすればいいですか？</dt>
+      <dd data-i18n="faq.a6">Binance Walletアプリで無料のエージェントIDを取得してください — 上の「AIエージェントをまだ持っていませんか？」をご覧ください — その後、エージェントにもう一度試すよう依頼してください。</dd>
     </dl>
   </section>
 </main>
 
 <footer class="site-footer">
-  <p>Zigzoo &mdash; 5,000 cute animal NFTs on BNB Smart Chain.</p>
-  <p>Minting is live. Contract: <a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener"><code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></a></p>
-  <p><a href="https://x.com/zigzooNFT" target="_blank" rel="noopener">&#120143; Follow Zigzoo on X</a></p>
+  <p data-i18n="foot.tagline">Zigzoo — BNBスマートチェーン上の5,000体のかわいい動物NFT。</p>
+  <p><span data-i18n="foot.live">ミント受付中です。コントラクト：</span> <a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener"><code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></a></p>
+  <p><a href="https://x.com/zigzooNFT" target="_blank" rel="noopener" data-i18n="foot.x">𝕏 XでZigzooをフォロー</a></p>
 </footer>
 <script>
 (function () {
@@ -292,17 +257,22 @@
 </script>
 <script>
 (function () {
+  function T(k, f, v) {
+    if (window.ZIGZOO_T) return window.ZIGZOO_T(k, v);
+    var s = f;
+    if (v) for (var n in v) s = s.split('{' + n + '}').join(String(v[n]));
+    return s;
+  }
   var btn = document.getElementById('copy-prompt');
   var box = document.getElementById('agent-prompt');
   if (!btn || !box) return;
-  var original = btn.textContent;
   var timer = null;
   function showCopied() {
-    btn.textContent = 'Copied ✓';
+    btn.textContent = T('common.copied', 'Copied \u2713');
     btn.classList.add('copied');
     if (timer) clearTimeout(timer);
     timer = setTimeout(function () {
-      btn.textContent = original;
+      btn.textContent = T('common.copy_prompt', 'Copy prompt');
       btn.classList.remove('copied');
     }, 2000);
   }
@@ -323,7 +293,7 @@
     var text = box.textContent;
     function done(ok) {
       if (ok) { showCopied(); }
-      else { btn.textContent = 'Copy failed - select the text manually'; }
+      else { btn.textContent = T('common.copy_failed', 'Copy failed - select the text manually'); }
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(
@@ -359,11 +329,18 @@
 </script>
 <script>
 (function () {
+  function T(k, f, v) {
+    if (window.ZIGZOO_T) return window.ZIGZOO_T(k, v);
+    var s = f;
+    if (v) for (var n in v) s = s.split('{' + n + '}').join(String(v[n]));
+    return s;
+  }
   var form = document.getElementById('wallet-form');
   var input = document.getElementById('wallet-address');
   var status = document.getElementById('wallet-status');
   var result = document.getElementById('wallet-result');
   if (!form || !input || !result) return;
+  var lastAddr = null;
   var NFT = '0x09ADA5A12293C30D75b97c56E34967E8a4326a3C';
   var RPCS = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
   function pad(addr) { return '000000000000000000000000' + addr.slice(2).toLowerCase(); }
@@ -383,7 +360,7 @@
   }
   function fmtBnb(weiHex) {
     var wei = BigInt(weiHex);
-    if (wei === 0n) return 'FREE';
+    if (wei === 0n) return T('check.free_v', 'FREE');
     var whole = wei / 1000000000000000000n;
     var frac = wei % 1000000000000000000n;
     var fracStr = frac.toString().padStart(18, '0').replace(/0+$/, '');
@@ -391,11 +368,12 @@
   }
   function lookup(addr) {
     if (!/^0x[0-9a-fA-F]{40}$/.test(addr)) {
-      if (status) status.textContent = 'Enter a valid wallet address starting with 0x (40 characters).';
+      if (status) status.textContent = T('check.err_addr', 'Enter a valid wallet address starting with 0x (40 characters).');
       result.innerHTML = '';
       return;
     }
-    if (status) status.textContent = 'Checking wallet...';
+    lastAddr = addr;
+    if (status) status.textContent = T('check.checking', 'Checking wallet...');
     result.innerHTML = '';
     Promise.all([
       tryRpc(0, NFT, '0x70a08231' + pad(addr)),
@@ -410,12 +388,12 @@
       if (status) status.textContent = '';
       result.innerHTML =
         '<div class="wallet-card">' +
-          '<p><strong>Wallet:</strong> <code>' + esc(addr) + '</code></p>' +
-          '<p><strong>NFTs held:</strong> ' + held + '</p>' +
-          '<p><strong>Total minted:</strong> ' + minted + '</p>' +
-          '<p><strong>Next mint price:</strong> ' + esc(price) + '</p>' +
-          '<p><strong>Agent ID:</strong> ' + (hasId ? 'Yes' : 'No') + '</p>' +
-          '<p><a href="https://bscscan.com/address/' + esc(addr) + '" target="_blank" rel="noopener">View on BscScan</a></p>' +
+          '<p><strong>' + T('check.r_wallet', 'Wallet:') + '</strong> <code>' + esc(addr) + '</code></p>' +
+          '<p><strong>' + T('check.r_held', 'NFTs held:') + '</strong> ' + held + '</p>' +
+          '<p><strong>' + T('check.r_minted', 'Total minted:') + '</strong> ' + minted + '</p>' +
+          '<p><strong>' + T('check.r_price', 'Next mint price:') + '</strong> ' + esc(price) + '</p>' +
+          '<p><strong>' + T('check.r_agent', 'Agent ID:') + '</strong> ' + (hasId ? T('common.yes', 'Yes') : T('common.no', 'No')) + '</p>' +
+          '<p><a href="https://bscscan.com/address/' + esc(addr) + '" target="_blank" rel="noopener">' + T('check.r_bscscan', 'View on BscScan') + '</a></p>' +
         '</div>';
       try {
         var url = new URL(window.location.href);
@@ -423,18 +401,28 @@
         window.history.replaceState(null, '', url.toString());
       } catch (e) {}
     }).catch(function () {
-      if (status) status.textContent = 'Could not read the wallet. Check the address and try again.';
+      if (status) status.textContent = T('check.err_read', 'Could not read the wallet. Check the address and try again.');
     });
   }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     lookup(input.value.trim());
   });
-  try {
-    var params = new URLSearchParams(window.location.search);
-    var preset = params.get('wallet');
-    if (preset) { input.value = preset; lookup(preset); }
-  } catch (e) {}
+  /* Re-render the active lookup in the new language on switch. */
+  var prevRefresh = window.ZIGZOO_LIVE_REFRESH;
+  window.ZIGZOO_LIVE_REFRESH = function () {
+    if (prevRefresh) prevRefresh();
+    if (lastAddr) lookup(lastAddr);
+  };
+  /* Auto-lookup from ?wallet= — deferred until DOMContentLoaded so the
+     i18n engine (deferred script) has run and ZIGZOO_T exists. */
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var preset = params.get('wallet');
+      if (preset) { input.value = preset; lookup(preset); }
+    } catch (e) {}
+  });
 })();
 </script>
 </body>

@@ -32,6 +32,15 @@ code { overflow-wrap: anywhere; }
   white-space: nowrap;
 }
 .status-pill.live { background: #22c55e; color: #062b14; }
+.lang-switch {
+  display: inline-flex; gap: 4px; margin-left: auto; flex: none;
+}
+.lang-switch button {
+  background: transparent; color: #F6EFDC; border: 1px solid #F6EFDC;
+  border-radius: 999px; padding: 6px 10px; font-size: 13px; font-weight: 800;
+  cursor: pointer; min-height: 36px; font-family: inherit;
+}
+.lang-switch button.active { background: #f5b301; border-color: #f5b301; color: #221d12; }
 .menu-toggle {
   display: inline-flex; flex-direction: column; justify-content: center; align-items: center;
   gap: 5px; width: 44px; height: 44px; min-width: 44px; min-height: 44px;
@@ -53,6 +62,8 @@ code { overflow-wrap: anywhere; }
 }
 .site-nav a:hover, .site-nav a:focus-visible { color: #f5b301; }
 @media (max-width: 767px) {
+  .status-pill { display: none; }
+  .lang-switch button { padding: 6px 8px; font-size: 12px; }
   .site-nav.open {
     display: block; position: absolute; top: 100%; left: 0; right: 0;
     background: #221d12; border-top: 1px solid #3a3222; padding: 8px 16px 16px;
