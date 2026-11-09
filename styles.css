@@ -32,6 +32,10 @@ code { overflow-wrap: anywhere; }
   white-space: nowrap;
 }
 .status-pill.live { background: #22c55e; color: #062b14; }
+.status-bar {
+  display: flex; justify-content: center;
+  padding: 12px 16px 0;
+}
 .lang-switch {
   display: inline-flex; gap: 4px; margin-left: auto; flex: none;
 }
@@ -62,7 +66,6 @@ code { overflow-wrap: anywhere; }
 }
 .site-nav a:hover, .site-nav a:focus-visible { color: #f5b301; }
 @media (max-width: 767px) {
-  .status-pill { display: none; }
   .lang-switch button { padding: 6px 8px; font-size: 12px; }
   .site-nav.open {
     display: block; position: absolute; top: 100%; left: 0; right: 0;
