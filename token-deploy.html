@@ -16,6 +16,16 @@
     padding: 18px; margin-top: 18px; max-width: 640px; margin-left: auto; margin-right: auto;
   }
   .step h2 { font-size: 22px; margin: 0 0 6px; }
+  .step.todo { opacity: 0.55; }
+  .step.active { border-color: #f5b301; box-shadow: 0 0 0 3px #f5b30133; }
+  .step.blocked { border-color: #b91c1c; }
+  .step.done { border-color: #3f6212; }
+  .step.done h2::after { content: " ✓"; color: #3f6212; }
+  .badge { display: inline-block; font-weight: 800; font-size: 14px; padding: 6px 12px; border-radius: 999px; margin: 6px 0; }
+  .badge.ok { background: #e8f5d8; color: #3f6212; }
+  .badge.bad { background: #fee2e2; color: #b91c1c; }
+  .warn-box { background: #fee2e2; border: 3px solid #b91c1c; border-radius: 14px; padding: 14px 16px; margin-top: 12px; }
+  .live-line { display: block; margin-top: 6px; font-size: 15px; }
   .btn {
     display: block; width: 100%; min-height: 52px; margin: 12px 0 0;
     padding: 14px 18px; font-size: 18px; font-weight: 800; font-family: inherit;
@@ -77,8 +87,30 @@
     The claim page (<a href="claim.html">claim.html</a>) stays on “Coming soon” until step 5 is done.
   </div>
 
+  <div id="note" class="note-box info hidden" role="status"></div>
+
+  <!-- Step 0 -->
+  <section class="step todo" id="step-0">
+    <h2>Step 0 &mdash; Connect your wallet</h2>
+    <p>Connect the browser wallet on <strong>BNB Smart Chain (chain 56)</strong>. If you are on another network, the page will offer to switch. Deploy stays disabled until My Wallet is connected — the owner address is locked in at deploy time.</p>
+    <p class="status-line"><strong>Wallet:</strong> <span id="wallet-status">Not connected.</span></p>
+    <p class="status-line hidden" id="wallet-address-row"><strong>Address:</strong> <code class="mono" id="wallet-address"></code></p>
+    <p class="status-line"><strong>Network:</strong> <span id="chain-status">—</span></p>
+    <p class="status-line"><strong>Contract files:</strong> <span id="artifact-status">Loading…</span></p>
+    <p class="status-line"><strong>Owner must be:</strong> <code class="mono" id="owner-expected">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code></p>
+    <p class="status-line"><strong>Connected wallet:</strong> <code class="mono" id="owner-connected">—</code></p>
+    <p><span class="badge" id="owner-badge">Not checked yet</span></p>
+    <div id="owner-warning" class="warn-box hidden">
+      <strong>Wrong wallet.</strong> The connected wallet is not My Wallet. Switch accounts in your wallet app, then reconnect here. Do not deploy from any other wallet.
+    </div>
+    <button class="btn" id="connect-btn" type="button">Connect Wallet</button>
+    <div id="switch-row" class="hidden">
+      <button class="btn ghost" id="switch-btn" type="button">Switch to BNB Smart Chain</button>
+    </div>
+  </section>
+
   <!-- Step 1 -->
-  <section class="step" id="step-1">
+  <section class="step todo" id="step-1">
     <h2>Step 1 &mdash; Deploy the ZigzooToken ($ZGZ)</h2>
     <p>Deploy the ERC-20 token contract from My Wallet. The whole 100,000,000 $ZGZ supply is minted to the owner at deploy.</p>
     <table class="kv">
@@ -90,6 +122,15 @@
     <p class="status-line"><strong>Live gas price:</strong> <span class="gas-price">—</span></p>
     <p class="status-line"><strong>Estimated gas:</strong> <span class="gas-est">1,200,000 gas (reference — your wallet shows the real figure before you sign)</span></p>
     <p class="cost"><span class="cost-bnb" data-gas="1200000">— BNB</span></p>
+    <button class="btn primary" id="deploy-token-btn" type="button" disabled>DEPLOY $ZGZ TOKEN</button>
+    <p class="status-line" id="token-deploy-status">Waiting for Step 0 — connect My Wallet first.</p>
+    <p class="status-line hidden" id="token-tx-row"><strong>Transaction:</strong> <a id="token-tx-link" href="#" target="_blank" rel="noopener"><code class="mono" id="token-tx"></code></a></p>
+    <div id="token-deployed-row" class="hidden">
+      <p class="status-line"><strong>Token address:</strong><br><code class="mono" id="token-deployed-address"></code>
+        <button class="btn small ghost" id="copy-token-btn" type="button">Copy</button></p>
+      <p><a id="token-deployed-link" href="#" target="_blank" rel="noopener">View token on BscScan</a> &middot;
+         <a id="token-verify-link" href="#" target="_blank" rel="noopener">Verify source on BscScan</a></p>
+    </div>
     <label for="token-address"><strong>Deployed $ZGZ token address</strong></label>
     <input class="addr" id="token-address" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="0x… (paste after deploy)">
     <p class="status-line"><button class="btn ghost small" type="button" data-save="token-address">Save address on this page</button></p>
@@ -97,7 +138,7 @@
   </section>
 
   <!-- Step 2 -->
-  <section class="step" id="step-2">
+  <section class="step todo" id="step-2">
     <h2>Step 2 &mdash; Deploy the ZigzooClaim contract</h2>
     <p>Deploy the claim contract from My Wallet. Copy the token address from step 1 into the constructor — do not type it from memory.</p>
     <table class="kv">
@@ -112,6 +153,15 @@
     <p class="status-line"><strong>Live gas price:</strong> <span class="gas-price">—</span></p>
     <p class="status-line"><strong>Estimated gas:</strong> <span class="gas-est">1,000,000 gas (reference — your wallet shows the real figure before you sign)</span></p>
     <p class="cost"><span class="cost-bnb" data-gas="1000000">— BNB</span></p>
+    <button class="btn primary" id="deploy-claim-btn" type="button" disabled>DEPLOY CLAIM CONTRACT</button>
+    <p class="status-line" id="claim-deploy-status">Waiting for Step 1 — deploy the token first.</p>
+    <p class="status-line hidden" id="claim-tx-row"><strong>Transaction:</strong> <a id="claim-tx-link" href="#" target="_blank" rel="noopener"><code class="mono" id="claim-tx"></code></a></p>
+    <div id="claim-deployed-row" class="hidden">
+      <p class="status-line"><strong>Claim contract address:</strong><br><code class="mono" id="claim-deployed-address"></code>
+        <button class="btn small ghost" id="copy-claim-btn" type="button">Copy</button></p>
+      <p><a id="claim-deployed-link" href="#" target="_blank" rel="noopener">View claim contract on BscScan</a> &middot;
+         <a id="claim-verify-link" href="#" target="_blank" rel="noopener">Verify source on BscScan</a></p>
+    </div>
     <label for="claim-address"><strong>Deployed claim contract address</strong></label>
     <input class="addr" id="claim-address" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="0x… (paste after deploy)">
     <p class="status-line"><button class="btn ghost small" type="button" data-save="claim-address">Save address on this page</button></p>
@@ -119,7 +169,7 @@
   </section>
 
   <!-- Step 3 -->
-  <section class="step" id="step-3">
+  <section class="step todo" id="step-3">
     <h2>Step 3 &mdash; Fund the claim pool</h2>
     <p>Transfer <strong>77,500,000 $ZGZ</strong> from My Wallet to the claim contract deployed in step 2. This is a plain ERC-20 <code>transfer()</code> — the claim contract cannot pay claims until it holds the pool.</p>
     <table class="kv">
@@ -131,29 +181,35 @@
     <p class="status-line"><strong>Live gas price:</strong> <span class="gas-price">—</span></p>
     <p class="status-line"><strong>Estimated gas:</strong> <span class="gas-est">60,000 gas (reference — your wallet shows the real figure before you sign)</span></p>
     <p class="cost"><span class="cost-bnb" data-gas="60000">— BNB</span></p>
+    <button class="btn primary" id="fund-pool-btn" type="button" disabled>FUND POOL — SEND 77,500,000 $ZGZ</button>
+    <p class="status-line" id="fund-status">Waiting for Step 2 — deploy the claim contract first.</p>
+    <p class="status-line hidden" id="fund-tx-row"><strong>Transaction:</strong> <a id="fund-tx-link" href="#" target="_blank" rel="noopener"><code class="mono" id="fund-tx"></code></a></p>
+    <p class="status-line"><strong>Claim contract $ZGZ balance after funding:</strong> <span id="pool-balance">—</span></p>
     <p class="status-line">After the transfer, check the claim contract's $ZGZ balance on BscScan — it must read exactly 77,500,000 $ZGZ before you continue.</p>
     <p class="status-line"><button class="btn ghost small" type="button" id="refresh-estimate-btn">Refresh estimate</button></p>
   </section>
 
   <!-- Step 4 -->
-  <section class="step" id="step-4">
+  <section class="step todo" id="step-4">
     <h2>Step 4 &mdash; Verify the on-chain readings</h2>
     <p>Before the claim goes live, read these values back from the deployed contracts (free read-only calls — no gas). Every one must match, or stop and fix it before step 5.</p>
+    <button class="btn" id="verify-btn" type="button" disabled>VERIFY READINGS</button>
+    <p class="status-line" id="verify-status">Enter the deployed token and claim addresses first.</p>
     <table class="kv">
-      <tr><th>$ZGZ totalSupply()</th><td>100,000,000 $ZGZ</td></tr>
-      <tr><th>Claim contract $ZGZ balance</th><td>77,500,000 $ZGZ</td></tr>
-      <tr><th>Claim contract token()</th><td>The $ZGZ address from step 1</td></tr>
-      <tr><th>Claim contract nft()</th><td><code class="mono">0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></td></tr>
-      <tr><th>Claim contract revenue()</th><td><code class="mono">0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code></td></tr>
-      <tr><th>Claim contract claimFee()</th><td>0.0003 BNB</td></tr>
-      <tr><th>claimed(1)</th><td>false (no NFT has claimed yet)</td></tr>
+      <tr><th>$ZGZ totalSupply()</th><td>100,000,000 $ZGZ<span class="live-line">Live: <span id="vr-totalSupply">—</span> <span class="badge" id="vr-totalSupply-badge">not checked</span></span></td></tr>
+      <tr><th>Claim contract $ZGZ balance</th><td>77,500,000 $ZGZ<span class="live-line">Live: <span id="vr-balance">—</span> <span class="badge" id="vr-balance-badge">not checked</span></span></td></tr>
+      <tr><th>Claim contract token()</th><td>The $ZGZ address from step 1<span class="live-line">Live: <span class="mono" id="vr-token">—</span> <span class="badge" id="vr-token-badge">not checked</span></span></td></tr>
+      <tr><th>Claim contract nft()</th><td><code class="mono">0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code><span class="live-line">Live: <span class="mono" id="vr-nft">—</span> <span class="badge" id="vr-nft-badge">not checked</span></span></td></tr>
+      <tr><th>Claim contract revenueWallet()</th><td><code class="mono">0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code><span class="live-line">Live: <span class="mono" id="vr-revenue">—</span> <span class="badge" id="vr-revenue-badge">not checked</span></span></td></tr>
+      <tr><th>Claim contract claimFee()</th><td>0.0003 BNB<span class="live-line">Live: <span id="vr-claimFee">—</span> <span class="badge" id="vr-claimFee-badge">not checked</span></span></td></tr>
+      <tr><th>claimed(1)</th><td>false (no NFT has claimed yet)<span class="live-line">Live: <span id="vr-claimed1">—</span> <span class="badge" id="vr-claimed1-badge">not checked</span></span></td></tr>
     </table>
     <p>Then verify the source on BscScan for both contracts: open each contract on BscScan &rarr; Contract &rarr; Verify and Publish, compiler 0.8.24, optimizer runs 200, license MIT. Source verification is free.</p>
     <p class="status-line">Estimated gas for this step: <strong>0 BNB</strong> (reads and BscScan verification cost nothing).</p>
   </section>
 
   <!-- Step 5 -->
-  <section class="step" id="step-5">
+  <section class="step todo" id="step-5">
     <h2>Step 5 &mdash; Update the site (follow-up step)</h2>
     <p>Do this after steps 1–4 are verified — not now, and not before the contracts exist.</p>
     <ol>
@@ -180,82 +236,7 @@
   </footer>
 </main>
 
-<script>
-(function () {
-  "use strict";
-  var RPCS = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
-  function fmtBnb(wei) {
-    var whole = wei / 1000000000000000000n;
-    var frac = wei % 1000000000000000000n;
-    var fracStr = frac.toString().padStart(18, '0').replace(/0+$/, '').slice(0, 6);
-    return whole.toString() + (fracStr ? '.' + fracStr : '') + ' BNB';
-  }
-  function fetchGasPrice(i) {
-    if (i >= RPCS.length) return Promise.reject(new Error('all RPCs failed'));
-    return fetch(RPCS[i], { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_gasPrice', params: [] }) })
-      .then(function (r) { return r.json(); })
-      .then(function (j) { if (!j.result) throw new Error('no result'); return BigInt(j.result); })
-      .catch(function () { return fetchGasPrice(i + 1); });
-  }
-  function refresh() {
-    var priceEls = document.querySelectorAll('.gas-price');
-    var costEls = document.querySelectorAll('.cost-bnb');
-    priceEls.forEach(function (el) { el.textContent = 'Loading…'; });
-    fetchGasPrice(0).then(function (gasPrice) {
-      var gwei = Number(gasPrice) / 1e9;
-      priceEls.forEach(function (el) { el.textContent = gwei.toFixed(4) + ' gwei'; });
-      costEls.forEach(function (el) {
-        el.textContent = fmtBnb(gasPrice * BigInt(el.getAttribute('data-gas')));
-      });
-    }).catch(function () {
-      priceEls.forEach(function (el) { el.textContent = 'Unavailable — your wallet shows the cost before you sign.'; });
-      costEls.forEach(function (el) { el.textContent = '— BNB'; });
-    });
-  }
-  function loadSaved() {
-    try {
-      var token = window.localStorage.getItem('zgz-token-address') || '';
-      var claim = window.localStorage.getItem('zgz-claim-address') || '';
-      if (token) {
-        document.getElementById('token-address').value = token;
-        document.getElementById('token-saved').textContent = 'Saved on this page: ' + token;
-        document.getElementById('step2-token').textContent = token;
-      }
-      if (claim) {
-        document.getElementById('claim-address').value = claim;
-        document.getElementById('claim-saved').textContent = 'Saved on this page: ' + claim;
-        document.getElementById('step3-claim').textContent = claim;
-      }
-    } catch (e) { /* storage unavailable */ }
-  }
-  document.querySelectorAll('[data-save]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var id = btn.getAttribute('data-save');
-      var input = document.getElementById(id);
-      var val = input.value.trim();
-      if (!/^0x[0-9a-fA-F]{40}$/.test(val)) {
-        alert('Enter a valid address starting with 0x (40 characters).');
-        return;
-      }
-      try {
-        if (id === 'token-address') {
-          window.localStorage.setItem('zgz-token-address', val);
-          document.getElementById('token-saved').textContent = 'Saved on this page: ' + val;
-          document.getElementById('step2-token').textContent = val;
-        } else {
-          window.localStorage.setItem('zgz-claim-address', val);
-          document.getElementById('claim-saved').textContent = 'Saved on this page: ' + val;
-          document.getElementById('step3-claim').textContent = val;
-        }
-      } catch (e) { /* storage unavailable */ }
-    });
-  });
-  var refreshBtn = document.getElementById('refresh-estimate-btn');
-  if (refreshBtn) refreshBtn.addEventListener('click', refresh);
-  loadSaved();
-  refresh();
-})();
-</script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="token-deploy.js"></script>
 </body>
 </html>
