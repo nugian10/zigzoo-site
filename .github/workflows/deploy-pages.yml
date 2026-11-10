@@ -1,0 +1,40 @@
+# Deploy Zigzoo site to GitHub Pages with a 30-minute sync timeout.
+# The built-in pages workflow aborts after 10 minutes, which is too short
+# for this site (448 MB, 6,873 files) while GitHub's sync is slow.
+# This workflow gives the sync up to 30 minutes to finish.
+name: Deploy Zigzoo site (30-min Pages sync)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+        with:
+          timeout: 1800000
