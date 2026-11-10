@@ -5,16 +5,15 @@ Zigzoo NFT on BNB Chain. One claim per NFT, ever. Site: https://zigzoo.xyz/
 
 ## Status — read this first
 
-COMING SOON — the $ZGZ token contract and the ZigzooClaim contract are
-NOT deployed yet. Nothing can be claimed right now. Do NOT attempt a
-claim while the addresses below are still the zero address
-(0x0000000000000000000000000000000000000000). Tell the user the claim
-is coming soon and stop.
+LIVE — the $ZGZ token contract (0x7Be2CD7AE923DE746B876c810aAa6137aDD6e1F1)
+and the ZigzooClaim contract (0x935B095dAC0D68a9a019ea451D6140fA20a7f051)
+are deployed and source-verified on BscScan. Claims are open — follow
+the flow below.
 
 ## Contracts (BNB Chain, chain id 56)
 
-- $ZGZ token (ERC-20): 0x0000000000000000000000000000000000000000 — NOT deployed yet.
-- ZigzooClaim: 0x0000000000000000000000000000000000000000 — NOT deployed yet.
+- $ZGZ token (ERC-20): 0x7Be2CD7AE923DE746B876c810aAa6137aDD6e1F1
+- ZigzooClaim: 0x935B095dAC0D68a9a019ea451D6140fA20a7f051
 - Zigzoo NFT (ZIGZOO): 0x09ADA5A12293C30D75b97c56E34967E8a4326a3C — deployed 6 Nov 2026, mint is LIVE.
 - SPACE ID Agent ID registry: 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F
 - Revenue wallet: 0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7 — the 0.0003 BNB claim fee is forwarded
@@ -50,14 +49,12 @@ is coming soon and stop.
 - ownerOf(tokenId) on the NFT contract. If the caller is not the owner,
   the claim reverts.
 - Read the claim contract's token address and claim fee from the
-  contract after deploy — never hardcode them. Before deploy, both
-  contract addresses on this page are the zero address.
+  contract before each claim — never assume them.
 
 ## Flow, per claim
 
-1. Check the claim contract is deployed (its address is not
-   0x0000000000000000000000000000000000000000). If it is not deployed,
-   tell the user the claim is coming soon and stop.
+1. Check the claim contract is live: read claimed(tokenId). A
+   successful read confirms the claim contract is deployed.
 2. Check claimed(tokenId) is false, holdsAgentId() is true, and the
    calling wallet owns the NFT.
 3. Read the rarity from the metadata and show the exact claim amount
@@ -81,4 +78,3 @@ is coming soon and stop.
 - Pool empty: the claim pool (77,500,000 $ZGZ) is exhausted.
 - Contract caller rejected: the call came from a contract, not the
   wallet directly.
-- Claim not live: the claim contract is not deployed yet.

@@ -34,7 +34,7 @@
 
 ## $ZGZ token claim
 
-- Status: COMING SOON — the $ZGZ token and claim contracts are not deployed yet. Nothing can be claimed right now.
+- Status: LIVE — the $ZGZ token (0x7Be2CD7AE923DE746B876c810aAa6137aDD6e1F1) and claim contract (0x935B095dAC0D68a9a019ea451D6140fA20a7f051) are deployed and source-verified on BscScan. Claims are open. Claim fee 0.0003 BNB.
 - $ZGZ: ERC-20, total supply 100,000,000. Claim pool 77,500,000, liquidity 15,000,000, treasury 7,500,000.
 - One claim per NFT: Common 10,000 / Rare 25,000 / Epic 50,000 / Legendary 100,000 $ZGZ. Claim fee 0.0003 BNB per claim.
 - Details: https://zigzoo.xyz/claim.html — full agent instructions: https://zigzoo.xyz/zigzoo-claim-skill.md

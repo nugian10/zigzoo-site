@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-i18n-title="meta.title.claim">$ZGZ Token — Claim</title>
-<meta name="description" data-i18n-desc="meta.desc.claim" content="Claim $ZGZ tokens for your Zigzoo NFT — one claim per NFT, 10,000 to 100,000 $ZGZ by rarity. Claim is coming soon — contracts not deployed yet.">
+<meta name="description" data-i18n-desc="meta.desc.claim" content="Claim $ZGZ tokens for your Zigzoo NFT — one claim per NFT, 10,000 to 100,000 $ZGZ by rarity. Claim is LIVE — the $ZGZ token and claim contracts are deployed.">
 <meta property="og:title" content="$ZGZ Token — Claim">
-<meta property="og:description" content="One claim per Zigzoo NFT: Common 10,000, Rare 25,000, Epic 50,000, Legendary 100,000 $ZGZ. Claim fee 0.0003 BNB. Coming soon.">
+<meta property="og:description" content="One claim per Zigzoo NFT: Common 10,000, Rare 25,000, Epic 50,000, Legendary 100,000 $ZGZ. Claim fee 0.0003 BNB. Claim is live.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zigzoo.xyz/claim.html">
 <meta property="og:image" content="https://zigzoo.xyz/images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp">
@@ -42,7 +42,7 @@
   <section class="section">
     <h1 data-i18n="claim.h1">$ZGZ Token — Claim</h1>
     <div class="status-box claim-banner">
-      <strong data-i18n="claim.banner">Coming soon — the $ZGZ token and claim contracts are not deployed yet. Nothing can be claimed right now.</strong>
+      <strong data-i18n="claim.banner">Claim is LIVE — the $ZGZ token and claim contracts are deployed. Hold a Zigzoo NFT that has not been claimed yet and claim your $ZGZ.</strong>
     </div>
   </section>
 
@@ -85,13 +85,13 @@
   <section class="section">
     <h2 data-i18n="claim.prompt_h">Prompt for your agent</h2>
     <p><button type="button" class="btn copy-btn" id="copy-claim-prompt" data-i18n="common.copy_prompt">Copy prompt</button></p>
-    <pre class="prompt" id="claim-prompt">You are an AI agent claiming $ZGZ tokens for your user&#x27;s Zigzoo NFT on BNB Smart Chain (chain 56). Read https://zigzoo.xyz/zigzoo-claim-skill.md and follow it exactly — it has the contract addresses, claim amounts and the claim flow. Claim is coming soon: if the claim contract is not deployed yet, do not claim and tell the user it is not live yet. Never claim without a SPACE ID Agent ID; never send more or less than the exact 0.0003 BNB claim fee.</pre>
+    <pre class="prompt" id="claim-prompt">You are an AI agent claiming $ZGZ tokens for your user&#x27;s Zigzoo NFT on BNB Smart Chain (chain 56). Read https://zigzoo.xyz/zigzoo-claim-skill.md and follow it exactly — it has the contract addresses, claim amounts and the claim flow. The claim is LIVE: the $ZGZ token is at 0x7Be2CD7AE923DE746B876c810aAa6137aDD6e1F1 and the claim contract is at 0x935B095dAC0D68a9a019ea451D6140fA20a7f051, both verified on BscScan. Never claim without a SPACE ID Agent ID; never send more or less than the exact 0.0003 BNB claim fee.</pre>
     <p data-i18n-html="claim.skill_link">Full agent instructions: <a href="zigzoo-claim-skill.md">zigzoo-claim-skill.md</a>.</p>
   </section>
 
   <section class="section">
     <h2 data-i18n="claim.check_h">Check a claim</h2>
-    <p data-i18n="claim.check_p">Enter a token number (1 to 5,000) to see that NFT's rarity and claim amount. Once the claim contract is deployed, this will also show whether it has been claimed.</p>
+    <p data-i18n="claim.check_p">Enter a token number (1 to 5,000) to see that NFT's rarity, claim amount and whether it has been claimed.</p>
     <form id="claim-check-form" class="check-form">
       <label for="claim-token-id" data-i18n="check.token_label">Token number</label>
       <input id="claim-token-id" name="id" type="number" min="1" max="5000" inputmode="numeric" placeholder="e.g. 1222" data-i18n-placeholder="check.token_ph" required>
@@ -103,7 +103,7 @@
 
   <section class="section">
     <h2 data-i18n="claim.contract_h">Contracts</h2>
-    <p data-i18n-html="claim.contract_p"><strong>Status: coming soon — contracts not deployed yet.</strong><br>$ZGZ token: <code>0x0000000000000000000000000000000000000000</code> (not deployed)<br>Claim contract: <code>0x0000000000000000000000000000000000000000</code> (not deployed)<br>Zigzoo NFT: <code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code><br>Claim fee: 0.0003 BNB per claim, forwarded to revenue wallet <code>0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code>.</p>
+    <p data-i18n-html="claim.contract_p"><strong>Status: LIVE — claim is open.</strong><br>$ZGZ token: <code>0x7Be2CD7AE923DE746B876c810aAa6137aDD6e1F1</code><br>Claim contract: <code>0x935B095dAC0D68a9a019ea451D6140fA20a7f051</code><br>Zigzoo NFT: <code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code><br>Claim fee: 0.0003 BNB per claim, forwarded to revenue wallet <code>0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code>.</p>
   </section>
 </main>
 
@@ -196,10 +196,9 @@
     if (v) for (var n in v) s = s.split('{' + n + '}').join(String(v[n]));
     return s;
   }
-  /* 0x0000...0000 = placeholder: the claim contract is NOT deployed yet.
-     While this stays the zero address, no on-chain claimed() call is made. */
-  var CLAIM_CONTRACT = '0x0000000000000000000000000000000000000000';
-  var ZERO = '0x0000000000000000000000000000000000000000';
+  /* Claim contract (ZigzooClaim), deployed 10 Nov 2026, BscScan-verified.
+     Its claimed() is read on-chain below. */
+  var CLAIM_CONTRACT = '0x935B095dAC0D68a9a019ea451D6140fA20a7f051';
   var NFT = '0x09ADA5A12293C30D75b97c56E34967E8a4326a3C';
   var RPCS = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
   var AMOUNTS = { Common: 10000, Rare: 25000, Epic: 50000, Legendary: 100000 };
@@ -232,7 +231,7 @@
     return callRpc(RPCS[i], to, data).catch(function () { return tryRpc(i + 1, to, data); });
   }
   function soonNote() {
-    return T('claim.r_soon', 'Coming soon — the claim contract is not deployed yet, so claim status cannot be read on-chain.');
+    return T('claim.r_soon', 'Could not read claim status on-chain right now — please try again.');
   }
   function render(id, data, claimedState) {
     var rarity = attr(data, 'Rarity');
@@ -241,7 +240,7 @@
     var character = attr(data, 'Character');
     var amount = AMOUNTS[rarity] || 0;
     var statusLine;
-    if (CLAIM_CONTRACT === ZERO || claimedState === null || claimedState === undefined) {
+    if (claimedState === null || claimedState === undefined) {
       statusLine = soonNote();
     } else if (claimedState === true) {
       statusLine = T('claim.r_claimed', 'Already claimed');
@@ -283,7 +282,6 @@
           url.searchParams.set('id', String(n));
           window.history.replaceState(null, '', url.toString());
         } catch (e) {}
-        if (CLAIM_CONTRACT === ZERO) { render(n, data, null); return; }
         /* claimed(uint256) selector 0xdbe7e3bd = keccak("claimed(uint256)")[:4] */
         var calldata = '0xdbe7e3bd' + n.toString(16).padStart(64, '0');
         tryRpc(0, CLAIM_CONTRACT, calldata)
