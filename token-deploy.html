@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deploy the $ZGZ Token &amp; Claim Contract — Owner Tool</title>
+<meta name="description" content="Owner-only page to deploy the Zigzoo $ZGZ token and claim contracts from a browser wallet. Not a public page.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hidden { display: none !important; }
+  .owner-pill { background: #b3541e; color: #F6EFDC; }
+  .back-link { display: inline-block; margin: 16px 0 0; font-weight: 700; }
+  .step {
+    background: #fff; border: 3px solid #221d12; border-radius: 18px;
+    padding: 18px; margin-top: 18px; max-width: 640px; margin-left: auto; margin-right: auto;
+  }
+  .step h2 { font-size: 22px; margin: 0 0 6px; }
+  .btn {
+    display: block; width: 100%; min-height: 52px; margin: 12px 0 0;
+    padding: 14px 18px; font-size: 18px; font-weight: 800; font-family: inherit;
+    color: #F6EFDC; background: #221d12; border: 3px solid #221d12; border-radius: 14px;
+    cursor: pointer; text-align: center;
+  }
+  .btn:hover:not(:disabled) { background: #3a3120; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn.primary { background: #b3541e; border-color: #b3541e; }
+  .btn.primary:hover:not(:disabled) { background: #96431a; }
+  .btn.ghost { background: #fff; color: #221d12; }
+  .btn.small { width: auto; display: inline-block; min-height: 44px; font-size: 15px; padding: 10px 16px; margin-top: 8px; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; overflow-wrap: anywhere; word-break: break-word; }
+  .kv { width: 100%; border-collapse: collapse; margin: 10px 0; background: #fff; }
+  .kv th, .kv td { border: 2px solid #221d12; padding: 10px 12px; text-align: left; font-size: 15px; vertical-align: top; }
+  .kv th { background: #221d12; color: #F6EFDC; width: 34%; }
+  .note-box { max-width: 640px; margin: 16px auto 0; padding: 14px 16px; border-radius: 14px; border: 3px solid #221d12; font-size: 15px; }
+  .note-box.info { background: #fff8e1; border-color: #f5b301; }
+  .note-box.warn { background: #fff7ed; border-color: #b3541e; }
+  .note-box.error { background: #fee2e2; border-color: #b91c1c; }
+  .note-box.ok { background: #e8f5d8; border-color: #3f6212; }
+  .status-line { margin: 8px 0; }
+  .status-line strong { display: block; font-size: 15px; }
+  .cost { font-size: 26px; font-weight: 900; margin: 4px 0; }
+  input.addr {
+    width: 100%; min-height: 52px; padding: 12px 14px; font-size: 15px; font-family: inherit;
+    border: 3px solid #221d12; border-radius: 12px; background: #fff; color: #221d12;
+  }
+  .done-box { background: #e8f5d8; border: 3px solid #3f6212; border-radius: 16px; padding: 18px; margin-top: 18px; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .done-box h2 { margin-top: 0; }
+  .done-box ol { padding-left: 22px; }
+  .done-box li { margin: 8px 0; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="index.html">ZIGZOO</a>
+  <span class="status-pill owner-pill">OWNER TOOL</span>
+</header>
+
+<main>
+  <a class="back-link" href="index.html">&larr; Back to site</a>
+
+  <section class="section hero" style="margin-top:24px">
+    <p class="eyebrow">OWNER ONLY &mdash; NOT A PUBLIC PAGE</p>
+    <h1 style="font-size:44px">Deploy $ZGZ &amp; the Claim Contract</h1>
+    <p class="tagline">Deploy the Zigzoo $ZGZ token (ERC-20) and the ZigzooClaim contract to BNB Smart Chain from your own browser wallet. No private key, no seed phrase &mdash; ever. Your wallet signs each transaction after you click.</p>
+  </section>
+
+  <div class="note-box warn" style="margin-top:24px">
+    <strong>Safety first.</strong> This page will <strong>never</strong> ask for your seed phrase or private key.
+    Only connect your browser wallet (MetaMask). If any page or person asks for your seed phrase, it is a scam &mdash; stop immediately.
+    Deployment costs real BNB (see the live estimate in each step before you sign anything).
+  </div>
+
+  <div class="note-box info" style="margin-top:16px">
+    <strong>Before you start.</strong> Connect <strong>My Wallet</strong> (<code class="mono">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code>) on <strong>BNB Smart Chain (chain 56)</strong> in your browser wallet.
+    Every step below must be sent from My Wallet — the owner address is locked in at deploy time.
+    The claim page (<a href="claim.html">claim.html</a>) stays on “Coming soon” until step 5 is done.
+  </div>
+
+  <!-- Step 1 -->
+  <section class="step" id="step-1">
+    <h2>Step 1 &mdash; Deploy the ZigzooToken ($ZGZ)</h2>
+    <p>Deploy the ERC-20 token contract from My Wallet. The whole 100,000,000 $ZGZ supply is minted to the owner at deploy.</p>
+    <table class="kv">
+      <tr><th>Constructor: owner</th><td><code class="mono">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code><br>My Wallet</td></tr>
+      <tr><th>Name / symbol</th><td>Zigzoo Token / $ZGZ — ERC-20, 18 decimals</td></tr>
+      <tr><th>Total supply</th><td><strong>100,000,000 $ZGZ</strong> (minted to the owner at deploy)</td></tr>
+      <tr><th>Split</th><td>Claim pool 77,500,000 &middot; Liquidity 15,000,000 &middot; Treasury 7,500,000 $ZGZ</td></tr>
+    </table>
+    <p class="status-line"><strong>Live gas price:</strong> <span class="gas-price">—</span></p>
+    <p class="status-line"><strong>Estimated gas:</strong> <span class="gas-est">1,200,000 gas (reference — your wallet shows the real figure before you sign)</span></p>
+    <p class="cost"><span class="cost-bnb" data-gas="1200000">— BNB</span></p>
+    <label for="token-address"><strong>Deployed $ZGZ token address</strong></label>
+    <input class="addr" id="token-address" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="0x… (paste after deploy)">
+    <p class="status-line"><button class="btn ghost small" type="button" data-save="token-address">Save address on this page</button></p>
+    <p class="status-line" id="token-saved"></p>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="step" id="step-2">
+    <h2>Step 2 &mdash; Deploy the ZigzooClaim contract</h2>
+    <p>Deploy the claim contract from My Wallet. Copy the token address from step 1 into the constructor — do not type it from memory.</p>
+    <table class="kv">
+      <tr><th>Constructor: owner</th><td><code class="mono">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code><br>My Wallet</td></tr>
+      <tr><th>Constructor: NFT</th><td><code class="mono">0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code><br>Zigzoo NFT (live)</td></tr>
+      <tr><th>Constructor: token</th><td><code class="mono" id="step2-token">0x… (from step 1)</code><br>$ZGZ token address deployed in step 1</td></tr>
+      <tr><th>Constructor: revenue</th><td><code class="mono">0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code><br>Revenue wallet — the 0.0003 BNB claim fee is forwarded here</td></tr>
+      <tr><th>Constructor: Agent ID registry</th><td><code class="mono">0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F</code><br>SPACE ID (.ai Agent ID)</td></tr>
+      <tr><th>Claim fee</th><td>0.0003 BNB per claim (exact — no more, no less)</td></tr>
+      <tr><th>Claim amounts</th><td>Common 10,000 / Rare 25,000 / Epic 50,000 / Legendary 100,000 $ZGZ — one claim per NFT</td></tr>
+    </table>
+    <p class="status-line"><strong>Live gas price:</strong> <span class="gas-price">—</span></p>
+    <p class="status-line"><strong>Estimated gas:</strong> <span class="gas-est">1,000,000 gas (reference — your wallet shows the real figure before you sign)</span></p>
+    <p class="cost"><span class="cost-bnb" data-gas="1000000">— BNB</span></p>
+    <label for="claim-address"><strong>Deployed claim contract address</strong></label>
+    <input class="addr" id="claim-address" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="0x… (paste after deploy)">
+    <p class="status-line"><button class="btn ghost small" type="button" data-save="claim-address">Save address on this page</button></p>
+    <p class="status-line" id="claim-saved"></p>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="step" id="step-3">
+    <h2>Step 3 &mdash; Fund the claim pool</h2>
+    <p>Transfer <strong>77,500,000 $ZGZ</strong> from My Wallet to the claim contract deployed in step 2. This is a plain ERC-20 <code>transfer()</code> — the claim contract cannot pay claims until it holds the pool.</p>
+    <table class="kv">
+      <tr><th>From</th><td><code class="mono">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code><br>My Wallet (holds the full supply after step 1)</td></tr>
+      <tr><th>To</th><td><code class="mono" id="step3-claim">0x… (from step 2)</code><br>Claim contract</td></tr>
+      <tr><th>Amount</th><td><strong>77,500,000 $ZGZ</strong></td></tr>
+      <tr><th>Left with owner</th><td>22,500,000 $ZGZ (15,000,000 liquidity + 7,500,000 treasury)</td></tr>
+    </table>
+    <p class="status-line"><strong>Live gas price:</strong> <span class="gas-price">—</span></p>
+    <p class="status-line"><strong>Estimated gas:</strong> <span class="gas-est">60,000 gas (reference — your wallet shows the real figure before you sign)</span></p>
+    <p class="cost"><span class="cost-bnb" data-gas="60000">— BNB</span></p>
+    <p class="status-line">After the transfer, check the claim contract's $ZGZ balance on BscScan — it must read exactly 77,500,000 $ZGZ before you continue.</p>
+    <p class="status-line"><button class="btn ghost small" type="button" id="refresh-estimate-btn">Refresh estimate</button></p>
+  </section>
+
+  <!-- Step 4 -->
+  <section class="step" id="step-4">
+    <h2>Step 4 &mdash; Verify the on-chain readings</h2>
+    <p>Before the claim goes live, read these values back from the deployed contracts (free read-only calls — no gas). Every one must match, or stop and fix it before step 5.</p>
+    <table class="kv">
+      <tr><th>$ZGZ totalSupply()</th><td>100,000,000 $ZGZ</td></tr>
+      <tr><th>Claim contract $ZGZ balance</th><td>77,500,000 $ZGZ</td></tr>
+      <tr><th>Claim contract token()</th><td>The $ZGZ address from step 1</td></tr>
+      <tr><th>Claim contract nft()</th><td><code class="mono">0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></td></tr>
+      <tr><th>Claim contract revenue()</th><td><code class="mono">0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code></td></tr>
+      <tr><th>Claim contract claimFee()</th><td>0.0003 BNB</td></tr>
+      <tr><th>claimed(1)</th><td>false (no NFT has claimed yet)</td></tr>
+    </table>
+    <p>Then verify the source on BscScan for both contracts: open each contract on BscScan &rarr; Contract &rarr; Verify and Publish, compiler 0.8.24, optimizer runs 200, license MIT. Source verification is free.</p>
+    <p class="status-line">Estimated gas for this step: <strong>0 BNB</strong> (reads and BscScan verification cost nothing).</p>
+  </section>
+
+  <!-- Step 5 -->
+  <section class="step" id="step-5">
+    <h2>Step 5 &mdash; Update the site (follow-up step)</h2>
+    <p>Do this after steps 1–4 are verified — not now, and not before the contracts exist.</p>
+    <ol>
+      <li>Replace the <code>0x0000…0000</code> placeholders in <code>claim.html</code> with the real $ZGZ token and claim contract addresses, and flip “Coming soon” to live.</li>
+      <li>Update the contract addresses in <code>zigzoo-claim-skill.md</code> and <code>llms.txt</code> the same way.</li>
+      <li>Rebuild the site and check <a href="claim.html">claim.html</a> — the “Check a claim” form must read real claimed status from the claim contract.</li>
+      <li>Announce the claim on X (@zigzooNFT).</li>
+    </ol>
+  </section>
+
+  <div class="done-box">
+    <h2>Launch checklist</h2>
+    <ol>
+      <li><strong>Token deployed</strong> — $ZGZ at the address saved in step 1, totalSupply 100,000,000.</li>
+      <li><strong>Claim deployed</strong> — claim contract at the address saved in step 2, constructor args as listed.</li>
+      <li><strong>Pool funded</strong> — claim contract holds exactly 77,500,000 $ZGZ.</li>
+      <li><strong>Readings verified</strong> — every value in step 4 matches, both contracts source-verified on BscScan.</li>
+      <li><strong>Site updated</strong> — claim.html, zigzoo-claim-skill.md and llms.txt carry the real addresses.</li>
+    </ol>
+  </div>
+
+  <footer class="site-footer">
+    <p>Zigzoo — $ZGZ deploy tool. Not a public page. Contract source is verifiable on BscScan; it is not an independent audit.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var RPCS = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
+  function fmtBnb(wei) {
+    var whole = wei / 1000000000000000000n;
+    var frac = wei % 1000000000000000000n;
+    var fracStr = frac.toString().padStart(18, '0').replace(/0+$/, '').slice(0, 6);
+    return whole.toString() + (fracStr ? '.' + fracStr : '') + ' BNB';
+  }
+  function fetchGasPrice(i) {
+    if (i >= RPCS.length) return Promise.reject(new Error('all RPCs failed'));
+    return fetch(RPCS[i], { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_gasPrice', params: [] }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.result) throw new Error('no result'); return BigInt(j.result); })
+      .catch(function () { return fetchGasPrice(i + 1); });
+  }
+  function refresh() {
+    var priceEls = document.querySelectorAll('.gas-price');
+    var costEls = document.querySelectorAll('.cost-bnb');
+    priceEls.forEach(function (el) { el.textContent = 'Loading…'; });
+    fetchGasPrice(0).then(function (gasPrice) {
+      var gwei = Number(gasPrice) / 1e9;
+      priceEls.forEach(function (el) { el.textContent = gwei.toFixed(4) + ' gwei'; });
+      costEls.forEach(function (el) {
+        el.textContent = fmtBnb(gasPrice * BigInt(el.getAttribute('data-gas')));
+      });
+    }).catch(function () {
+      priceEls.forEach(function (el) { el.textContent = 'Unavailable — your wallet shows the cost before you sign.'; });
+      costEls.forEach(function (el) { el.textContent = '— BNB'; });
+    });
+  }
+  function loadSaved() {
+    try {
+      var token = window.localStorage.getItem('zgz-token-address') || '';
+      var claim = window.localStorage.getItem('zgz-claim-address') || '';
+      if (token) {
+        document.getElementById('token-address').value = token;
+        document.getElementById('token-saved').textContent = 'Saved on this page: ' + token;
+        document.getElementById('step2-token').textContent = token;
+      }
+      if (claim) {
+        document.getElementById('claim-address').value = claim;
+        document.getElementById('claim-saved').textContent = 'Saved on this page: ' + claim;
+        document.getElementById('step3-claim').textContent = claim;
+      }
+    } catch (e) { /* storage unavailable */ }
+  }
+  document.querySelectorAll('[data-save]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-save');
+      var input = document.getElementById(id);
+      var val = input.value.trim();
+      if (!/^0x[0-9a-fA-F]{40}$/.test(val)) {
+        alert('Enter a valid address starting with 0x (40 characters).');
+        return;
+      }
+      try {
+        if (id === 'token-address') {
+          window.localStorage.setItem('zgz-token-address', val);
+          document.getElementById('token-saved').textContent = 'Saved on this page: ' + val;
+          document.getElementById('step2-token').textContent = val;
+        } else {
+          window.localStorage.setItem('zgz-claim-address', val);
+          document.getElementById('claim-saved').textContent = 'Saved on this page: ' + val;
+          document.getElementById('step3-claim').textContent = val;
+        }
+      } catch (e) { /* storage unavailable */ }
+    });
+  });
+  var refreshBtn = document.getElementById('refresh-estimate-btn');
+  if (refreshBtn) refreshBtn.addEventListener('click', refresh);
+  loadSaved();
+  refresh();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n-title="meta.title.claim">$ZGZ Token — Claim</title>
+<meta name="description" data-i18n-desc="meta.desc.claim" content="Claim $ZGZ tokens for your Zigzoo NFT — one claim per NFT, 10,000 to 100,000 $ZGZ by rarity. Claim is coming soon — contracts not deployed yet.">
+<meta property="og:title" content="$ZGZ Token — Claim">
+<meta property="og:description" content="One claim per Zigzoo NFT: Common 10,000, Rare 25,000, Epic 50,000, Legendary 100,000 $ZGZ. Claim fee 0.0003 BNB. Coming soon.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zigzoo.xyz/claim.html">
+<meta property="og:image" content="https://zigzoo.xyz/images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/">ZIGZOO</a>
+  <nav class="site-nav" id="site-nav" aria-label="Sections">
+    <ul>
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="index.html#price" data-i18n="nav.price">Price ladder</a></li>
+      <li><a href="index.html#rarity" data-i18n="nav.rarity">Rarity</a></li>
+      <li><a href="index.html#roadmap" data-i18n="nav.roadmap">Roadmap</a></li>
+      <li><a href="index.html#market" data-i18n="nav.market">Market</a></li>
+      <li><a href="index.html#agent-mint" data-i18n="nav.agentmint">Mint with agent</a></li>
+      <li><a href="index.html#faq" data-i18n="nav.faq">Questions</a></li>
+      <li><a href="claim.html" data-i18n="nav.claim">Claim</a></li>
+    </ul>
+  </nav>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" data-lang="en" class="active">EN</button>
+    <button type="button" data-lang="ja">日本語</button>
+    <button type="button" data-lang="zh">中文</button>
+  </div>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="status-bar"><span class="status-pill live" data-i18n="status.live">MINT IS LIVE</span></div>
+
+<main>
+  <section class="section">
+    <h1 data-i18n="claim.h1">$ZGZ Token — Claim</h1>
+    <div class="status-box claim-banner">
+      <strong data-i18n="claim.banner">Coming soon — the $ZGZ token and claim contracts are not deployed yet. Nothing can be claimed right now.</strong>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 data-i18n="claim.facts_h">$ZGZ facts</h2>
+    <table class="ladder">
+      <tbody>
+        <tr><td data-i18n="claim.supply_l">Total supply</td><td><strong>100,000,000 $ZGZ</strong></td></tr>
+        <tr><td data-i18n="claim.pool_l">Claim pool</td><td><strong>77,500,000 $ZGZ</strong></td></tr>
+        <tr><td data-i18n="claim.liq_l">Liquidity</td><td><strong>15,000,000 $ZGZ</strong></td></tr>
+        <tr><td data-i18n="claim.treas_l">Treasury</td><td><strong>7,500,000 $ZGZ</strong></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2 data-i18n="claim.table_h">Claim per NFT</h2>
+    <table class="ladder">
+      <thead><tr><th data-i18n="claim.th_tier">Tier</th><th data-i18n="claim.th_amount">Claim amount ($ZGZ)</th></tr></thead>
+      <tbody>
+        <tr><td>Common</td><td><strong>10,000</strong></td></tr>
+        <tr><td>Rare</td><td><strong>25,000</strong></td></tr>
+        <tr><td>Epic</td><td><strong>50,000</strong></td></tr>
+        <tr><td>Legendary</td><td><strong>100,000</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="note" data-i18n="claim.fee_note">Claim fee: 0.0003 BNB per claim, forwarded to the revenue wallet.</p>
+  </section>
+
+  <section class="section">
+    <h2 data-i18n="claim.how_h">How to claim</h2>
+    <ol class="steps">
+      <li data-i18n="claim.s1">Hold a Zigzoo NFT that has not been claimed yet.</li>
+      <li data-i18n="claim.s2">Your agent checks that you own the NFT, hold a SPACE ID Agent ID, and that the NFT has not been claimed.</li>
+      <li data-i18n="claim.s3">Your agent calls claim(tokenId) and sends exactly 0.0003 BNB.</li>
+      <li data-i18n="claim.s4">The $ZGZ arrives in your wallet in the same transaction.</li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <h2 data-i18n="claim.prompt_h">Prompt for your agent</h2>
+    <p><button type="button" class="btn copy-btn" id="copy-claim-prompt" data-i18n="common.copy_prompt">Copy prompt</button></p>
+    <pre class="prompt" id="claim-prompt">You are an AI agent claiming $ZGZ tokens for your user&#x27;s Zigzoo NFT on BNB Smart Chain (chain 56). Read https://zigzoo.xyz/zigzoo-claim-skill.md and follow it exactly — it has the contract addresses, claim amounts and the claim flow. Claim is coming soon: if the claim contract is not deployed yet, do not claim and tell the user it is not live yet. Never claim without a SPACE ID Agent ID; never send more or less than the exact 0.0003 BNB claim fee.</pre>
+    <p data-i18n-html="claim.skill_link">Full agent instructions: <a href="zigzoo-claim-skill.md">zigzoo-claim-skill.md</a>.</p>
+  </section>
+
+  <section class="section">
+    <h2 data-i18n="claim.check_h">Check a claim</h2>
+    <p data-i18n="claim.check_p">Enter a token number (1 to 5,000) to see that NFT's rarity and claim amount. Once the claim contract is deployed, this will also show whether it has been claimed.</p>
+    <form id="claim-check-form" class="check-form">
+      <label for="claim-token-id" data-i18n="check.token_label">Token number</label>
+      <input id="claim-token-id" name="id" type="number" min="1" max="5000" inputmode="numeric" placeholder="e.g. 1222" data-i18n-placeholder="check.token_ph" required>
+      <button type="submit" class="btn check-btn" data-i18n="claim.check_btn">Check this token</button>
+    </form>
+    <p id="claim-check-status" class="check-status" aria-live="polite"></p>
+    <div id="claim-check-result" class="check-result"></div>
+  </section>
+
+  <section class="section">
+    <h2 data-i18n="claim.contract_h">Contracts</h2>
+    <p data-i18n-html="claim.contract_p"><strong>Status: coming soon — contracts not deployed yet.</strong><br>$ZGZ token: <code>0x0000000000000000000000000000000000000000</code> (not deployed)<br>Claim contract: <code>0x0000000000000000000000000000000000000000</code> (not deployed)<br>Zigzoo NFT: <code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code><br>Claim fee: 0.0003 BNB per claim, forwarded to revenue wallet <code>0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code>.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p data-i18n="foot.tagline">Zigzoo — 5,000 cute animal NFTs on BNB Smart Chain.</p>
+  <p><span data-i18n="foot.live">Minting is live. Contract:</span> <a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener"><code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></a></p>
+  <p><a href="https://x.com/zigzooNFT" target="_blank" rel="noopener" data-i18n="foot.x">𝕏 Follow Zigzoo on X</a></p>
+</footer>
+<script>
+(function () {
+  var btn = document.getElementById('menu-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+  function closeMenu() {
+    btn.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('open');
+  }
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('click', function (e) {
+    if (!nav.classList.contains('open')) return;
+    if (e.target.closest('.site-header')) return;
+    closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
+</script>
+<script>
+(function () {
+  function T(k, f, v) {
+    if (window.ZIGZOO_T) return window.ZIGZOO_T(k, v);
+    var s = f;
+    if (v) for (var n in v) s = s.split('{' + n + '}').join(String(v[n]));
+    return s;
+  }
+  var btn = document.getElementById('copy-claim-prompt');
+  var box = document.getElementById('claim-prompt');
+  if (!btn || !box) return;
+  var timer = null;
+  function showCopied() {
+    btn.textContent = T('common.copied', 'Copied ✓');
+    btn.classList.add('copied');
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(function () {
+      btn.textContent = T('common.copy_prompt', 'Copy prompt');
+      btn.classList.remove('copied');
+    }, 2000);
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'absolute';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  btn.addEventListener('click', function () {
+    var text = box.textContent;
+    function done(ok) {
+      if (ok) { showCopied(); }
+      else { btn.textContent = T('common.copy_failed', 'Copy failed - select the text manually'); }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        function () { done(true); },
+        function () { done(fallbackCopy(text)); });
+    } else {
+      done(fallbackCopy(text));
+    }
+  });
+})();
+</script>
+<script>
+(function () {
+  function T(k, f, v) {
+    if (window.ZIGZOO_T) return window.ZIGZOO_T(k, v);
+    var s = f;
+    if (v) for (var n in v) s = s.split('{' + n + '}').join(String(v[n]));
+    return s;
+  }
+  /* 0x0000...0000 = placeholder: the claim contract is NOT deployed yet.
+     While this stays the zero address, no on-chain claimed() call is made. */
+  var CLAIM_CONTRACT = '0x0000000000000000000000000000000000000000';
+  var ZERO = '0x0000000000000000000000000000000000000000';
+  var NFT = '0x09ADA5A12293C30D75b97c56E34967E8a4326a3C';
+  var RPCS = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
+  var AMOUNTS = { Common: 10000, Rare: 25000, Epic: 50000, Legendary: 100000 };
+  var form = document.getElementById('claim-check-form');
+  var input = document.getElementById('claim-token-id');
+  var result = document.getElementById('claim-check-result');
+  var status = document.getElementById('claim-check-status');
+  if (!form || !input || !result) return;
+  var lastId = null;
+  function attr(data, key) {
+    var list = data.attributes || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].trait_type === key) return list[i].value;
+    }
+    return '';
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function fmt(n) { return Number(n).toLocaleString('en-US'); }
+  function callRpc(rpc, to, data) {
+    return fetch(rpc, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_call',
+        params: [{ to: to, data: data }, 'latest'] }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.result) throw new Error('no result'); return j.result; });
+  }
+  function tryRpc(i, to, data) {
+    if (i >= RPCS.length) return Promise.reject(new Error('all RPCs failed'));
+    return callRpc(RPCS[i], to, data).catch(function () { return tryRpc(i + 1, to, data); });
+  }
+  function soonNote() {
+    return T('claim.r_soon', 'Coming soon — the claim contract is not deployed yet, so claim status cannot be read on-chain.');
+  }
+  function render(id, data, claimedState) {
+    var rarity = attr(data, 'Rarity');
+    var edition = attr(data, 'Edition');
+    var design = attr(data, 'Design');
+    var character = attr(data, 'Character');
+    var amount = AMOUNTS[rarity] || 0;
+    var statusLine;
+    if (CLAIM_CONTRACT === ZERO || claimedState === null || claimedState === undefined) {
+      statusLine = soonNote();
+    } else if (claimedState === true) {
+      statusLine = T('claim.r_claimed', 'Already claimed');
+    } else {
+      statusLine = T('claim.r_unclaimed', 'Not claimed yet');
+    }
+    result.innerHTML =
+      '<article class="card check-card">' +
+        '<img src="' + esc(data.image) + '" alt="' + esc(data.name) + '" width="640" height="640">' +
+        '<div class="card-body">' +
+          '<h3>' + esc(data.name) + '</h3>' +
+          (rarity ? '<p class="rarity ' + esc(String(rarity).toLowerCase()) + '">' + esc(rarity) + '</p>' : '') +
+          '<p>' + (character ? esc(character) : '') +
+          (design ? ' &middot; ' + T('check.r_design', 'Design') + ' ' + esc(design) : '') +
+          (edition ? ' &middot; ' + T('check.r_edition', 'Edition') + ' ' + esc(edition) : '') + '</p>' +
+          '<p><strong>' + T('claim.r_amount', 'Claim amount:') + '</strong> <span class="claim-amount">' + fmt(amount) + ' $ZGZ</span></p>' +
+          '<p><strong>' + T('claim.r_status', 'Claim status:') + '</strong> ' + esc(statusLine) + '</p>' +
+          '<p><a href="https://element.market/collections/zigzoo-1" target="_blank" rel="noopener">' + T('check.r_element', 'View on Element') + '</a> &middot; ' +
+          '<a href="https://bscscan.com/nft/' + NFT + '/' + id + '" target="_blank" rel="noopener">' + T('check.r_bscscan', 'View on BscScan') + '</a></p>' +
+        '</div>' +
+      '</article>';
+  }
+  function lookup(id) {
+    var n = parseInt(id, 10);
+    if (!n || n < 1 || n > 5000) {
+      if (status) status.textContent = T('claim.err_token', 'Enter a token number from 1 to 5000.');
+      result.innerHTML = '';
+      return;
+    }
+    lastId = n;
+    if (status) status.textContent = T('claim.looking', 'Looking up Zigzoo #{n}...', { n: n });
+    result.innerHTML = '';
+    fetch('https://zigzoo.xyz/metadata/' + n + '.json')
+      .then(function (r) { if (!r.ok) throw new Error('not found'); return r.json(); })
+      .then(function (data) {
+        if (status) status.textContent = '';
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('id', String(n));
+          window.history.replaceState(null, '', url.toString());
+        } catch (e) {}
+        if (CLAIM_CONTRACT === ZERO) { render(n, data, null); return; }
+        /* claimed(uint256) selector 0xdbe7e3bd = keccak("claimed(uint256)")[:4] */
+        var calldata = '0xdbe7e3bd' + n.toString(16).padStart(64, '0');
+        tryRpc(0, CLAIM_CONTRACT, calldata)
+          .then(function (res) { render(n, data, parseInt(res, 16) === 1); })
+          .catch(function () { render(n, data, null); });
+      })
+      .catch(function () {
+        if (status) status.textContent = T('claim.not_found', 'Could not find Zigzoo #{n}. It may not be minted yet.', { n: n });
+      });
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    lookup(input.value.trim());
+  });
+  var prevRefresh = window.ZIGZOO_LIVE_REFRESH;
+  window.ZIGZOO_LIVE_REFRESH = function () {
+    if (prevRefresh) prevRefresh();
+    if (lastId) lookup(lastId);
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var preset = params.get('id');
+      if (preset) { input.value = preset; lookup(preset); }
+    } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

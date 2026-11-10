@@ -32,6 +32,13 @@
 - Full agent instructions: https://zigzoo.xyz/agent-skill.md
 - Agent prompt: on the homepage at https://zigzoo.xyz/#agent-mint
 
+## $ZGZ token claim
+
+- Status: COMING SOON — the $ZGZ token and claim contracts are not deployed yet. Nothing can be claimed right now.
+- $ZGZ: ERC-20, total supply 100,000,000. Claim pool 77,500,000, liquidity 15,000,000, treasury 7,500,000.
+- One claim per NFT: Common 10,000 / Rare 25,000 / Epic 50,000 / Legendary 100,000 $ZGZ. Claim fee 0.0003 BNB per claim.
+- Details: https://zigzoo.xyz/claim.html — full agent instructions: https://zigzoo.xyz/zigzoo-claim-skill.md
+
 ## Check
 
 - Check a wallet: on the homepage at https://zigzoo.xyz/#check-wallet — paste any wallet address to see its NFTs, mint count, next mint price and Agent ID status.
