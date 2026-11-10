@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n-title="meta.title.check">あなたのZigzoo NFTをチェック</title>
-<meta name="description" data-i18n-desc="meta.desc.check" content="トークン番号でZigzoo NFTを調べ、動物、レアリティ、エディションを見ましょう。BNBスマートチェーン上の5,000体のかわいい動物NFT。">
-<meta property="og:title" content="あなたのZigzoo NFTをチェック">
-<meta property="og:description" content="トークン番号を入力して、あなたのZigzooの動物、レアリティ、エディションを見ましょう。">
+<title data-i18n-title="meta.title.check">Check your Zigzoo NFT</title>
+<meta name="description" data-i18n-desc="meta.desc.check" content="Look up any Zigzoo NFT by its token number and see the animal, its rarity and edition. 5,000 cute animal NFTs on BNB Smart Chain.">
+<meta property="og:title" content="Check your Zigzoo NFT">
+<meta property="og:description" content="Enter a token number to see your Zigzoo's animal, rarity and edition.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zigzoo.xyz/check.html">
 <meta property="og:image" content="https://zigzoo.xyz/images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp">
@@ -18,45 +18,46 @@
   <a class="logo" href="/">ZIGZOO</a>
   <nav class="site-nav" id="site-nav" aria-label="Sections">
     <ul>
-      <li><a href="index.html" data-i18n="nav.home">ホーム</a></li>
-      <li><a href="gallery.html" data-i18n="nav.gallery">ギャラリー</a></li>
-      <li><a href="index.html#price" data-i18n="nav.price">価格表</a></li>
-      <li><a href="index.html#rarity" data-i18n="nav.rarity">レアリティ</a></li>
-      <li><a href="index.html#roadmap" data-i18n="nav.roadmap">ロードマップ</a></li>
-      <li><a href="index.html#market" data-i18n="nav.market">マーケット</a></li>
-      <li><a href="index.html#agent-mint" data-i18n="nav.agentmint">エージェントでミント</a></li>
-      <li><a href="index.html#faq" data-i18n="nav.faq">よくある質問</a></li>
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="index.html#price" data-i18n="nav.price">Price ladder</a></li>
+      <li><a href="index.html#rarity" data-i18n="nav.rarity">Rarity</a></li>
+      <li><a href="index.html#roadmap" data-i18n="nav.roadmap">Roadmap</a></li>
+      <li><a href="index.html#market" data-i18n="nav.market">Market</a></li>
+      <li><a href="index.html#agent-mint" data-i18n="nav.agentmint">Mint with agent</a></li>
+      <li><a href="index.html#faq" data-i18n="nav.faq">Questions</a></li>
     </ul>
   </nav>
   <div class="lang-switch" role="group" aria-label="Language">
-    <button type="button" data-lang="ja" class="active">日本語</button>
-    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="en" class="active">EN</button>
+    <button type="button" data-lang="ja">日本語</button>
+    <button type="button" data-lang="zh">中文</button>
   </div>
   <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
-<div class="status-bar"><span class="status-pill live" data-i18n="status.live">ミント受付中</span></div>
+<div class="status-bar"><span class="status-pill live" data-i18n="status.live">MINT IS LIVE</span></div>
 
 <main>
   <section class="section check-intro">
-    <h1 data-i18n="check.h1">NFTをチェック</h1>
-    <p data-i18n-html="check.intro">Zigzooをミントして、どの動物を手に入れたか見たいですか？下にトークン番号（1〜5,000）を入力してください。<code>zigzoo.xyz/check.html?id=1222</code>のようなリンクを共有することもできます。</p>
+    <h1 data-i18n="check.h1">Check your NFT</h1>
+    <p data-i18n-html="check.intro">Minted a Zigzoo and want to see which animal you got? Enter your token number (1 to 5,000) below. You can also share a link like <code>zigzoo.xyz/check.html?id=1222</code>.</p>
     <form id="check-form" class="check-form">
-      <label for="token-id" data-i18n="check.token_label">トークン番号</label>
-      <input id="token-id" name="id" type="number" min="1" max="5000" inputmode="numeric" placeholder="例：1222" data-i18n-placeholder="check.token_ph" required>
-      <button type="submit" class="btn check-btn" data-i18n="check.btn">NFTを表示</button>
+      <label for="token-id" data-i18n="check.token_label">Token number</label>
+      <input id="token-id" name="id" type="number" min="1" max="5000" inputmode="numeric" placeholder="e.g. 1222" data-i18n-placeholder="check.token_ph" required>
+      <button type="submit" class="btn check-btn" data-i18n="check.btn">Show my NFT</button>
     </form>
     <p id="check-status" class="check-status" aria-live="polite"></p>
     <div id="check-result" class="check-result"></div>
-    <p class="note" data-i18n-html="check.note">ヒント：エージェントはミント直後にトークン番号を教えてくれます。<a href="https://element.market/collections/zigzoo-1" target="_blank" rel="noopener">Element</a>や<a href="https://bscscan.com/token/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener">BscScan</a>でも確認できます。</p>
+    <p class="note" data-i18n-html="check.note">Tip: your agent tells you the token number right after minting. You can also find it on <a href="https://element.market/collections/zigzoo-1" target="_blank" rel="noopener">Element</a> or <a href="https://bscscan.com/token/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener">BscScan</a>.</p>
 
-    <p><a href="index.html" data-i18n="common.back_home">← メインページに戻る</a></p>
+    <p><a href="index.html" data-i18n="common.back_home">← Back to the main page</a></p>
   </section>
 </main>
 
 <footer class="site-footer">
-  <p data-i18n="foot.tagline">Zigzoo — BNBスマートチェーン上の5,000体のかわいい動物NFT。</p>
-  <p><span data-i18n="foot.live">ミント受付中です。コントラクト：</span> <a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener"><code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></a></p>
-  <p><a href="https://x.com/zigzooNFT" target="_blank" rel="noopener" data-i18n="foot.x">𝕏 XでZigzooをフォロー</a></p>
+  <p data-i18n="foot.tagline">Zigzoo — 5,000 cute animal NFTs on BNB Smart Chain.</p>
+  <p><span data-i18n="foot.live">Minting is live. Contract:</span> <a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener"><code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></a></p>
+  <p><a href="https://x.com/zigzooNFT" target="_blank" rel="noopener" data-i18n="foot.x">𝕏 Follow Zigzoo on X</a></p>
 </footer>
 <script>
 (function () {
