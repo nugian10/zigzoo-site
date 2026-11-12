@@ -36,6 +36,13 @@ code { overflow-wrap: anywhere; }
   display: flex; justify-content: center;
   padding: 12px 16px 0;
 }
+.topbar-claim {
+  display: block; text-align: center;
+  background: #f5b301; color: #221d12;
+  font-weight: 800; font-size: 14px;
+  padding: 10px 16px; text-decoration: none;
+}
+.topbar-claim:hover { text-decoration: underline; }
 .lang-switch {
   display: inline-flex; gap: 4px; margin-left: auto; flex: none;
 }
@@ -240,3 +247,6 @@ main a:not(.btn) { display: inline-block; padding: 8px 2px; min-height: 44px; }
   .gallery { grid-template-columns: repeat(3, 1fr); }
   .tiers { grid-template-columns: repeat(4, 1fr); }
 }
+
+.claim-banner { background: #fff7ed; border-color: #b3541e; }
+.claim-amount { font-size: 24px; font-weight: 900; }
