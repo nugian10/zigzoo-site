@@ -157,6 +157,8 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 16px 48px; }
 .rarity.epic { background: #ede9fe; color: #6b21a8; }
 .rarity.legendary { background: #fef3c7; color: #92400e; }
 .story { margin: 0; font-size: 15px; }
+.aotd-card { max-width: 560px; margin: 20px auto 0; }
+.aotd-date { font-weight: 700; color: #5c4f36; margin: 10px 0 0; }
 
 .tiers { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 16px; align-items: start; }
 .tier-card {

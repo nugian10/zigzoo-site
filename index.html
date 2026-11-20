@@ -12,6 +12,7 @@
 <meta property="og:image" content="https://zigzoo.xyz/images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp">
 <link rel="stylesheet" href="styles.css">
 <script src="i18n.js" defer></script>
+<script src="aotd.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -69,6 +70,21 @@
       <div><strong data-i18n="stat.free_v">FREE</strong><span data-i18n="stat.free">first mint</span></div>
       <div class="wide"><strong id="minted-count">&hellip;</strong><span data-i18n="stat.minted">minted so far</span></div>
     </div>
+  </section>
+
+  <section id="aotd" class="section">
+    <h2 data-i18n="aotd.h">Animal of the Day</h2>
+    <p data-i18n="aotd.sub">A new friend every day. Come back tomorrow to meet the next one.</p>
+    <p class="aotd-date" id="aotd-date"></p>
+    <article class="card aotd-card">
+      <img id="aotd-img" src="images/media-generation-mochi-cat-0-fd1c456b-17c8-4bbb-875c-2103e8bd798c.webp" alt="Mochi the orange tabby cat" data-i18n-alt="alt.hero_mochi" width="640" height="640">
+      <div class="card-body">
+        <h3 id="aotd-name">Mochi</h3>
+        <p class="rarity common" id="aotd-tier">Common</p>
+        <p class="story" id="aotd-story">Mochi is an orange tabby who naps in sunbeams and wakes up only for snacks. He once chased a ball of yarn all the way around Zigzoo and back, and he still insists he won.</p>
+        <p><a class="btn" href="#agent-mint" data-i18n="aotd.cta">Mint your own Zigzoo ↓</a></p>
+      </div>
+    </article>
   </section>
 
   <section id="price" class="section">
@@ -308,6 +324,54 @@
       done(fallbackCopy(text));
     }
   });
+})();
+</script>
+<script>
+(function () {
+  var img = document.getElementById('aotd-img');
+  if (!img) return;
+  var nameEl = document.getElementById('aotd-name');
+  var tierEl = document.getElementById('aotd-tier');
+  var storyEl = document.getElementById('aotd-story');
+  var dateEl = document.getElementById('aotd-date');
+  var LOCALES = { en: 'en-US', ja: 'ja-JP', zh: 'zh-CN' };
+  function lang() {
+    try {
+      var s = window.localStorage.getItem('zigzoo-lang');
+      if (s && LOCALES[s]) return s;
+    } catch (e) { /* storage unavailable */ }
+    return 'en';
+  }
+  function jakartaDayNumber() {
+    var s = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    var p = s.split('-');
+    return Math.floor(Date.UTC(+p[0], +p[1] - 1, +p[2]) / 86400000);
+  }
+  function render() {
+    var data = window.ZIGZOO_AOTD;
+    if (!data || !data.length) return;
+    var idx = ((jakartaDayNumber() * 389) % data.length + data.length) % data.length;
+    var d = data[idx];
+    img.src = 'images/' + d.i;
+    img.alt = d.n;
+    nameEl.textContent = d.n;
+    tierEl.textContent = d.t;
+    tierEl.className = 'rarity ' + d.t.toLowerCase();
+    var story = d.s;
+    var l = lang();
+    if (l !== 'en' && window.ZIGZOO_I18N && window.ZIGZOO_I18N[l]) {
+      var tr = window.ZIGZOO_I18N[l]['story.' + d.d];
+      if (tr) story = tr;
+    }
+    storyEl.textContent = story;
+    try {
+      dateEl.textContent = new Intl.DateTimeFormat(LOCALES[l], { timeZone: 'Asia/Jakarta', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date());
+    } catch (e) { dateEl.textContent = ''; }
+  }
+  document.addEventListener('DOMContentLoaded', render);
+  var prev = window.ZIGZOO_LIVE_REFRESH;
+  window.ZIGZOO_LIVE_REFRESH = function () { if (prev) prev(); render(); };
+  render();
 })();
 </script>
 <script>
