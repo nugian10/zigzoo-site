@@ -253,30 +253,44 @@ main a:not(.btn) { display: inline-block; padding: 8px 2px; min-height: 44px; }
 .claim-banner { background: #fff7ed; border-color: #b3541e; }
 .claim-amount { font-size: 24px; font-weight: 900; }
 
-.trade-stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 18px 0; }
+.trade-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
 .tstat {
-  flex: 1 1 140px; background: #fff; border: 3px solid #221d12; border-radius: 16px;
+  background: #fff; border: 3px solid #221d12; border-radius: 16px;
   padding: 12px 14px; box-shadow: 0 6px 16px rgba(34,29,18,.10);
+}
+.tstat:last-child { grid-column: 1 / -1; }
+@media (min-width: 700px) {
+  .trade-stats { grid-template-columns: 1fr 1fr 1fr; }
+  .tstat:last-child { grid-column: auto; }
 }
 .tstat span { display: block; font-size: 13px; opacity: .75; }
 .tstat strong { display: block; font-size: 19px; margin: 4px 0 2px; word-break: break-all; }
 .tstat small { opacity: .6; }
 .trade-grid { display: grid; gap: 16px; margin: 18px 0; }
 @media (min-width: 800px) { .trade-grid { grid-template-columns: 1fr 1fr; } }
-.trade-box h2 { margin-top: 0; }
+.trade-box { padding: 18px 16px 20px; }
+.trade-box h2 { margin: 0 0 12px; }
 .trade-amt { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
 .trade-amt input {
   flex: 1; font-size: 18px; padding: 10px 12px; min-width: 0;
   border: 3px solid #221d12; border-radius: 12px;
 }
-.trade-amt .unit { font-weight: 900; }
+.trade-amt .unit { font-weight: 900; font-size: 15px; flex-shrink: 0; }
 .trade-est { margin: 8px 0 14px; }
 .trade-box .btn { width: 100%; }
 .trade-coin { text-align: center; }
-.trade-coin img { border-radius: 50%; border: 3px solid #221d12; }
+.trade-coin img { display: block; margin: 8px auto; border-radius: 50%; border: 3px solid #221d12; }
 .trade-wallet { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 #trade-account { font-family: monospace; font-size: 13px; word-break: break-all; }
 .trade-max {
   background: none; border: none; color: #b3541e; font-weight: 700;
   cursor: pointer; text-decoration: underline; padding: 0; font-size: 14px;
+}
+.trade-facts code { word-break: break-all; }
+@media (max-width: 640px) {
+  .trade-facts, .trade-facts tbody, .trade-facts tr, .trade-facts td { display: block; width: 100%; }
+  .trade-facts tr { padding: 10px 0; border-bottom: 2px solid #221d12; }
+  .trade-facts td { border: 0; padding: 2px 14px; }
+  .trade-facts td:first-child { opacity: .7; font-size: 14px; padding-bottom: 0; }
+  .trade-facts code { font-size: 12.5px; }
 }
