@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n-title="meta.title.trade">Trade $ZIGZOO — Zigzoo Token</title>
+<meta name="description" data-i18n-desc="meta.desc.trade" content="Buy and sell $ZIGZOO, the Zigzoo coin. All 100,000,000 tokens sit in one PancakeSwap V3 pool, locked forever. The creator holds zero.">
+<meta property="og:title" content="Trade $ZIGZOO — Zigzoo Token">
+<meta property="og:description" content="Buy and sell $ZIGZOO on its PancakeSwap V3 pool. 100% of the supply is in the pool, locked forever. Creator holds zero.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zigzoo.xyz/trade.html">
+<meta property="og:image" content="https://zigzoo.xyz/images/zigzoo-coin.webp">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/">ZIGZOO</a>
+  <nav class="site-nav" id="site-nav" aria-label="Sections">
+    <ul>
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="index.html#price" data-i18n="nav.price">Price ladder</a></li>
+      <li><a href="index.html#rarity" data-i18n="nav.rarity">Rarity</a></li>
+      <li><a href="index.html#roadmap" data-i18n="nav.roadmap">Roadmap</a></li>
+      <li><a href="index.html#market" data-i18n="nav.market">Market</a></li>
+      <li><a href="trade.html" data-i18n="nav.trade">Trade</a></li>
+      <li><a href="index.html#agent-mint" data-i18n="nav.agentmint">Mint with agent</a></li>
+      <li><a href="index.html#faq" data-i18n="nav.faq">Questions</a></li>
+    </ul>
+  </nav>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" data-lang="en" class="active">EN</button>
+    <button type="button" data-lang="ja">日本語</button>
+    <button type="button" data-lang="zh">中文</button>
+  </div>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="status-bar"><span class="status-pill live" data-i18n="status.live">MINT IS LIVE</span></div>
+
+<main>
+  <section class="section">
+    <h1 data-i18n="trade.h1">Trade $ZIGZOO</h1>
+    <p data-i18n="trade.intro">The Zigzoo coin, trading on PancakeSwap V3. The whole supply — 100,000,000 $ZIGZOO — went into one pool at launch. There is no creator allocation and no claim: if you want $ZIGZOO, this pool is the only source, for everyone alike.</p>
+
+    <div id="trade-soon" class="status-box claim-banner" hidden>
+      <strong data-i18n="trade.soon_h">Trading opens soon</strong>
+      <p data-i18n="trade.soon_p">Trading opens Monday 23 November 2026 at 00:00 UTC. The buy and sell boxes switch on by themselves the moment the pool opens.</p>
+    </div>
+
+    <div class="trade-stats">
+      <div class="tstat"><span data-i18n="trade.price_l">Price</span><strong id="trade-price">—</strong><small>BNB / $ZIGZOO</small></div>
+      <div class="tstat"><span data-i18n="trade.mcap_l">Market cap</span><strong id="trade-mcap">—</strong><small>BNB</small></div>
+      <div class="tstat"><span data-i18n="trade.inpool_l">$ZIGZOO in pool</span><strong id="trade-inpool">—</strong><small>$ZIGZOO</small></div>
+    </div>
+
+    <p class="trade-wallet">
+      <button type="button" id="trade-connect" class="btn" data-i18n="trade.connect">Connect wallet</button>
+      <span id="trade-account"></span>
+    </p>
+    <p><span data-i18n="trade.balance_l">Your $ZIGZOO</span>: <strong id="trade-zigbal">—</strong> · BNB: <strong id="trade-bnbbal">—</strong></p>
+
+    <div class="trade-grid">
+      <div class="card trade-box">
+        <h2 data-i18n="trade.buy_h">Buy $ZIGZOO</h2>
+        <label for="buy-amount" data-i18n="trade.pay_l">You pay</label>
+        <div class="trade-amt"><input id="buy-amount" type="text" inputmode="decimal" placeholder="0.001" autocomplete="off"><span class="unit">BNB</span></div>
+        <p class="trade-est"><span data-i18n="trade.get_l">You receive (estimate)</span>: <strong id="buy-est">—</strong> $ZIGZOO</p>
+        <button type="button" id="buy-btn" class="btn" data-i18n="trade.buy_btn" disabled>Buy $ZIGZOO</button>
+      </div>
+      <div class="card trade-box">
+        <h2 data-i18n="trade.sell_h">Sell $ZIGZOO</h2>
+        <label for="sell-amount" data-i18n="trade.pay_l">You pay</label>
+        <div class="trade-amt"><input id="sell-amount" type="text" inputmode="decimal" placeholder="0" autocomplete="off"><span class="unit">$ZIGZOO</span></div>
+        <p class="trade-est"><span data-i18n="trade.get_l">You receive (estimate)</span>: <strong id="sell-est">—</strong> BNB <button type="button" id="sell-max" class="trade-max" data-i18n="trade.max">Max</button></p>
+        <button type="button" id="sell-btn" class="btn" data-i18n="trade.sell_btn" disabled>Sell $ZIGZOO</button>
+      </div>
+    </div>
+    <p id="trade-status" class="check-status" aria-live="polite"></p>
+    <p class="note" data-i18n="trade.min_note">Minimum trade: 0.001 BNB · Pool fee: 1%</p>
+    <p class="note" data-i18n="trade.note">Estimates come from the pool's own quoter — the final amount can differ a little when your transaction lands. Always check the preview in your wallet before you confirm. A brand-new token is risky: only trade what you can afford to lose.</p>
+  </section>
+
+  <section class="section">
+    <div class="trade-coin"><img src="images/zigzoo-coin.webp" alt="$ZIGZOO coin — Mochi the cat on a gold coin" width="180" height="180"></div>
+    <h2 data-i18n="trade.facts_h">Token facts</h2>
+    <table class="ladder">
+      <tbody>
+        <tr><td data-i18n="trade.supply_l">Total supply</td><td><strong>100,000,000 $ZIGZOO</strong></td></tr>
+        <tr><td data-i18n="trade.creator_l">Creator holds</td><td><strong>0 $ZIGZOO</strong></td></tr>
+        <tr><td data-i18n="trade.liq_l">Liquidity</td><td><strong data-i18n="trade.liq_v">Locked forever in a vault contract</strong></td></tr>
+        <tr><td data-i18n="trade.contract_l">Token contract</td><td><a href="https://bscscan.com/token/0xfFbdcb170409DD11d4C6c982936460C1575ecC87" target="_blank" rel="noopener"><code>0xfFbdcb170409DD11d4C6c982936460C1575ecC87</code></a></td></tr>
+        <tr><td data-i18n="trade.pool_l">Pool (PancakeSwap V3)</td><td><a href="https://bscscan.com/address/0xe862bEA883c568Cc1Ba90A8716950E75Caf99B44" target="_blank" rel="noopener"><code>0xe862bEA883c568Cc1Ba90A8716950E75Caf99B44</code></a></td></tr>
+      </tbody>
+    </table>
+    <p><a href="https://dexscreener.com/bsc/0xe862bea883c568cc1ba90a8716950e75caf99b44" target="_blank" rel="noopener" data-i18n="trade.dex">View on DexScreener</a></p>
+    <p><a href="index.html" data-i18n="common.back_home">← Back to the main page</a></p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p data-i18n="foot.tagline">Zigzoo — 5,000 cute animal NFTs on BNB Smart Chain.</p>
+  <p><span data-i18n="foot.live">Minting is live. Contract:</span> <a href="https://bscscan.com/address/0x09ADA5A12293C30D75b97c56E34967E8a4326a3C" target="_blank" rel="noopener"><code>0x09ADA5A12293C30D75b97c56E34967E8a4326a3C</code></a></p>
+  <p><a href="https://x.com/zigzooNFT" target="_blank" rel="noopener" data-i18n="foot.x">𝕏 Follow Zigzoo on X</a></p>
+</footer>
+<script>
+(function () {
+  var btn = document.getElementById('menu-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+  function closeMenu() {
+    btn.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('open');
+  }
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('click', function (e) {
+    if (!nav.classList.contains('open')) return;
+    if (e.target.closest('.site-header')) return;
+    closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
+</script>
+<script>
+(function () {
+  var TOKEN = '0xfFbdcb170409DD11d4C6c982936460C1575ecC87';
+  var POOL = '0xe862bEA883c568Cc1Ba90A8716950E75Caf99B44';
+  var WBNB = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
+  var ROUTER = '0x1b81D678ffb9C0263b24A97847620C99d213eB14';
+  var QUOTER = '0xB048Bbc1Ee6b733FFfCFb9e9CeF7375518e25997';
+  var FEE = 10000n;
+  var MIN_WEI = 1000000000000000n; /* 0.001 BNB */
+  var SUPPLY_TOKENS = 100000000;
+  var RPCS = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
+
+  var priceEl = document.getElementById('trade-price');
+  var mcapEl = document.getElementById('trade-mcap');
+  var inpoolEl = document.getElementById('trade-inpool');
+  var soonBox = document.getElementById('trade-soon');
+  var statusEl = document.getElementById('trade-status');
+  var connectBtn = document.getElementById('trade-connect');
+  var accountEl = document.getElementById('trade-account');
+  var zigBalEl = document.getElementById('trade-zigbal');
+  var bnbBalEl = document.getElementById('trade-bnbbal');
+  var buyAmt = document.getElementById('buy-amount');
+  var buyEst = document.getElementById('buy-est');
+  var buyBtn = document.getElementById('buy-btn');
+  var sellAmt = document.getElementById('sell-amount');
+  var sellEst = document.getElementById('sell-est');
+  var sellBtn = document.getElementById('sell-btn');
+  var sellMax = document.getElementById('sell-max');
+  if (!buyBtn || !sellBtn) return;
+
+  var account = null;
+  var zigBalance = 0n;
+  var marketOpen = false;
+  var buyTimer = null, sellTimer = null;
+
+  function setStatus(s) { if (statusEl) statusEl.textContent = s || ''; }
+  function word(x) {
+    var h = (typeof x === 'bigint') ? x.toString(16) : String(x).replace(/^0x/, '');
+    return h.padStart(64, '0');
+  }
+  function wordAt(res, i) {
+    if (!res || res.length < 2 + (i + 1) * 64) return null;
+    return BigInt('0x' + res.slice(2 + i * 64, 2 + (i + 1) * 64));
+  }
+  function rpc(method, params) {
+    function attempt(i) {
+      if (i >= RPCS.length) return Promise.reject(new Error('rpc'));
+      return fetch(RPCS[i], { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: method, params: params }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { if (j.error) throw new Error('rpc'); return j.result; })
+        .catch(function () { return attempt(i + 1); });
+    }
+    return attempt(0);
+  }
+  function ethCall(to, data) { return rpc('eth_call', [{ to: to, data: data }, 'latest']); }
+  function parseDec(str) {
+    if (str == null) return null;
+    str = String(str).trim().replace(',', '.');
+    if (!/^[0-9]*(\.[0-9]*)?$/.test(str) || str === '' || str === '.') return null;
+    var parts = str.split('.');
+    var ip = parts[0] === '' ? '0' : parts[0];
+    var fp = ((parts[1] || '') + '000000000000000000').slice(0, 18);
+    return BigInt(ip) * (10n ** 18n) + BigInt(fp);
+  }
+  function fmt(big, dp) {
+    if (big == null) return '—';
+    var neg = big < 0n; if (neg) big = -big;
+    var base = 10n ** 18n;
+    var ip = big / base, fp = big % base;
+    var ips = ip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    var fps = fp.toString().padStart(18, '0').slice(0, dp);
+    fps = fps.replace(/0+$/, '');
+    return (neg ? '-' : '') + ips + (fps ? '.' + fps : '');
+  }
+  function fmtPrice(x) {
+    if (!x || !isFinite(x) || x <= 0) return '—';
+    var s = x.toFixed(12).replace(/0+$/, '').replace(/\.$/, '');
+    return s;
+  }
+  function shortAddr(a) { return a ? a.slice(0, 6) + '…' + a.slice(-4) : ''; }
+
+  function loadMarket() {
+    ethCall(POOL, '0x3850c7bd').then(function (slot0) {
+      var sqrt = wordAt(slot0, 0);
+      if (!sqrt || sqrt === 0n) throw new Error('closed');
+      return ethCall(POOL, '0x1a686502').then(function (liqRes) {
+        var liq = wordAt(liqRes, 0);
+        if (!liq || liq === 0n) throw new Error('closed');
+        var s = Number(sqrt) / Math.pow(2, 96);
+        var bnbPerZig = 1 / (s * s);
+        if (priceEl) priceEl.textContent = fmtPrice(bnbPerZig);
+        if (mcapEl) mcapEl.textContent = (bnbPerZig * SUPPLY_TOKENS).toLocaleString('en-US', { maximumFractionDigits: 2 });
+        marketOpen = true;
+        if (soonBox) soonBox.hidden = true;
+        buyBtn.disabled = false; sellBtn.disabled = false;
+        return ethCall(TOKEN, '0x70a08231' + word(POOL));
+      }).then(function (balRes) {
+        var bal = wordAt(balRes, 0);
+        if (bal != null && inpoolEl) inpoolEl.textContent = fmt(bal, 0);
+      });
+    }).catch(function () {
+      marketOpen = false;
+      if (soonBox) soonBox.hidden = false;
+      buyBtn.disabled = true; sellBtn.disabled = true;
+    });
+  }
+
+  function quote(tokenIn, tokenOut, amountIn) {
+    var data = '0xc6a5026a' + word(tokenIn) + word(tokenOut) + word(amountIn) + word(FEE) + word(0n);
+    return ethCall(QUOTER, data).then(function (res) { return wordAt(res, 0); });
+  }
+  function refreshBuyQuote() {
+    var amt = parseDec(buyAmt.value);
+    if (!marketOpen || amt == null || amt === 0n) { buyEst.textContent = '—'; return; }
+    quote(WBNB, TOKEN, amt).then(function (out) {
+      buyEst.textContent = (out == null) ? '—' : fmt(out, 2);
+    }).catch(function () { buyEst.textContent = '—'; });
+  }
+  function refreshSellQuote() {
+    var amt = parseDec(sellAmt.value);
+    if (!marketOpen || amt == null || amt === 0n) { sellEst.textContent = '—'; return; }
+    quote(TOKEN, WBNB, amt).then(function (out) {
+      sellEst.textContent = (out == null) ? '—' : fmt(out, 6);
+    }).catch(function () { sellEst.textContent = '—'; });
+  }
+  buyAmt.addEventListener('input', function () {
+    clearTimeout(buyTimer); buyTimer = setTimeout(refreshBuyQuote, 350);
+  });
+  sellAmt.addEventListener('input', function () {
+    clearTimeout(sellTimer); sellTimer = setTimeout(refreshSellQuote, 350);
+  });
+  if (sellMax) sellMax.addEventListener('click', function () {
+    if (zigBalance > 0n) { sellAmt.value = fmt(zigBalance, 18).replace(/,/g, ''); refreshSellQuote(); }
+  });
+
+  function loadBalances() {
+    if (!account) return;
+    ethCall(TOKEN, '0x70a08231' + word(account)).then(function (res) {
+      var b = wordAt(res, 0);
+      if (b != null) { zigBalance = b; if (zigBalEl) zigBalEl.textContent = fmt(b, 2); }
+    }).catch(function () {});
+    rpc('eth_getBalance', [account, 'latest']).then(function (res) {
+      if (bnbBalEl && res) bnbBalEl.textContent = fmt(BigInt(res), 4);
+    }).catch(function () {});
+  }
+
+  function connect() {
+    if (!window.ethereum) {
+      setStatus('No wallet found. Open this page inside your wallet app browser (for example Binance or MetaMask), or install a wallet extension.');
+      return Promise.resolve(false);
+    }
+    return window.ethereum.request({ method: 'eth_requestAccounts' }).then(function (accs) {
+      account = accs && accs[0];
+      if (!account) return false;
+      return window.ethereum.request({ method: 'eth_chainId' }).then(function (cid) {
+        if (cid !== '0x38') {
+          return window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x38' }] })
+            .then(function () { return true; })
+            .catch(function () { setStatus('Please switch your wallet to BNB Smart Chain.'); return false; });
+        }
+        return true;
+      });
+    }).then(function (ok) {
+      if (ok && account) {
+        if (accountEl) accountEl.textContent = shortAddr(account);
+        if (connectBtn) connectBtn.textContent = 'Connected';
+        loadBalances();
+      }
+      return !!account;
+    }).catch(function () {
+      setStatus('Wallet connection was cancelled.');
+      return false;
+    });
+  }
+  if (connectBtn) connectBtn.addEventListener('click', connect);
+  if (window.ethereum && window.ethereum.on) {
+    window.ethereum.on('accountsChanged', function (accs) {
+      account = accs && accs[0] ? accs[0] : null;
+      if (accountEl) accountEl.textContent = account ? shortAddr(account) : '';
+      loadBalances();
+    });
+  }
+
+  function sendTx(to, data, valueWei) {
+    return window.ethereum.request({ method: 'eth_sendTransaction', params: [{
+      from: account, to: to, data: data, value: '0x' + (valueWei || 0n).toString(16)
+    }] });
+  }
+  function waitReceipt(hash) {
+    var tries = 0;
+    return new Promise(function (resolve, reject) {
+      (function poll() {
+        window.ethereum.request({ method: 'eth_getTransactionReceipt', params: [hash] })
+          .then(function (rc) {
+            if (rc) { rc.status === '0x1' ? resolve(rc) : reject(new Error('reverted')); }
+            else if (++tries > 48) reject(new Error('timeout'));
+            else setTimeout(poll, 2500);
+          })
+          .catch(function () { if (++tries > 48) reject(new Error('timeout')); else setTimeout(poll, 2500); });
+      })();
+    });
+  }
+  function swapData(tokenIn, tokenOut, amountIn, minOut) {
+    var deadline = BigInt(Math.floor(Date.now() / 1000) + 1200);
+    return '0x414bf389' + word(tokenIn) + word(tokenOut) + word(FEE) + word(account) +
+      word(deadline) + word(amountIn) + word(minOut) + word(0n);
+  }
+  function friendlyErr(e) {
+    if (e && (e.code === 4001 || /reject|denied|cancel/i.test(e.message || ''))) return 'Cancelled in the wallet.';
+    return 'Transaction failed. Please check your wallet and try again.';
+  }
+
+  buyBtn.addEventListener('click', function () {
+    if (!marketOpen) return;
+    var amt = parseDec(buyAmt.value);
+    if (amt == null || amt === 0n) { setStatus('Enter how much BNB you want to spend.'); return; }
+    if (amt < MIN_WEI) { setStatus('Minimum trade is 0.001 BNB.'); return; }
+    (account ? Promise.resolve(true) : connect()).then(function (ok) {
+      if (!ok) return;
+      setStatus('Getting the pool price…');
+      return quote(WBNB, TOKEN, amt).then(function (out) {
+        if (out == null || out === 0n) { setStatus('The pool returned no quote. Try again in a moment.'); return; }
+        var minOut = out * 95n / 100n;
+        setStatus('Confirm the buy in your wallet…');
+        return sendTx(ROUTER, swapData(WBNB, TOKEN, amt, minOut), amt).then(function (hash) {
+          setStatus('Buy sent — waiting for confirmation…');
+          return waitReceipt(hash);
+        }).then(function () {
+          setStatus('Buy confirmed. Your $ZIGZOO balance is updated below.');
+          loadBalances(); loadMarket(); refreshSellQuote();
+        });
+      });
+    }).catch(function (e) { setStatus(friendlyErr(e)); });
+  });
+
+  sellBtn.addEventListener('click', function () {
+    if (!marketOpen) return;
+    var amt = parseDec(sellAmt.value);
+    if (amt == null || amt === 0n) { setStatus('Enter how much $ZIGZOO you want to sell.'); return; }
+    (account ? Promise.resolve(true) : connect()).then(function (ok) {
+      if (!ok) return;
+      if (zigBalance > 0n && amt > zigBalance) { setStatus('That is more $ZIGZOO than your wallet holds.'); return; }
+      setStatus('Getting the pool price…');
+      return quote(TOKEN, WBNB, amt).then(function (out) {
+        if (out == null || out === 0n) { setStatus('The pool returned no quote. Try again in a moment.'); return; }
+        var minOut = out * 95n / 100n;
+        return ethCall(TOKEN, '0xdd62ed3e' + word(account) + word(ROUTER)).then(function (res) {
+          var allowance = wordAt(res, 0);
+          if (allowance != null && allowance >= amt) return null;
+          setStatus('One approval first: confirm in your wallet so the pool can take your $ZIGZOO…');
+          return sendTx(TOKEN, '0x095ea7b3' + word(ROUTER) + word(amt), 0n).then(waitReceipt);
+        }).then(function () {
+          setStatus('Confirm the sell in your wallet…');
+          return sendTx(ROUTER, swapData(TOKEN, WBNB, amt, minOut), 0n);
+        }).then(function (hash) {
+          setStatus('Sell sent — waiting for confirmation…');
+          return waitReceipt(hash);
+        }).then(function () {
+          setStatus('Sell confirmed. Your balances are updated below.');
+          loadBalances(); loadMarket(); refreshBuyQuote();
+        });
+      });
+    }).catch(function (e) { setStatus(friendlyErr(e)); });
+  });
+
+  var prevRefresh = window.ZIGZOO_LIVE_REFRESH;
+  window.ZIGZOO_LIVE_REFRESH = function () {
+    if (prevRefresh) prevRefresh();
+    loadMarket();
+  };
+  loadMarket();
+  setInterval(loadMarket, 30000);
+})();
+</script>
+</body>
+</html>
