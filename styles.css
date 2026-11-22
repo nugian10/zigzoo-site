@@ -253,15 +253,32 @@ main a:not(.btn) { display: inline-block; padding: 8px 2px; min-height: 44px; }
 .claim-banner { background: #fff7ed; border-color: #b3541e; }
 .claim-amount { font-size: 24px; font-weight: 900; }
 
-.trade-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+.mkt-card { padding: 18px 16px; margin: 18px 0; }
+.mkt-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.mkt-head span { display: block; font-size: 13px; opacity: .75; }
+.mkt-head strong { display: block; font-size: 30px; font-weight: 900; line-height: 1.15; }
+.mkt-head small { opacity: .65; }
+.mkt-head .chg {
+  display: inline-block; font-weight: 800; font-size: 14px; opacity: 1;
+  padding: 4px 10px; border-radius: 999px; flex-shrink: 0; margin-top: 6px;
+}
+.chg.up { background: #d9f5d0; color: #14532d; border: 2px solid #14532d; }
+.chg.down { background: #fde2e2; color: #7f1d1d; border: 2px solid #7f1d1d; }
+.chg[hidden] { display: none; }
 .tstat {
   background: #fff; border: 3px solid #221d12; border-radius: 16px;
   padding: 12px 14px; box-shadow: 0 6px 16px rgba(34,29,18,.10);
 }
-.tstat:last-child { grid-column: 1 / -1; }
-@media (min-width: 700px) {
-  .trade-stats { grid-template-columns: 1fr 1fr 1fr; }
-  .tstat:last-child { grid-column: auto; }
+.mkt-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+@media (max-width: 640px) {
+  .mkt-grid { grid-template-columns: 1fr 1fr; }
+  .mkt-grid .tstat:last-child { grid-column: 1 / -1; }
+}
+.mkt-grid .tstat strong { font-size: 16px; }
+.mkt-chart { margin-top: 14px; }
+.mkt-chart iframe {
+  width: 100%; height: 360px; display: block; background: #fff;
+  border: 3px solid #221d12; border-radius: 16px;
 }
 .tstat span { display: block; font-size: 13px; opacity: .75; }
 .tstat strong { display: block; font-size: 19px; margin: 4px 0 2px; word-break: break-all; }

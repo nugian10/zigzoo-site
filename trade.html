@@ -48,10 +48,21 @@
       <p data-i18n="trade.soon_p">Trading opens Monday 23 November 2026 at 00:00 UTC. The buy and sell boxes switch on by themselves the moment the pool opens.</p>
     </div>
 
-    <div class="trade-stats">
-      <div class="tstat"><span data-i18n="trade.price_l">Price</span><strong id="trade-price">—</strong><small>BNB / $ZIGZOO</small></div>
-      <div class="tstat"><span data-i18n="trade.mcap_l">Market cap</span><strong id="trade-mcap">—</strong><small>BNB</small></div>
-      <div class="tstat"><span data-i18n="trade.inpool_l">$ZIGZOO in pool</span><strong id="trade-inpool">—</strong><small>$ZIGZOO</small></div>
+    <div class="card mkt-card">
+      <div class="mkt-head">
+        <div>
+          <span data-i18n="trade.price_l">Price</span>
+          <strong id="mkt-price">—</strong>
+          <small id="mkt-price-bnb">—</small>
+        </div>
+        <span id="mkt-change" class="chg" hidden>—</span>
+      </div>
+      <div class="mkt-grid">
+        <div class="tstat"><span data-i18n="trade.mcap_l">Market cap</span><strong id="mkt-mcap">—</strong></div>
+        <div class="tstat"><span data-i18n="trade.vol24_l">24h volume</span><strong id="mkt-vol">—</strong></div>
+        <div class="tstat"><span data-i18n="trade.inpool_l">$ZIGZOO in pool</span><strong id="trade-inpool">—</strong></div>
+      </div>
+      <div id="mkt-chart" class="mkt-chart" hidden><iframe id="mkt-frame" title="DexScreener price chart" loading="lazy"></iframe></div>
     </div>
 
     <p class="trade-wallet">
@@ -141,8 +152,13 @@
   var SUPPLY_TOKENS = 100000000;
   var RPCS = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org'];
 
-  var priceEl = document.getElementById('trade-price');
-  var mcapEl = document.getElementById('trade-mcap');
+  var mktPrice = document.getElementById('mkt-price');
+  var mktPriceBnb = document.getElementById('mkt-price-bnb');
+  var mktChange = document.getElementById('mkt-change');
+  var mktMcap = document.getElementById('mkt-mcap');
+  var mktVol = document.getElementById('mkt-vol');
+  var mktChart = document.getElementById('mkt-chart');
+  var mktFrame = document.getElementById('mkt-frame');
   var inpoolEl = document.getElementById('trade-inpool');
   var soonBox = document.getElementById('trade-soon');
   var statusEl = document.getElementById('trade-status');
@@ -162,7 +178,53 @@
   var account = null;
   var zigBalance = 0n;
   var marketOpen = false;
+  var chainPriceBnb = 0;
+  var dexPair = null;
+  var chartLoaded = false;
   var buyTimer = null, sellTimer = null;
+
+  function fmtUsd(x) {
+    if (x == null || !isFinite(x)) return '—';
+    if (x >= 1000) return x.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    if (x >= 1) return x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return x.toFixed(8).replace(/0+$/, '').replace(/\.$/, '');
+  }
+  function renderMarket() {
+    if (dexPair) {
+      if (mktPrice) mktPrice.textContent = '$' + fmtUsd(parseFloat(dexPair.priceUsd));
+      if (mktPriceBnb) mktPriceBnb.textContent = fmtPrice(chainPriceBnb || parseFloat(dexPair.priceNative)) + ' BNB';
+      var mc = dexPair.marketCap || dexPair.fdv;
+      if (mktMcap) mktMcap.textContent = mc ? '$' + fmtUsd(mc) : '—';
+      var ch = dexPair.priceChange ? dexPair.priceChange.h24 : null;
+      if (mktChange) {
+        if (ch == null) { mktChange.hidden = true; }
+        else {
+          mktChange.hidden = false;
+          mktChange.className = 'chg ' + (ch >= 0 ? 'up' : 'down');
+          mktChange.textContent = (ch >= 0 ? '▲ ' : '▼ ') + Math.abs(ch).toFixed(1) + '% · 24h';
+        }
+      }
+      var vol = dexPair.volume ? dexPair.volume.h24 : null;
+      if (mktVol) mktVol.textContent = (vol == null) ? '—' : '$' + fmtUsd(vol);
+      if (!chartLoaded && mktFrame) {
+        chartLoaded = true;
+        mktFrame.src = 'https://dexscreener.com/bsc/' + POOL + '?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15';
+        if (mktChart) mktChart.hidden = false;
+      }
+    } else if (marketOpen && chainPriceBnb > 0) {
+      if (mktPrice) mktPrice.textContent = fmtPrice(chainPriceBnb);
+      if (mktPriceBnb) mktPriceBnb.textContent = 'BNB / $ZIGZOO';
+      if (mktMcap) mktMcap.textContent = (chainPriceBnb * SUPPLY_TOKENS).toLocaleString('en-US', { maximumFractionDigits: 2 }) + ' BNB';
+    }
+  }
+  function loadDex() {
+    fetch('https://api.dexscreener.com/latest/dex/pairs/bsc/' + POOL)
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.pairs && j.pairs.length) { dexPair = j.pairs[0]; renderMarket(); }
+      })
+      .catch(function () {});
+  }
 
   function setStatus(s) { if (statusEl) statusEl.textContent = s || ''; }
   function word(x) {
@@ -219,9 +281,8 @@
         var liq = wordAt(liqRes, 0);
         if (!liq || liq === 0n) throw new Error('closed');
         var s = Number(sqrt) / Math.pow(2, 96);
-        var bnbPerZig = 1 / (s * s);
-        if (priceEl) priceEl.textContent = fmtPrice(bnbPerZig);
-        if (mcapEl) mcapEl.textContent = (bnbPerZig * SUPPLY_TOKENS).toLocaleString('en-US', { maximumFractionDigits: 2 });
+        chainPriceBnb = 1 / (s * s);
+        renderMarket();
         marketOpen = true;
         if (soonBox) soonBox.hidden = true;
         buyBtn.disabled = false; sellBtn.disabled = false;
@@ -399,9 +460,12 @@
   window.ZIGZOO_LIVE_REFRESH = function () {
     if (prevRefresh) prevRefresh();
     loadMarket();
+    loadDex();
   };
   loadMarket();
+  loadDex();
   setInterval(loadMarket, 30000);
+  setInterval(loadDex, 30000);
 })();
 </script>
 </body>
