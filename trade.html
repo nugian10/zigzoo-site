@@ -62,7 +62,10 @@
         <div class="tstat"><span data-i18n="trade.vol24_l">24h volume</span><strong id="mkt-vol">—</strong></div>
         <div class="tstat"><span data-i18n="trade.inpool_l">$ZIGZOO in pool</span><strong id="trade-inpool">—</strong></div>
       </div>
-      <div id="mkt-chart" class="mkt-chart" hidden><iframe id="mkt-frame" title="DexScreener price chart" loading="lazy"></iframe></div>
+      <div id="mkt-chart" class="mkt-chart" hidden>
+        <svg id="mkt-svg" viewBox="0 0 320 110" preserveAspectRatio="none" role="img" aria-label="Price chart"></svg>
+        <div class="mkt-chart-cap"><span id="mkt-hi"></span><span id="mkt-lo"></span></div>
+      </div>
     </div>
 
     <p class="trade-wallet">
@@ -157,7 +160,9 @@
   var mktMcap = document.getElementById('mkt-mcap');
   var mktVol = document.getElementById('mkt-vol');
   var mktChart = document.getElementById('mkt-chart');
-  var mktFrame = document.getElementById('mkt-frame');
+  var mktSvg = document.getElementById('mkt-svg');
+  var mktHi = document.getElementById('mkt-hi');
+  var mktLo = document.getElementById('mkt-lo');
   var inpoolEl = document.getElementById('trade-inpool');
   var soonBox = document.getElementById('trade-soon');
   var statusEl = document.getElementById('trade-status');
@@ -179,7 +184,6 @@
   var marketOpen = false;
   var chainPriceBnb = 0;
   var dexPair = null;
-  var chartLoaded = false;
   var buyTimer = null, sellTimer = null;
 
   function fmtUsd(x) {
@@ -205,11 +209,6 @@
       }
       var vol = dexPair.volume ? dexPair.volume.h24 : null;
       if (mktVol) mktVol.textContent = (vol == null) ? '—' : '$' + fmtUsd(vol);
-      if (!chartLoaded && mktFrame) {
-        chartLoaded = true;
-        mktFrame.src = 'https://dexscreener.com/bsc/' + POOL + '?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15';
-        if (mktChart) mktChart.hidden = false;
-      }
     } else if (marketOpen && chainPriceBnb > 0) {
       if (mktPrice) mktPrice.textContent = fmtPrice(chainPriceBnb);
       if (mktPriceBnb) mktPriceBnb.textContent = 'BNB / $ZIGZOO';
@@ -221,6 +220,40 @@
       .then(function (r) { return r.json(); })
       .then(function (j) {
         if (j && j.pairs && j.pairs.length) { dexPair = j.pairs[0]; renderMarket(); }
+      })
+      .catch(function () {});
+  }
+
+  // Native mobile-first price chart (GeckoTerminal hourly closes), drawn as
+  // a lightweight SVG in the site's own style — no third-party embed.
+  function loadChart() {
+    if (!mktSvg) return;
+    fetch('https://api.geckoterminal.com/api/v2/networks/bsc/pools/' + POOL + '/ohlcv/hour?aggregate=1&limit=100&currency=usd')
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var list = j && j.data && j.data.attributes && j.data.attributes.ohlcv_list;
+        if (!list || !list.length) return;
+        var pts = list.slice().reverse().map(function (c) { return c[4]; }).filter(function (x) { return x > 0; });
+        if (!pts.length) return;
+        var rawHi = Math.max.apply(null, pts), rawLo = Math.min.apply(null, pts);
+        var hi = rawHi, lo = rawLo;
+        if (hi === lo) { hi = hi * 1.01; lo = lo * 0.99; }
+        var W = 320, H = 110, PAD = 6;
+        var coords = pts.map(function (v, i) {
+          var x = pts.length > 1 ? PAD + (W - PAD * 2) * i / (pts.length - 1) : W / 2;
+          var y = PAD + (1 - (v - lo) / (hi - lo)) * (H - PAD * 2);
+          return [x, y];
+        });
+        if (pts.length === 1) coords = [[PAD, coords[0][1]], [W - PAD, coords[0][1]]];
+        var line = coords.map(function (c, i) { return (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1); }).join(' ');
+        var area = line + ' L' + coords[coords.length - 1][0].toFixed(1) + ' ' + H + ' L' + coords[0][0].toFixed(1) + ' ' + H + ' Z';
+        var last = coords[coords.length - 1];
+        mktSvg.innerHTML = '<path d="' + area + '" fill="rgba(227,154,0,.13)"/>' +
+          '<path d="' + line + '" fill="none" stroke="#e39a00" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>' +
+          '<circle cx="' + last[0].toFixed(1) + '" cy="' + last[1].toFixed(1) + '" r="3.5" fill="#e39a00"/>';
+        if (mktHi) mktHi.textContent = 'High $' + fmtUsd(rawHi);
+        if (mktLo) mktLo.textContent = 'Low $' + fmtUsd(rawLo);
+        if (mktChart) mktChart.hidden = false;
       })
       .catch(function () {});
   }
@@ -460,11 +493,14 @@
     if (prevRefresh) prevRefresh();
     loadMarket();
     loadDex();
+    loadChart();
   };
   loadMarket();
   loadDex();
+  loadChart();
   setInterval(loadMarket, 30000);
   setInterval(loadDex, 30000);
+  setInterval(loadChart, 60000);
 })();
 </script>
 </body>

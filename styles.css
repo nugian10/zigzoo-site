@@ -276,9 +276,13 @@ main a:not(.btn) { display: inline-block; padding: 8px 2px; min-height: 44px; }
 }
 .mkt-grid .tstat strong { font-size: 16px; }
 .mkt-chart { margin-top: 14px; }
-.mkt-chart iframe {
-  width: 100%; height: 360px; display: block; background: #fff;
+.mkt-chart svg {
+  width: 100%; height: 110px; display: block; background: #fffdf6;
   border: 3px solid #221d12; border-radius: 16px;
+}
+.mkt-chart-cap {
+  display: flex; justify-content: space-between; gap: 10px;
+  font-size: 12.5px; opacity: .7; margin-top: 6px;
 }
 .tstat span { display: block; font-size: 13px; opacity: .75; }
 .tstat strong { display: block; font-size: 19px; margin: 4px 0 2px; word-break: break-all; }
