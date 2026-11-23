@@ -47,6 +47,12 @@
   <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
 <div class="status-bar"><span class="status-pill live" data-i18n="status.live">MINT IS LIVE</span></div>
+<a class="trade-bar" href="https://dexscreener.com/bsc/0x1abc5d6fd879688290dfbf3971d0e0ffbc861388" target="_blank" rel="noopener">
+  <img src="images/zigzoo-coin.webp" alt="" width="26" height="26">
+  <span data-i18n="tradebar.txt">The $ZIGZOO coin is live and trading</span>
+  <span class="trade-bar-price" id="tradebar-price"></span>
+  <span class="trade-bar-cta"><span data-i18n="tradebar.cta">DexScreener</span> ↗</span>
+</a>
 
 <main>
   <section class="hero">
@@ -485,6 +491,29 @@
       if (preset) { input.value = preset; lookup(preset); }
     } catch (e) {}
   });
+})();
+</script>
+<script>
+(function () {
+  var el = document.getElementById('tradebar-price');
+  if (!el) return;
+  function fmt(x) {
+    if (x >= 1) return x.toFixed(2);
+    return x.toFixed(8).replace(/0+$/, '').replace(/\.$/, '');
+  }
+  function load() {
+    fetch('https://api.dexscreener.com/latest/dex/pairs/bsc/0x1abc5d6fd879688290dfbf3971d0e0ffbc861388')
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.pairs && j.pairs.length) {
+          var p = parseFloat(j.pairs[0].priceUsd);
+          if (p > 0) el.textContent = '$' + fmt(p);
+        }
+      })
+      .catch(function () {});
+  }
+  load();
+  setInterval(load, 60000);
 })();
 </script>
 </body>

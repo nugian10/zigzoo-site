@@ -36,6 +36,18 @@ code { overflow-wrap: anywhere; }
   display: flex; justify-content: center;
   padding: 12px 16px 0;
 }
+.trade-bar {
+  display: flex; align-items: center; justify-content: center; gap: 9px; flex-wrap: wrap;
+  background: #221d12; color: #fdf6dd; text-decoration: none;
+  padding: 10px 14px; margin-top: 12px;
+  font-weight: 800; font-size: 15px; text-align: center;
+}
+.trade-bar img { border-radius: 50%; flex-shrink: 0; }
+.trade-bar-price { color: #f5b301; font-weight: 900; }
+.trade-bar-cta {
+  background: #f5b301; color: #221d12; border-radius: 999px;
+  padding: 3px 12px; font-weight: 900; white-space: nowrap;
+}
 .topbar-claim {
   display: block; text-align: center;
   background: #f5b301; color: #221d12;
