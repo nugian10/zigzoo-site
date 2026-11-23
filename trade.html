@@ -45,7 +45,7 @@
 
     <div id="trade-soon" class="status-box claim-banner" hidden>
       <strong data-i18n="trade.soon_h">Trading opens soon</strong>
-      <p data-i18n="trade.soon_p">Trading opens Monday 23 November 2026 at 00:00 UTC. The buy and sell boxes switch on by themselves the moment the pool opens.</p>
+      <p data-i18n="trade.soon_p">The buy and sell boxes switch on by themselves the moment the pool opens.</p>
     </div>
 
     <div class="card mkt-card">
@@ -277,19 +277,19 @@
     ethCall(POOL, '0x3850c7bd').then(function (slot0) {
       var sqrt = wordAt(slot0, 0);
       if (!sqrt || sqrt === 0n) throw new Error('closed');
-      return ethCall(POOL, '0x1a686502').then(function (liqRes) {
-        var liq = wordAt(liqRes, 0);
-        if (!liq || liq === 0n) throw new Error('closed');
+      // The position is single-sided: its range sits below the current tick,
+      // so the pool's active liquidity() reads 0 until a trade steps into the
+      // range. The pool's $ZIGZOO balance is the true "market is open" signal.
+      return ethCall(TOKEN, '0x70a08231' + word(POOL)).then(function (balRes) {
+        var bal = wordAt(balRes, 0);
+        if (!bal || bal === 0n) throw new Error('closed');
         var s = Number(sqrt) / Math.pow(2, 96);
         chainPriceBnb = 1 / (s * s);
         renderMarket();
         marketOpen = true;
         if (soonBox) soonBox.hidden = true;
         buyBtn.disabled = false; sellBtn.disabled = false;
-        return ethCall(TOKEN, '0x70a08231' + word(POOL));
-      }).then(function (balRes) {
-        var bal = wordAt(balRes, 0);
-        if (bal != null && inpoolEl) inpoolEl.textContent = fmt(bal, 0);
+        if (inpoolEl) inpoolEl.textContent = fmt(bal, 0);
       });
     }).catch(function () {
       marketOpen = false;

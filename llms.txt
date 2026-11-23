@@ -39,9 +39,9 @@
 
 ## Trade ($ZIGZOO token)
 
-- The Zigzoo coin: $ZIGZOO, ERC-20 on BNB Smart Chain, total supply 100,000,000, contract 0xfFbdcb170409DD11d4C6c982936460C1575ecC87 (opens Monday 23 November 2026, 00:00 UTC).
+- The Zigzoo coin: $ZIGZOO, ERC-20 on BNB Smart Chain, total supply 100,000,000, contract 0xfFbdcb170409DD11d4C6c982936460C1575ecC87 (trading is open).
 - 100% of the supply sits in one PancakeSwap V3 pool (WBNB pair, 1% fee tier): 0x1abc5d6fd879688290dfbf3971d0e0ffbc861388. The creator holds 0 tokens; there is no claim and no creator allocation.
-- The pool position is locked forever in a vault contract that can only collect trading fees (paid to the creator's Agentic Wallet). Liquidity can never be withdrawn.
+- The pool position is locked forever in a vault contract (0x7852C49a3bc40f1e3c11FE261736cE0b6f16e5f6) that can only collect trading fees (paid to the creator's Agentic Wallet). Liquidity can never be withdrawn.
 - Trade page: https://zigzoo.xyz/trade.html — live pool price, market cap, and buy/sell through the pool. Minimum trade 0.001 BNB; no maximum.
 - Starting price: 0.0000001 BNB per $ZIGZOO.
 
